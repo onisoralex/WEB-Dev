@@ -1,0 +1,40 @@
+body {
+  font-family: "Verdana";
+}
+table {
+	border-spacing: 0px;
+	border-color: black;
+}
+sup {
+	font-size: 80%;
+}
+
+#test1 {
+	font-family: "Verdana";
+}
+#test2 {
+	font-family: "Arial";
+}
+#test3 {
+	font-family: "Times New Roman";
+}
+#test4 {
+	font-family: "Courier New";
+}
+#test5 {
+	font-family: "Lucida Console";
+}
+
+
+div.line {
+	/*border: 1px solid black;*/
+	overflow: hidden; /* will contain if #first is longer than #second */
+}
+div.block {
+	float: left;
+}
+div.note {
+	line-height: 80%;
+}
+div.text {
+}

@@ -1,0 +1,32 @@
+function extractAndPrepareInformationFromEditor()
+function createTextAndChords(whole_song)
+function getLyricsParts(complete_lyrics_array)
+	return parts1;
+function getStartingPositionOfParts(complete_lyrics_array2)
+	return starting_positions_of_parts;
+function getParts(complete_song_array, starting_positions_of_parts)
+	return parts2;
+function getSongTitle(complete_lyrics_array3, start_position_of_first_part)
+	return title;
+function getDefaultSongKey(complete_lyrics_array4, start_position_of_first_part)
+	return key;
+function getArtist(complete_lyrics_array5, start_position_of_first_part)
+	return key;
+function getDefaultSongStructure(parts4)
+	return structure;
+function processSong(parts3)
+	return parts3;
+function isInArray(needle, haystack)
+	return (haystack.indexOf(needle) > -1);
+function separateLyricsFromChords(part2)
+	return newpart;
+function makeChordsArrayForConsistency(part3)
+	return newpart2;
+function getSongWithTransformedChords(separated_and_processed_song2)
+	return separated_and_processed_song2;
+function transformChords(chords2)
+	return step3;
+function getChordsAsStrings(chords3)
+	return chords3;
+function searchChordsPositionsInChordsString(chords4, single_chords)
+function transformChordsAndMakeAnArray(step1, single_chord_positions)

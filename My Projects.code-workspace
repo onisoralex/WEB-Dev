@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "HTML Project"
+		},
+		{
+			"path": "HTML JS Udemy"
+		},
+		{
+			"path": "HTML WEB MySite"
+		},
+		{
+			"path": "Programmieren"
+		},
+		{
+			"path": "Random Tests and Stuff"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Random Tests and Stuff"
+	}
+}
