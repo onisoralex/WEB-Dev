@@ -3,50 +3,58 @@ function Calculator() {
   this.num2 = null;
   this.op = null;
   this.res = null;
-}
 
-Calculator.prototype.calc = function (num1x, num2x, opx) {
-  //Zuweisung der übergebene Variablen an das Objekt
-  this.num1 = num1x;
-  this.num2 = num2x;
-  this.op = opx;
-
-  //Abfrage, welche Operation durchgeführt werden soll
-  if (this.op === "+") {
-    return addition();
-  } else if (this.op === "-") {
-    return subtraction();
-  } else if (this.op === "*") {
-    return multiplication();
-  } else if (this.op === "/") {
-    if (this.num2 !== 0) {
-      return division();
-    }
-  } else {
-    return errorInvalidOperator();
+  //Zuweisung der übergebenen Zahlen an das Objekt
+  this.setNumbers = function (num1x, num2x) {
+    this.num1 = num1x;
+    this.num2 = num2x;
   }
-}
 
-addition = function () {
-  this.res = this.num1 + this.num2;
-  return `${this.num1} + ${this.num2} = ${this.res}`;
-}
+  //Zuweisung des übergebenen Operators an das Objekt
+  this.setOperator = function (opx) {
+    this.op = opx;
+  }
 
-subtraction = function () {
-  this.res = this.num1 - this.num2;
-  return `${this.num1} - ${this.num2} = ${this.res}`;
-}
+  this.calc = function () {
+    //Abfrage, welche Operation durchgeführt werden soll
+    if (this.op === "+") {
+      return this.addition();
+    } else if (this.op === "-") {
+      return this.subtraction();
+    } else if (this.op === "*") {
+      return this.multiplication();
+    } else if (this.op === "/") {
+      if (this.num2 !== 0) {
+        return this.division();
+      } else {
+        return "DIVISION BY 0!";
+      }
+    } else {
+      return this.errorInvalidOperator();
+    }
+  }
 
-multiplication = function () {
-  this.res = this.num1 * this.num2;
-  return `${this.num1} * ${this.num2} = ${this.res}`;
-}
+  this.addition = function () {
+    this.res = this.num1 + this.num2;
+    return `${this.num1} + ${this.num2} = ${this.res}`;
+  }
 
-division = function () {
-  this.res = this.num1 / this.num2;
-  return `${this.num1} / ${this.num2} = ${this.res}`;
-}
+  this.subtraction = function () {
+    this.res = this.num1 - this.num2;
+    return `${this.num1} - ${this.num2} = ${this.res}`;
+  }
 
-errorInvalidOperator = function () {
-  return "Your operator is invalid!"
+  this.multiplication = function () {
+    this.res = this.num1 * this.num2;
+    return `${this.num1} * ${this.num2} = ${this.res}`;
+  }
+
+  this.division = function () {
+    this.res = this.num1 / this.num2;
+    return `${this.num1} / ${this.num2} = ${this.res}`;
+  }
+
+  this.errorInvalidOperator = function () {
+    return "Your operator is invalid!"
+  }
 }
