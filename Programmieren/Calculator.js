@@ -38,22 +38,6 @@ function Calculator() {
         return this.errorInvalidOperator();
         break;
     }
-
-    // if (this.op === "+") {
-    //   return this.addition();
-    // } else if (this.op === "-") {
-    //   return this.subtraction();
-    // } else if (this.op === "*") {
-    //   return this.multiplication();
-    // } else if (this.op === "/") {
-    //   if (this.num2 !== 0) {
-    //     return this.division();
-    //   } else {
-    //     return "DIVISION BY 0!";
-    //   }
-    // } else {
-    //   return this.errorInvalidOperator();
-    // }
   }
 
   // Return the value of addition of the numbers
