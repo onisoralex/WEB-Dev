@@ -5,13 +5,13 @@ function Calculator_OOP() {
   this.res = null;
 }
 
-Calculator_OOP.prototype.calc = function (num1x, num2x, opx) {
-  //Zuweisung der übergebenen Variablen an das Objekt
-  this.num1 = num1x;
-  this.num2 = num2x;
-  this.op = opx;
+Calculator_OOP.prototype.calc = function (num1, num2, op) {
+  // Assigning of variables to calculator
+  this.num1 = num1;
+  this.num2 = num2;
+  this.op = op;
 
-  //Abfrage, welche Operation durchgeführt werden soll
+  // Evaluate the operator to use
   if (this.op === "+") {
     return addition();
   } else if (this.op === "-") {
