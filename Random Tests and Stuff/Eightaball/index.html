@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <header>
+    <title>EightBall</title>
+  </header>
+</head>
+
+<body>
+  <script src="./Eightball.js">
+  </script>
+
+  <input placeholder="Ask me something!">
+  <!--Asta crează câmpul în care poți scrie o întrebarea.
+    La acest câmp nu i-am dat ID, că nu e necesar, dacă nu se folosește campul sau conținutul mai departe.
+    Dar i-am dat un placeholder, un text înlocuitor, care dispare când începi să scrii ceava.
+    Nu e necesar, dar ajută să se știe ce trebuie făcut.-->
+  <button onclick="askTheEightBall()">Give me an answer!</button>
+  <!--Asta crează un buton cu text-ul între acel tag.
+    La buton i-am dat un event listener numit "onclick".
+    Când se apasă butonul poți executa o funcție.
+    În acest caz executăm funcția ta pentru a afișa un răspuns de la EightBall.-->
+  <div id='output'></div>
+  <!--Aici creăm un container pentru răspunsul de la funcția ta.
+    La acest container i-am dat ID-ul output ca să-l putem accesa în funcția JS de sus cu "document.getElementById();"-->
+</body>
+
+</html>
