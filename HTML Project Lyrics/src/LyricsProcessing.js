@@ -1,3 +1,5 @@
+// Advanced functions
+
 function extractAndPrepareInformationFromEditor() {
 	let song = document.getElementById("songtext").innerHTML;
 	createTextAndChords(song);
