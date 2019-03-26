@@ -11,7 +11,7 @@ function extractAndPrepareInformationFromEditor() {
 //TODO
 function createTextAndChords(whole_song) {
 	let array_whole_song = (whole_song.replace(/\r/g, "")).split("\n");	//Delete all the Carriage Return Characters in the File to be able to see the Linebreaks
-	let array_song_divided_in_different_parts_with_every_part_as_a_whole_string = getLyricsParts(array_whole_song);	//Gets the different Parts of a Song
+	let array_song_divided_in_different_parts_with_every_part_as_a_whole_string = searchAndGetLyricsParts(array_whole_song);	//Gets the different Parts of a Song
 	console.log(array_song_divided_in_different_parts_with_every_part_as_a_whole_string);
 	let separated_and_processed_song = processSong(array_song_divided_in_different_parts_with_every_part_as_a_whole_string);	//Divides the Parts in separateAarrays, extracts Informations and splits the relevant parts in Chords an Text
 	let song_with_transformed_chords = getSongWithTransformedChords(separated_and_processed_song);
@@ -21,9 +21,9 @@ function createTextAndChords(whole_song) {
 }
 //-----
 
-function getLyricsParts(complete_lyrics_array) {
+function searchAndGetLyricsParts(complete_lyrics_array) {
 	let starting_positions_of_parts = getStartingPositionOfParts(complete_lyrics_array);
-	let parts1 = getParts(complete_lyrics_array, starting_positions_of_parts);
+	let parts1 = extractParts(complete_lyrics_array, starting_positions_of_parts);
 
 	return parts1;
 }
@@ -40,9 +40,20 @@ function getStartingPositionOfParts(complete_lyrics_array2) {
 	return starting_positions_of_parts;
 }
 
-function getParts(complete_song_array, starting_positions_of_parts) {
+function extractParts(complete_song_array, starting_positions_of_parts) {
 	let parts2 = [];
 
+	parts2 = getParts(parts2);
+
+	parts2["title"] = getSongTitle(complete_song_array, starting_positions_of_parts[0]);	//Get Title
+	parts2["artist"] = getArtist(complete_song_array, starting_positions_of_parts[0]);	//Get Artist
+	parts2["default_key"] = getDefaultSongKey(complete_song_array, starting_positions_of_parts[0]);	//Get Default Key
+	parts2["default_structure"] = getDefaultSongStructure(parts2);	//Get Default Structure
+
+	return parts2;
+}
+
+function getParts(parts5) {
 	for (let i = 0; i < starting_positions_of_parts.length; i++) {
 		let part = [];
 		part["name"] = complete_song_array[starting_positions_of_parts[i]];
@@ -54,12 +65,7 @@ function getParts(complete_song_array, starting_positions_of_parts) {
 		if (parts2[parts2.length - 1][0] === "[Info]") break;	//If the last added Part is the Info part, prematurely break off
 	}
 
-	parts2["title"] = getSongTitle(complete_song_array, starting_positions_of_parts[0]);	//Get Title
-	parts2["artist"] = getArtist(complete_song_array, starting_positions_of_parts[0]);	//Get Artist
-	parts2["default_key"] = getDefaultSongKey(complete_song_array, starting_positions_of_parts[0]);	//Get Default Key
-	parts2["default_structure"] = getDefaultSongStructure(parts2);	//Get Default Structure
-
-	return parts2;
+	return parts5;
 }
 //-----
 
