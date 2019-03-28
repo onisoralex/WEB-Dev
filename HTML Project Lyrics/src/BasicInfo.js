@@ -52,7 +52,8 @@ function getDefaultSongKey(complete_lyrics_array4, start_position_of_first_part)
 function getDefaultSongStructure(parts4) {
 	let structure = "";
 
-	for (let i = 0; i < parts4.length - 2; i++) {	//Minus 2 to exclude the Info Part
+	for (let i = 0; i < parts4.length - 1; i++) {
+		if (parts4[i].name == "[Info]") continue;	// Exclude the Info Part
 		structure = structure + parts4[i].name + ", ";
 	}
 	structure = structure.concat(parts4[parts4.length - 2].name);

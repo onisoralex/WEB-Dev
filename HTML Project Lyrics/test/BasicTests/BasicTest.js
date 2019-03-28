@@ -30,10 +30,10 @@ function getDefaultSongKeyTest() {
   given == expected ? testPassInfo(8, "Key") : testFailInfo(8, "Key");
 }
 
-function getDefaultSongStructure() {
-  let testdata = "";
+function getDefaultSongStructureTest() {
+  let testdata_complete = ["[Vers1]\n", "[Chorus]", "[Vers2]", "[Vers3]", "[Bridge]", "[Info]"];
   let expected = "";
-  let given = null;;
+  let given = getDefaultSongStructure(testdata_complete);
 
   expected == given ? testPassInfo(9, Songstructure) : testFailInfo(9, "Songstructure");
 }
