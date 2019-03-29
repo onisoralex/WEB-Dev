@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <title>Module Test</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body class="all">
+  <div>
+    <input id="firstname" type="textfield" placeholder="Firstname...">
+    <input id="lastname" type="textfield" placeholder="Lastname...">
+    <input type="button" onclick="addNewPerson()" value="Add person">
+  </div>
+  <hr>
+  <div>
+    <input id="filename" type="textfield" placeholder="Save as...">
+    <input type="button" onclick="saveas('settings.txt')" value="Create settings file">
+    <br>
+    <a href="" id="exportlink">Export the settings</a>
+  </div>
+  <hr>
+  <div>
+    <table>
+      <tr>
+        <td>
+          <h3>Personlist</h3>
+        </td>
+        <td>
+          <input type="button" onclick="showPersonList()" value="Show person list">
+        </td>
+      </tr>
+    </table>
+    <table id="list"></table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
