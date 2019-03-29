@@ -10,6 +10,9 @@
     <input id="firstname" type="textfield" placeholder="Firstname...">
     <input id="lastname" type="textfield" placeholder="Lastname...">
     <input type="button" onclick="addNewPerson()" value="Add person">
+    <hr>
+    <input id="personid" type="textfield" placeholder="Person's ID">
+    <input type="button" onclick="deletePerson()" value="Delete person">
   </div>
   <hr>
   <div>
@@ -27,6 +30,7 @@
         </td>
         <td>
           <input type="button" onclick="showPersonList()" value="Show person list">
+          <input type="button" onclick="showPersonArray()" value="Show person Array">
         </td>
       </tr>
     </table>
