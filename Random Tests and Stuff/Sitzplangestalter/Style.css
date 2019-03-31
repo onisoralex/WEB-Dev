@@ -2,9 +2,43 @@
   font-family: Calibri;
 }
 
-#personlisttable {
+/* #personlisttable {
   border: 1px solid black;
   border-spacing: 0px;
-  padding: 1px;
+  padding: 0px;
   margin: 0px;
+} */
+
+.cell {
+  border-top: 1px solid black;
+}
+
+.tablebottom {
+  border-bottom: 1px solid black;
+}
+
+/* .row {
+  border: 1px solid black;
+} */
+
+.idcell {
+  text-align: right;
+  border-left: 1px solid black;
+}
+
+.firstnamecell {
+  text-align: right;
+  border-left: 1px solid black;
+}
+
+.lastnamecell {
+  text-align: left;
+  border-left: 1px solid black;
+}
+
+.deletebuttoncell {
+  text-align: center;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 0px;
 }

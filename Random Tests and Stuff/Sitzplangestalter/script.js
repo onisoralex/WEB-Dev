@@ -15,7 +15,7 @@ let personlist = [{ firstname: "Alexander", lastname: "Onisor" }
   , { firstname: "Sergiu", lastname: "Salcau" }];
 let firstname = document.getElementById("firstname");
 let lastname = document.getElementById("lastname");
-let plist = document.getElementById("personlisttable");
+let plist = document.getElementById("personlistcontainer");
 
 //Person Object Constructor
 let Person = function (firstname, lastname) {
@@ -87,19 +87,20 @@ function saveAs() {
 
 // Displays a list of all pesons saved in the personlist Array
 function showPersonList() {
-  let list = "";
-  plist.innerHTML = "";
-  let i = 0;
+  plist.innerHTML = ""; // Reset content of div
 
-  personlist.forEach(function (element, i) {
-    let entryid = `<td>${i + 1}</td>`;
-    let firstname = `<td>${element.firstname}</td>`;
-    let lastname = `<td>${element.lastname}</td>`;
-    let deletebutton = `<td><input type="button" onclick="deletePersonById(${i})" value="Delete"></td>`;
-    list += `<tr style="border: 1px solid black">${entryid}${firstname}${lastname}${deletebutton}</tr>`;
+  let i = 0; // Initialize and reset iterator
+  let list = `<table id="personlisttable" cellspacing="0px" class="tablebottom"`; // Create backbone of personlist table
+  personlist.forEach(function (element, i) { // Create content of the persontable
+    let entryid = `<td class="cell idcell">${i + 1}</td>`;
+    let firstname = `<td class="cell firstnamecell ">${element.firstname}</td>`;
+    let lastname = `<td class="cell lastnamecell">${element.lastname}</td>`;
+    let deletebutton = `<td class="cell deletebuttoncell"><input type="button" onclick="deletePersonById(${i})" value="Delete"></td>`;
+    list += `<tr>${entryid}${firstname}${lastname}${deletebutton}</tr>`; // Create rows of table with entries and add them to list
   });
+  list += "</table>"; // Finish personlisttable
 
-  plist.innerHTML = list;
+  plist.innerHTML = list; // Fill the content of div container with personlisttable
 }
 
 // Prints the array to the console
