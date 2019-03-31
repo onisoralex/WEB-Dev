@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Module Test</title>
+  <title>Table Planner</title>
   <link rel="stylesheet" href="Style.css">
 </head>
 
@@ -10,14 +10,18 @@
     <input id="firstname" type="textfield" placeholder="Firstname...">
     <input id="lastname" type="textfield" placeholder="Lastname...">
     <input type="button" onclick="addNewPerson()" value="Add person">
+    <label id="notsavedlabel"></label>
     <hr>
     <input id="personid" type="textfield" placeholder="Person's ID">
     <input type="button" onclick="deletePerson()" value="Delete person">
   </div>
   <hr>
+  <label><b>Import settings</b></label>
+  <input type="file" accept="text/plain" onchange="openFile(event)">
+  <hr>
   <div>
     <input id="filename" type="textfield" placeholder="Save as...">
-    <input type="button" onclick="saveas('settings.txt')" value="Create settings file">
+    <input type="button" onclick="saveAs('settings.txt')" value="Create settings file">
     <br>
     <a href="" id="exportlink">Export the settings</a>
   </div>
@@ -34,7 +38,7 @@
         </td>
       </tr>
     </table>
-    <table id="list"></table>
+    <table id="personlisttable" cellspacing="0px"></table>
   </div>
 
   <script src="script.js"></script>
