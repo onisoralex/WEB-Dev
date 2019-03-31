@@ -49,17 +49,20 @@ function addNewPerson() {
 // Deletes a person from the personlist based on the entrfy in the deletion id textfield
 function deletePerson() {
   let persontodeletefield = document.getElementById("personid");
-  let h = persontodeletefield.value - 1;
-  console.log(h);
-  let personToDelete = h; // Subtract one, since the IDs internally start at 0
+  let personToDelete = persontodeletefield.value - 1; // Subtract one, since the IDs internally start at 0
 
+  console.clear();
+  console.log("persontodeletefield:", typeof (persontodeletefield));
+  console.log("persontodeletefield.value:", typeof (persontodeletefield.value));
+  console.log("personToDelete:", typeof (personToDelete));
 
-  if (persontodeletefield.value < 1 || "") {
+  if (typeof (persontodeletefield.value) != "number"
+    || persontodeletefield.value < 1
+    || personToDelete === ""
+    || personToDelete >= personlist.length) {
     persontodeletefield.value = "";
   } else {
-    if (personToDelete == "" || personToDelete >= personlist.length) { } else {
-      deletePersonById(personToDelete);
-    }
+    deletePersonById(personToDelete);
   }
 
   persontodeletefield.value = "";
@@ -68,7 +71,7 @@ function deletePerson() {
 // Deletes a person from the personlist by the id in the table
 function deletePersonById(id) {
   personlist.splice(id, 1);
-
+  console.log(id, typeof (id));
   showPersonList();
 }
 
