@@ -51,18 +51,13 @@ function deletePerson() {
   let persontodeletefield = document.getElementById("personid");
   let personToDelete = persontodeletefield.value - 1; // Subtract one, since the IDs internally start at 0
 
-  console.clear();
-  console.log("persontodeletefield:", typeof (persontodeletefield));
-  console.log("persontodeletefield.value:", typeof (persontodeletefield.value));
-  console.log("personToDelete:", typeof (personToDelete));
-
-  if (typeof (persontodeletefield.value) != "number"
+  if (isNaN(personToDelete)
     || persontodeletefield.value < 1
     || personToDelete === ""
     || personToDelete >= personlist.length) {
     persontodeletefield.value = "";
   } else {
-    deletePersonById(personToDelete);
+    deletePersonById(personToDelete - 1);
   }
 
   persontodeletefield.value = "";
