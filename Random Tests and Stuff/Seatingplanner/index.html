@@ -2,22 +2,30 @@
 
 <head>
   <title>Table Planner</title>
-  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
-<body class="all">
+<body class="all" onload="showPersonList()">
+  <!-- Add Person Part -->
   <div>
     <input id="firstname" type="textfield" placeholder="Firstname...">
     <input id="lastname" type="textfield" placeholder="Lastname...">
-    <input type="button" onclick="addNewPerson()" value="Add person">
-    <label id="notsavedlabel"></label>
-    <hr>
-    <input id="personid" type="textfield" placeholder="Person's ID">
-    <input type="button" onclick="deletePerson()" value="Delete person">
+    <input type="button" onclick="addNewPerson()" value="Add Person">
+    <label id="nameerror"></label>
   </div>
   <hr>
-  <label><b>Import settings</b></label>
-  <input type="file" accept="text/plain" onchange="openFile(event)">
+  <!-- Delete Person Part -->
+  <!-- <div>
+    <input id="personid" type="textfield" placeholder="Person's ID">
+    <input type="button" onclick="deletePerson()" value="Delete person">
+  </div> -->
+  <hr>
+  <div>
+    <label><b>Import settings</b></label>
+    <input type="file" accept="text/plain" onchange="openFile(event)">
+  </div>
   <hr>
   <div>
     <input id="filename" type="textfield" placeholder="Save as...">
@@ -41,7 +49,7 @@
     <div id="personlistcontainer"></div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 
 </html>

@@ -32,11 +32,12 @@ let Person = function (firstname, lastname) {
 function addNewPerson() {
   var f = firstname.value;
   var l = lastname.value;
+  let nameerror = document.getElementById("nameerror");
 
   if (f == "" || l == "") {
-    document.getElementById("notsavedlabel").innerHTML = `<span style="background-color: Tomato; color: white;">NOT SAVED!</span>`;
+    nameerror.innerHTML = `<span class="invalidname">INVALID NAME!</span>`;
   } else {
-    document.getElementById("notsavedlabel").innerHTML = "";
+    nameerror.innerHTML = "";
 
     personlist.push(new Person(f, l));
     firstname.value = "";
@@ -95,7 +96,7 @@ function showPersonList() {
     let entryid = `<td class="cell idcell">${i + 1}</td>`;
     let firstname = `<td class="cell firstnamecell ">${element.firstname}</td>`;
     let lastname = `<td class="cell lastnamecell">${element.lastname}</td>`;
-    let deletebutton = `<td class="cell deletebuttoncell"><input type="button" onclick="deletePersonById(${i})" value="Delete"></td>`;
+    let deletebutton = `<td class="cell deletebuttoncell"><button class="delbtn" onclick="deletePersonById(${i})"><i class="far fa-trash-alt"></i></button></td>`;
     list += `<tr>${entryid}${firstname}${lastname}${deletebutton}</tr>`; // Create rows of table with entries and add them to list
   });
   list += "</table>"; // Finish personlisttable
