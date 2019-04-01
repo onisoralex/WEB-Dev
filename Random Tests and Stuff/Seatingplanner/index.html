@@ -20,18 +20,42 @@
   <!-- <div>
     <input id="personid" type="textfield" placeholder="Person's ID">
     <input type="button" onclick="deletePerson()" value="Delete person">
-  </div> -->
-  <hr>
+  </div>
+  <hr> -->
+  <!-- Import Settings Part -->
   <div>
-    <label><b>Import settings</b></label>
-    <input type="file" accept="text/plain" onchange="openFile(event)">
+    <table>
+      <tr>
+        <td>
+          <label><b>Import settings</b></label>
+        </td>
+        <td>
+          <input type="file" accept="text/plain" onchange="openFile(event)">
+        </td>
+      </tr>
+    </table>
   </div>
   <hr>
+  <!-- Save To Settings File Part -->
   <div>
-    <input id="filename" type="textfield" placeholder="Save as...">
-    <input type="button" onclick="saveAs('settings.txt')" value="Create settings file">
-    <br>
-    <a href="" id="exportlink">Export the settings</a>
+    <table>
+      <tr>
+        <td>
+          <label><b>Export settings</b></label>
+        </td>
+        <td>
+          <!-- <input id="filename" type="textfield" placeholder="Save as..."> -->
+          <input type="button" onclick="saveAs('Seatingplan')" value="Create settings file">
+        </td>
+        <td>
+          <button class="dloadbtn">
+            <a href="" id="exportlink" class="dloadlink">
+              <i class="far fa-arrow-alt-circle-down"></i>
+            </a>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
   <hr>
   <div>

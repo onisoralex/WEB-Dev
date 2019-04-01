@@ -46,18 +46,18 @@ function addNewPerson() {
   showPersonList();
 }
 
-// Deletes a person from the personlist based on the entrfy in the deletion id textfield
+// Deletes a person from the personlist based on the entry in the deletion ID textfield
 function deletePerson() {
   let persontodeletefield = document.getElementById("personid");
-  let personToDelete = persontodeletefield.value - 1; // Subtract one, since the IDs internally start at 0
+  let idOfPersonToDelete = persontodeletefield.value - 1; // Subtract one, since the IDs internally start at 0
 
-  if (isNaN(personToDelete)
-    || persontodeletefield.value < 1
-    || personToDelete === ""
-    || personToDelete >= personlist.length) {
+  if (isNaN(idOfPersonToDelete)
+    || idOfPersonToDelete < 0
+    || idOfPersonToDelete === ""
+    || idOfPersonToDelete >= personlist.length) {
     persontodeletefield.value = "";
   } else {
-    deletePersonById(personToDelete - 1);
+    deletePersonById(idOfPersonToDelete);
   }
 
   persontodeletefield.value = "";
@@ -66,7 +66,6 @@ function deletePerson() {
 // Deletes a person from the personlist by the id in the table
 function deletePersonById(id) {
   personlist.splice(id, 1);
-  console.log(id, typeof (id));
   showPersonList();
 }
 
@@ -77,8 +76,8 @@ function editPerson() {
 }
 
 // Clicking on the button creates a link which can be clicked to download the file with all the settings
-function saveAs() {
-  let filename = document.getElementById("filename").value;
+function saveAs(filename) {
+  // let filename = document.getElementById("filename").value;
   let type = "text/plain";
   let downloadlink = document.getElementById("exportlink");
 
@@ -101,7 +100,10 @@ function showPersonList() {
     let entryid = `<td class="cell idcell">${i + 1}</td>`;
     let firstname = `<td class="cell firstnamecell ">${element.firstname}</td>`;
     let lastname = `<td class="cell lastnamecell">${element.lastname}</td>`;
-    let deletebutton = `<td class="cell deletebuttoncell"><button class="delbtn" onclick="deletePersonById(${i})"><i class="far fa-trash-alt"></i></button></td>`;
+    let deletebutton = `<td class="cell deletebuttoncell">
+                        <button class="delbtn" onclick="deletePersonById(${i})">
+                        <i class="far fa-trash-alt">
+                        </i></button></td>`;
     list += `<tr>${entryid}${firstname}${lastname}${deletebutton}</tr>`; // Create rows of table with entries and add them to list
   });
   list += "</table>"; // Finish personlisttable

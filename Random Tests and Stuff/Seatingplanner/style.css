@@ -2,10 +2,30 @@
   font-family: Calibri;
 }
 
+td {
+  padding: 0px;
+}
+
 .invalidname {
   background-color: Tomato;
   color: white;
   padding: 0px 3px;
+}
+
+.dloadbtn {
+  border: none;
+  padding: 0px;
+}
+
+.dloadlink {
+  background-color: white;
+  color: Black;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dloadlink:hover {
+  color: DodgerBlue;
 }
 
 .cell {
