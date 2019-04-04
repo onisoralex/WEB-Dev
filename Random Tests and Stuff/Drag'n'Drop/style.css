@@ -1,0 +1,29 @@
+.all {
+  font-family: Calibri;
+}
+
+.dndfields {
+  min-width: 100px;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid Black;
+}
+
+.drag {
+  width: 50%;
+  height: 50%;
+  border: 1px solid Black;
+  margin: auto;
+  padding: 10%;
+}
+
+.btn {
+  border: none;
+  padding: 5px;
+  background-color: Black;
+  color: white;
+}
+
+.clearfix {
+  overflow: auto;
+}
