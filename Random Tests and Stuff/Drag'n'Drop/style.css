@@ -24,6 +24,10 @@
   color: white;
 }
 
-.clearfix {
-  overflow: auto;
+.left {
+  background-color: Tomato;
+}
+
+.right {
+  background-color: DodgerBlue;
 }
