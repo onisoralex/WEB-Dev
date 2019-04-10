@@ -28,6 +28,15 @@ td {
   color: DodgerBlue;
 }
 
+/* Round table styles */
+
+.table-table {
+  border: 1px solid Black;
+  width: 300;
+}
+
+/* General table styles */
+
 .cell {
   padding: 3px;
 }
