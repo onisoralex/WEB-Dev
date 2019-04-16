@@ -14,7 +14,7 @@ let personlist = [{ firstname: "Alexander", lastname: "Onisor", table: 1, seat: 
   , { firstname: "Laura", lastname: "Tarau", table: 1, seat: 1 }
   , { firstname: "Sergiu", lastname: "Salcau", table: 5, seat: 1 }];
 
-let tables = [];
+let tablelist = [];
 
 let firstname = document.getElementById("firstname");
 let lastname = document.getElementById("lastname");
@@ -71,8 +71,7 @@ function deletePerson() {
 
 // Deletes a person from the personlist by the id in the table
 function deletePersonById(id) {
-  // Delete person only if it has no table assigned
-  (personlist[id].table) ? {} : personlist.splice(id, 1);
+  (personlist[id].table) ? {} : personlist.splice(id, 1); // Delete person only if it has no table assigned
 
   showPersonList();
 }
@@ -105,13 +104,48 @@ function showPersonList() {
   let i = 0; // Initialize and reset iterator
   let list = `<table id="personlisttable" cellspacing="0px" class="tablebottom">
                 <tr>
-                  <th colspan="4">Personlist</th>
+                  <td class="tablenamecell" colspan="4"><h3>Personlist</h3></td>
                 </tr>
                 <tr>
-                  <th height="50">ID</th>
-                  <th height="50">Firstname</th>
-                  <th height="50">Lastname</th>
-                  <th height="50">Delete?</th>
+                  <th>ID</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Delete?</th>
+                </tr>`; // Create backbone of personlist table
+
+  personlist.forEach(function (element, i) { // Create content of the persontable
+    let entryid = `<td class="cell idcell">${i + 1}</td>`; // Display the ID + 1 in the personlist to be readable
+    let firstname = `<td class="cell firstnamecell ">${element.firstname}</td>`;
+    let lastname = `<td class="cell lastnamecell">${element.lastname}</td>`;
+    let deletebutton = `<td class="cell deletebuttoncell">
+                        <button class="delbtn" onclick="deletePersonById(${i})">
+                        <i class="far fa-trash-alt">
+                        </i></button></td>`;
+    list += `<tr id="dnd-element-${i + 1}" draggable="true" ondragstart="drag(event)">${entryid}${firstname}${lastname}${deletebutton}</tr>`; // Create rows of table with entries and add them to list
+  });
+
+  list += "</table>"; // Finish personlisttable
+
+  plist.innerHTML = list; // Fill the content of div container with personlisttable
+}
+
+function addNewTable() {
+
+}
+
+function showTableList() {
+  plist.innerHTML = ""; // Reset content of div
+
+  let i = 0; // Initialize and reset iterator
+  let list = `<table id="personlisttable" cellspacing="0px" class="tablebottom">
+                <tr>
+                  <td class="tablenamecell" colspan="4"><h3>Personlist</h3></td>
+                </tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Delete?</th>
                 </tr>`; // Create backbone of personlist table
 
   personlist.forEach(function (element, i) { // Create content of the persontable

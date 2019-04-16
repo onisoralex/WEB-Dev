@@ -62,14 +62,15 @@
     <table>
       <tr>
         <td>
-          <h3>Personlist</h3>
+          <label><b>Personlist</b></label>
         </td>
         <td>
           <input type="button" onclick="showPersonList()" value="Show person list">
-          <input type="button" onclick="showPersonArray()" value="Show person Array">
+          <!-- <input type="button" onclick="showPersonArray()" value="Show person Array"> -->
         </td>
       </tr>
     </table>
+    <hr>
     <table>
       <tr>
         <td>
@@ -79,13 +80,15 @@
           <div>
             <table class="table-table" ondrop="drop(event)" ondragover="allowDrop(event)">
               <tr>
-                <th colspan="4">Table 1</th>
+                <td class="tablenamecell" colspan="4">
+                  <h3>Table 1</h3>
+                </td>
               </tr>
               <tr>
-                <th height="50">ID</th>
-                <th height="50">Firstname</th>
-                <th height="50">Lastname</th>
-                <th height="50">Delete?</th>
+                <th>ID</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Delete?</th>
               </tr>
             </table>
           </div>
