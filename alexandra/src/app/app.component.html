@@ -1,21 +1,33 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container">
+  <form #todoForm="ngForm" (submit)="todoSubmit(todoForm.value); todoForm.resetForm()">
+    <div class="form-group">
+      <h1 class="text-center">Todo App</h1>
+      <div class="input-group-prepend">
+        <input type="text" #todo class="form-control" placeholder="Add Todo" name="todo" ngModel>
+        <span class="input-group-text" (click)="addTodo(todo.value)">
+          <i class="material-icons">add</i>
+        </span>
+      </div>
+    </div>
+    <div class="data">
+      <ul class="list-unstyled">
+        <li [@moveInLeft] *ngFor="let todo of todoArray">{{todo}}
+          <i (click)="deleteItem(todo)" class="material-icons">delete</i>
+        </li>
+      </ul>
+    </div>
+  </form>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
-<router-outlet></router-outlet>
+
+<!-- Opening the Application the rest call for the list of applications and the list of persons will be sent. -->
+<!-- Clicking on an application will send a REST call for the information regarding that aappllication. Get the userlist of that application. -->
+<!-- Clicking on a user will send a REST call for the list of users -->
+<!-- Angular displays the lsit of applications and the list of users at the beginning -->
+<!-- After Getting the lsit of users for a clicked application Angular should change the content of the list respectively, or set some parameters to the internal JS Objects and display the whole list again. Second variannt will be the first one implemented, since modifying information in a JS list and redrawing of the table will be easier done -->
+
+
+<!-- This tutorial comes from
+   https://medium.freecodecamp.org/learn-how-to-create-your-first-angular-app-in-20-min-146201d9b5a7 -->
+<!-- Test also
+   https://angular.io/tutorial/toh-pt0 -->
