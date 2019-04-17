@@ -11,9 +11,12 @@
 		},
 		{
 			"path": "Random Tests and Stuff"
+		},
+		{
+			"path": "alexandra"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Random Tests and Stuff"
+		"liveServer.settings.multiRootWorkspaceName": "alexandra"
 	}
 }
