@@ -1,0 +1,16 @@
+<h2>All Applications</h2>
+<ul class="applications">
+  <li *ngFor="let application of applications" (click)="onSelect(application)"
+    [class.selected]="application === selectedApplication">
+    <span class="badge">{{application.id}}</span> {{application.name}}
+  </li>
+</ul>
+<div *ngIf="selectedApplication">
+  <h2>{{selectedApplication.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedApplication.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedApplication.name" placeholder="name" />
+    </label>
+  </div>
+</div>
