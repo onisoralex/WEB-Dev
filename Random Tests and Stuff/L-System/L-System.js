@@ -15,6 +15,7 @@ let pen = {
   lineLength: 0,
   x: 0,
   y: 0,
+  states: [],
   init: function () { // Initialises the starting values for the pen
     this.dir = Number(eval(getValue("direction")));; // Set drawing direction; Default right
     this.angle = Number(eval(getValue("angle")));
@@ -27,6 +28,25 @@ let pen = {
   },
   turnRight: function () { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
+  },
+  pushState: function () {
+    let obj = { dir: this.dir, x: this.x, y: this.y };
+    this.states.push(obj);
+  },
+  popState: function () {
+    let lastState = this.states[this.states.length - 1];
+
+    console.log("Old dir:", this.dir);
+    this.dir = lastState.dir;
+    console.log("New dir:", this.dir);
+    console.log("Old x:", this.x);
+    this.x = lastState.x;
+    console.log("New x:", this.x);
+    console.log("Old y:", this.y);
+    this.y = lastState.y;
+    console.log("New y:", this.y);
+
+    this.states = this.states.pop();
   },
   getNextPos: function () {
     this.x = this.x + this.getNextPositionX();
@@ -76,6 +96,7 @@ function draw(resultAxiom) {
   for (let i = 0; i < resultAxiom.length; i++) {
     switch (resultAxiom.charAt(i)) {
       case "F":
+      case 1:
         pen.getNextPos();
         pen.line();
         break;
@@ -83,12 +104,18 @@ function draw(resultAxiom) {
         pen.turnLeft();
         break;
       case "-": // Turn Right
+      case "−":
         pen.turnRight();
         break;
       /* case "|": // Turn Back (180°) */
       case "[": // Push Drawing State to Stack
+        console.log("pushing");
+        console.log(pen.states);
+        pen.pushState();
         break;
       case "]": // Pop Drawing State from Stack
+        console.log("poping");
+        pen.popState();
         break;
       /* case "#": // Increment line width */
       /* case "!": // Decrement line width */
