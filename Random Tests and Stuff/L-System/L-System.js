@@ -29,6 +29,9 @@ let pen = {
   turnRight: function () { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
+  turnOneEighty: function () {
+    this.dir = (this.dir + 180) % 360;
+  },
   pushState: function () {
     let obj = { dir: this.dir, x: this.x, y: this.y };
     this.states.push(obj);
@@ -36,22 +39,16 @@ let pen = {
   popState: function () {
     let lastState = this.states[this.states.length - 1];
 
-    console.log("Old dir:", this.dir);
     this.dir = lastState.dir;
-    console.log("New dir:", this.dir);
-    console.log("Old x:", this.x);
     this.x = lastState.x;
-    console.log("New x:", this.x);
-    console.log("Old y:", this.y);
     this.y = lastState.y;
-    console.log("New y:", this.y);
 
-    this.states = this.states.pop();
+    this.move();
+    this.states.pop();
   },
   getNextPos: function () {
     this.x = this.x + this.getNextPositionX();
     this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
-    /* console.log("x:", this.x, "& y:", this.y, "& dir:", this.dir); */
   },
   degToRad: function () { // DEG to RAD
     return this.dir / 180 * Math.PI;
@@ -79,11 +76,9 @@ function start() {
   let rules = extraxtRules(rulesField);
   ctx.lineWidth = getValue("lineThickness");
   const resultField = document.getElementById("result");
-  let resultAxiom = axiom;
 
-  for (let i = 0; i < it; i++) {
-    resultAxiom = transform(resultAxiom, rules);
-  }
+  let resultAxiom = transform2(axiom, rules, it);
+
   resultField.innerText = `${resultAxiom}`;
 
   draw(resultAxiom);
@@ -95,8 +90,12 @@ function draw(resultAxiom) {
   pen.move(); // Sets the pen to the starting position
   for (let i = 0; i < resultAxiom.length; i++) {
     switch (resultAxiom.charAt(i)) {
+      case "A":
+      case "B":
       case "F":
-      case 1:
+      case "G":
+      case "0":
+      case "1":
         pen.getNextPos();
         pen.line();
         break;
@@ -107,14 +106,13 @@ function draw(resultAxiom) {
       case "−":
         pen.turnRight();
         break;
-      /* case "|": // Turn Back (180°) */
+      case "|": // Turn Back (180°)
+        pen.turnOneEighty();
+        break;
       case "[": // Push Drawing State to Stack
-        console.log("pushing");
-        console.log(pen.states);
         pen.pushState();
         break;
       case "]": // Pop Drawing State from Stack
-        console.log("poping");
         pen.popState();
         break;
       /* case "#": // Increment line width */
@@ -141,7 +139,7 @@ function draw(resultAxiom) {
 
 // Gets the HTML element by it's element ID
 function getValue(id) {
-  return document.getElementById(id).value.replace(/ /g, "");
+  return document.getElementById(id).value.replace(/\s|\(|\)/g, ""); // Eliminate whitespaces, "(" & ")" characters
 }
 
 // Creates an object with all rules specified by the user
@@ -150,8 +148,8 @@ function extraxtRules(rulesField) {
   let rules = [];
   for (let i = 0; i < rule.length; i++) {
     let ruleObject = {
-      input: rule[i].split("->")[0],
-      output: rule[i].split("->")[1]
+      input: rule[i].split(/->|→/)[0],
+      output: rule[i].split(/->|→/)[1]
     };
     rules.push(ruleObject);
   }
@@ -160,13 +158,24 @@ function extraxtRules(rulesField) {
 
 // Recursive function to transform the Axiom character by character
 function transform(axiom, rules) {
-  if (axiom.length >= 2) {
+  if (axiom.length >= 1) {
     return exchange(axiom.slice(0, 1), rules) + transform(axiom.substring(1, axiom.length), rules);
-  } else if (axiom.length === 1) {
-    return exchange(axiom.slice(0, 1), rules);
   } else {
     return "";
   }
+}
+
+// Loop function to transform the Axiom character by character
+function transform2(axiom, rules, it) {
+  for (let i = 0; i < it; i++) {
+    let aux = "";
+    for (let j = 0; j < axiom.length; j++) {
+      aux = aux.concat(exchange(axiom.charAt(j, j + 1), rules));
+    }
+    axiom = aux;
+    // return + transform(axiom.substring(1, axiom.length), rules);
+  }
+  return axiom;
 }
 
 // If specific characters occur, they remain, else they get exchanged based on the rules
