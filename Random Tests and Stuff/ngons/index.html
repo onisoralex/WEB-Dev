@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <title>Draw n-gons & n-pointed stars</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>
+        <div>
+          <canvas id="myCanvas"></canvas>
+          <br>
+          <label>Result =</label>
+          <br>
+          <label id="result"></label>
+        </div>
+      </td>
+      <td>
+        <div>
+          <label>Outer Radius:</label>
+          <input id="outerRadius" class="shortTextField" oninput="start()" value="100">
+          <br>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="checkbox" id="ifOuterCircle" name="ifOuterCircle">
+          <label>Draw outer circle</label>
+          <br>
+          <input type="checkbox" id="toggleInnerRadius" name="toggleInnerRadius"
+            onClick="toggleHiddenElements('IR-Fields')" checked>
+          <label>Inner Radius is same as outer Radius?</label>
+          <br>
+          <label class="IR-Fields" hidden>Inner Radius:</label>
+          <input id="innerRadius" class="shortTextField IR-Fields" oninput="start()" value="50" hidden>
+          <br class="IR-Fields" hidden>
+          <span class="IR-Fields" hidden>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="checkbox" id="ifInnerCircle"
+            class="IR-Fields" name="ifInnerCircle" hidden>
+          <label class="IR-Fields" hidden>Draw inner circle</label>
+          <br class="IR-Fields" hidden>
+          <label>n =</label>
+          <input id="gons" class="numberField" placeholder="° (JS-Function)" oninput="start()" value="8">
+          <br>
+          <label>Connect every</label>
+          <input id="everyXPoints" class="numberField" oninput="start()" value="2">
+          <label>points</label>
+          <br>
+          <label>Starting Direction =</label>
+          <input id="direction" class="shortTextField" placeholder="° (JS-Function)" oninput="start()" value="90">
+          <br>
+          <input type="checkbox" id="drawByLineLength" onClick="toggleHiddenElements('drawByLineLength')"
+            name="drawByLine" disabled>
+          <label>Draw by line length? (unused yet)</label>
+          <br>
+          <label class="drawByLineLength" hidden>Line Length =</label>
+          <input id="lineLength" class="numberField drawByLineLength" placeholder="px" oninput="start()" value="5"
+            hidden>
+          <br class="drawByLineLength" hidden>
+          <label>Line Thickness =</label>
+          <input id="lineThickness" class="numberField" placeholder="px" oninput="start()" value="1">
+          <br>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+
+  <script src="ngons.js" onload="start()"></script>
+</body>
+
+</html>
