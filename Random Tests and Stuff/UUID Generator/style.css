@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+body {
+  font-family: Raleway, Arial, sans-serif;
+}
+
+#output {
+  font-family: monospace;
+  font-size: 1.5em;
+}
+
+.genbtn {
+  font-size: 1.5em;
+  background-color: DodgerBlue;
+  color: white;
+  border: none;
+  padding: 5px;
+  min-width: 200;
+  min-height: 100;
+}
+
+.genbtn:hover {
+  background-color: Orange;
+  cursor: pointer;
+}
