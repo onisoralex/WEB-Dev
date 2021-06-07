@@ -4,35 +4,51 @@ function extractAndPrepareInformationFromEditor() {
 	let song = document.getElementById("songtext").innerHTML;
 	createTextAndChords(song);
 
-	//		let node = document.getElementById('output');	//Gets the Place where the Lyrics should go in the HTML
-	//		node.innerText = lyrics;	//Displays the Lyrics
+	//let node = document.getElementById('output');	// Gets the Place where the Lyrics should go in the HTML
+	//node.innerText = lyrics;	// Displays the Lyrics
 }
 
-//TODO
-function createTextAndChords(whole_song) {
-	let array_whole_song = (whole_song.replace(/\r/g, "")).split("\n");	//Delete all the Carriage Return Characters in the File to be able to see the Linebreaks
-	let array_song_divided_in_different_parts_with_every_part_as_a_whole_string = searchAndGetLyricsParts(array_whole_song);	//Gets the different Parts of a Song
-	console.log(array_song_divided_in_different_parts_with_every_part_as_a_whole_string);
-	let separated_and_processed_song = processSong(array_song_divided_in_different_parts_with_every_part_as_a_whole_string);	//Divides the Parts in separateAarrays, extracts Informations and splits the relevant parts in Chords an Text
+// TODO after subfunctions are done
+function createTextAndChords(complete_song_text) {
+	let complete_song_line_by_line_array = convertTextToArray(complete_song_text);
+	let song_divided_in_different_parts_with_every_part_as_a_whole_string_array = searchAndGetLyricsParts(complete_song_line_by_line_array);	// Gets the different Parts of a Song
+	console.log(song_divided_in_different_parts_with_every_part_as_a_whole_string_array);
+	let separated_and_processed_song = processSong(song_divided_in_different_parts_with_every_part_as_a_whole_string_array);	// Divides the Parts in separateAarrays, extracts Informations and splits the relevant parts in Chords an Text
 	let song_with_transformed_chords = getSongWithTransformedChords(separated_and_processed_song);
 
 	//console.log("----- Whole Array with transformed chords (when it works):");
 	//console.log(song_with_transformed_chords);
 }
-//-----
 
-function searchAndGetLyricsParts(complete_lyrics_array) {
-	let starting_positions_of_parts = getStartingPositionOfParts(complete_lyrics_array);
-	let parts1 = extractParts(complete_lyrics_array, starting_positions_of_parts);
+function convertTextToArray(complete_song_text) {
+	let arr = (complete_song_text.replace(/\r/g, "")).split("\n"); // Also delete all the Carriage Return Characters in the File to be able to see the Linebreaks
 
-	return parts1;
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] == "") {
+			arr.splice(i, 1);
+			i--;	// Repeat same line in case there is an empty line again after moving the lines upwards
+		}
+	}
+
+	return arr;
 }
 
-function getStartingPositionOfParts(complete_lyrics_array2) {
+function searchAndGetLyricsParts(complete_song_line_by_line_array) {
+	let starting_positions_of_parts = getStartingPositionOfParts(complete_song_line_by_line_array);
+	let parts = extractParts(complete_song_line_by_line_array, starting_positions_of_parts);
+
+	return parts;
+}
+
+function startOfNewPart(line) {
+	return line.charAt(0) === "[";	// New Parts always beginn with a "["
+}
+
+function getStartingPositionOfParts(complete_song_line_by_line_array) {
 	let starting_positions_of_parts = [];
 
-	for (let i = 0; i < complete_lyrics_array2.length; i++) {
-		if (complete_lyrics_array2[i].charAt(0) === "[") {	//New Parts always beginn with a "["
+	for (let i = 0; i < complete_song_line_by_line_array.length; i++) {
+		if (startOfNewPart(complete_song_line_by_line_array[i])) {
 			starting_positions_of_parts.push(i);
 		}
 	}
@@ -40,63 +56,58 @@ function getStartingPositionOfParts(complete_lyrics_array2) {
 	return starting_positions_of_parts;
 }
 
-function extractParts(complete_song_array, starting_positions_of_parts) {
-	let parts2 = [];
+// ToDo now
+function extractParts(complete_song_line_by_line_array, starting_positions_of_parts) {
+	let parts = [];
 
-	parts2 = getParts(parts2);
+	parts = splitCompleteSongIntoParts(complete_song_line_by_line_array, starting_positions_of_parts);
+// ToDo from here
+	parts["title"] = getSongTitle(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Title
+	parts["artist"] = getArtist(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Artist
+	parts["default_key"] = getDefaultSongKey(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Default Key
+	parts["default_structure"] = getDefaultSongStructure(parts);	// Get Default Structure
 
-	parts2["title"] = getSongTitle(complete_song_array, starting_positions_of_parts[0]);	//Get Title
-	parts2["artist"] = getArtist(complete_song_array, starting_positions_of_parts[0]);	//Get Artist
-	parts2["default_key"] = getDefaultSongKey(complete_song_array, starting_positions_of_parts[0]);	//Get Default Key
-	parts2["default_structure"] = getDefaultSongStructure(parts2);	//Get Default Structure
-
-	return parts2;
+	return parts;
 }
 
-// ToDo
-function getParts(parts5) {
-	for (let i = 0; i < starting_positions_of_parts.length; i++) {
+function splitCompleteSongIntoParts(complete_song_line_by_line_array, starting_positions_of_parts) {
+	let parts_array = [];
+	starting_positions_of_parts.push(complete_song_line_by_line_array.length - 1);
+
+	for (let i = 0; i < starting_positions_of_parts.length - 1; i++) {
 		let part = [];
-		part["name"] = complete_song_array[starting_positions_of_parts[i]]; // Extract the name of a specific part
+		part["name"] = complete_song_line_by_line_array[starting_positions_of_parts[i]]; // Extract the name of a specific part
 
-		let j = starting_positions_of_parts[i] + 1; // Start with the line after the Part Tag
-		for (; ;) {	// Infinite Loop
-			if ((complete_song_array[j + 1] == "") || (complete_song_array[j + 1].charAt(0) === "[")) {
-				break;
-			}
-			else {
-				part.push(complete_song_array[j]); // Push every line from the new part into an array}	// Look ahead and break the Line Gathering if the next Line is empty or starts with a new part
-				j++;
-			}
+		for (let j = starting_positions_of_parts[i] + 1; j < starting_positions_of_parts[i + 1]; j++) {	// Start with the first line of a part (line after the Part Tag)
+			part.push(complete_song_line_by_line_array[j]); // Push every line from the new part into an array
+		}
 
-			parts2.push(part);
-			if (parts2[parts2.length - 1][0] === "[Info]") {
-				break;	// If the last added Part is the Info part, prematurely break off
-			}
+		parts_array.push(part);
+		if (part["name"] === "[Info]") {
+			break;	// If the last added Part is the Info part, break off
 		}
 	}
 
-	return parts5;
+	return parts_array;
 }
-//-----
 
-function processSong(parts3) {
+function processSong(parts) {
 	let names_of_parts_to_exclude_from_splitting = ["[Intro]", "[Solo]", "[Outro]", "[Info]"];
 	let names_of_special_parts_to_be_transformed = ["[Intro]", "[Solo]", "[Outro]", "[Info]"];
 
-	for (let i = 0; i < parts3.length; i++) {
-		if (!isInArray(parts3[i].name, names_of_parts_to_exclude_from_splitting)) {
-			parts3[i] = separateLyricsFromChords(parts3[i]);
+	for (let i = 0; i < parts.length; i++) {
+		if (!isInArray(parts[i].name, names_of_parts_to_exclude_from_splitting)) {
+			parts[i] = separateLyricsFromChords(parts[i]);
 		}
 	}
 
-	for (let i = 0; i < parts3.length; i++) {
-		if (isInArray(parts3[i].name, names_of_special_parts_to_be_transformed)) {
-			parts3[i] = makeChordsArrayForConsistency(parts3[i]);
+	for (let i = 0; i < parts.length; i++) {
+		if (isInArray(parts[i].name, names_of_special_parts_to_be_transformed)) {
+			parts[i] = makeChordsArrayForConsistency(parts[i]);
 		}
 	}
 
-	return parts3;
+	return parts;
 }
 
 function isInArray(needle, haystack) {
@@ -127,16 +138,16 @@ function makeChordsArrayForConsistency(part3) {
 
 	return newpart2;
 }
-//-------------
+
 
 function getSongWithTransformedChords(separated_and_processed_song2) {
 	let names_of_parts_to_exclude_from_transforming = ["[Info]"];
 	//console.log(separated_and_processed_song2);
 
-	for (let i = 0; i < separated_and_processed_song2.length; i++) {	//Check if the Part is not in the List of Names to exclude and then send it to transformation
+	for (let i = 0; i < separated_and_processed_song2.length; i++) {	// Check if the Part is not in the List of Names to exclude and then send it to transformation
 		if (!isInArray(separated_and_processed_song2[i].name, names_of_parts_to_exclude_from_transforming)) {
 			if (separated_and_processed_song2.length) {
-				separated_and_processed_song2[i].chords = transformChords(separated_and_processed_song2[i].chords);	//Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
+				separated_and_processed_song2[i].chords = transformChords(separated_and_processed_song2[i].chords);	// Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
 			}
 		}
 	}
@@ -144,15 +155,15 @@ function getSongWithTransformedChords(separated_and_processed_song2) {
 	return separated_and_processed_song2;
 }
 
-//TODO
+// TODO
 function transformChords(chords2) {
 	//console.log("----- Chords2 (before transformation; String with Chords Lines):");
 	//console.log(chords2);
-	//First get the Chords as Strings
+	// First get the Chords as Strings
 	let step1 = getChordsAsStrings(chords2);
-	//Then search their position in the Chords-String
+	// Then search their position in the Chords-String
 	let step2 = searchChordsPositionsInChordsString(chords2, step1);
-	//Then tranform the chords
+	// Then tranform the chords
 	let step3 = transformChordsAndMakeAnArray(step1, step2);
 
 	return step3;
@@ -161,7 +172,7 @@ function transformChords(chords2) {
 function getChordsAsStrings(chords3) {
 	for (let i = 0; i < chords3.length; i++) {
 		let help = chords3[i].split(" ");
-		let newchords = [];	//Declare a new Array with only the Chords
+		let newchords = [];	// Declare a new Array with only the Chords
 		for (let j = 0; j < help.length; j++) {
 			if (help[j] != "") {
 				newchords.push(help[j]);
@@ -173,7 +184,7 @@ function getChordsAsStrings(chords3) {
 	return chords3;
 }
 
-//TODO
+// TODO
 function searchChordsPositionsInChordsString(chords4, single_chords) {
 	//console.log("----- Chordsstring to be transformed:");
 	//console.log(chords4);
@@ -181,7 +192,7 @@ function searchChordsPositionsInChordsString(chords4, single_chords) {
 	//console.log(single_chords);
 }
 
-//TODO
+// TODO
 function transformChordsAndMakeAnArray(step1, single_chord_positions) {
 
 }
