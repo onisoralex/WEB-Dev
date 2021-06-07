@@ -34,7 +34,7 @@ function convertTextToArray(complete_song_text) {
 }
 
 function searchAndGetLyricsParts(complete_song_line_by_line_array) {
-	let starting_positions_of_parts = getStartingPositionOfParts(complete_song_line_by_line_array);
+	let starting_positions_of_parts = getStartingPositionsOfParts(complete_song_line_by_line_array);
 	let parts = extractParts(complete_song_line_by_line_array, starting_positions_of_parts);
 
 	return parts;
@@ -44,7 +44,7 @@ function startOfNewPart(line) {
 	return line.charAt(0) === "[";	// New Parts always beginn with a "["
 }
 
-function getStartingPositionOfParts(complete_song_line_by_line_array) {
+function getStartingPositionsOfParts(complete_song_line_by_line_array) {
 	let starting_positions_of_parts = [];
 
 	for (let i = 0; i < complete_song_line_by_line_array.length; i++) {
