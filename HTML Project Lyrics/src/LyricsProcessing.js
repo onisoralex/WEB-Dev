@@ -56,16 +56,15 @@ function getStartingPositionsOfParts(complete_song_line_by_line_array) {
 	return starting_positions_of_parts;
 }
 
-// ToDo now
+
 function extractParts(complete_song_line_by_line_array, starting_positions_of_parts) {
 	let parts = [];
 
 	parts = splitCompleteSongIntoParts(complete_song_line_by_line_array, starting_positions_of_parts);
-	// ToDo from here
-	parts["title"] = getSongTitle(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Title
-	parts["artist"] = getArtist(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Artist
-	parts["default_key"] = getDefaultSongKey(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Default Key
-	parts["default_structure"] = getDefaultSongStructure(parts);	// Get Default Structure
+	parts["title"] = getSongTitle(complete_song_line_by_line_array.slice(0, starting_positions_of_parts[0]));
+	parts["artist"] = getArtist(complete_song_line_by_line_array.slice(0, starting_positions_of_parts[0]));
+	parts["default_key"] = getDefaultSongKey(complete_song_line_by_line_array.slice(0, starting_positions_of_parts[0]));
+	parts["default_structure"] = getDefaultSongStructure(parts[parts.length - 1]);
 
 	return parts;
 }

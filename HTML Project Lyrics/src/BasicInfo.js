@@ -6,68 +6,47 @@ function getIndexInArray(needle, haystack) {
 	return haystack.indexOf(needle);
 }
 
-function getSongTitle(complete_song_line_by_line_array, start_position_of_first_part) {
+function getInfoFromLine(basic_song_information_array, key_words) {
+	let info = "";
+
+	for (let i = 0; i < basic_song_information_array.length; i++) {
+		let one_line_array = basic_song_information_array[i].split(/:(.+)/);
+		if (isInArray(one_line_array[0].toLowerCase(), key_words)) {
+			info = one_line_array[1].trim();
+		}
+	}
+
+	return info;
+}
+
+function getSongTitle(basic_song_information_array) {
 	let title = "Unknown Song";
 	let title_key_words = ["title", "name"];
+	let returned_title = getInfoFromLine(basic_song_information_array, title_key_words)
 
-	for (let i = 0; i < start_position_of_first_part; i++) {	// From Beginning of Song to the "end" of the Title Part (beginning of first Song Part)
-		if (complete_song_line_by_line_array[i] !== "") {
-			title = complete_song_line_by_line_array[i];
-		}
-		if (title != "") break;
-	}
-
-	return title;
+	return returned_title == "" ? title : returned_title;
 }
 
-function getArtist(complete_song_line_by_line_array, start_position_of_first_part) {
-	let artist = "";
+function getArtist(basic_song_information_array) {
+	let artist = "Unknown Artist";
+	let artist_key_words = ["artist", "interpret"];
+	let returned_artist = getInfoFromLine(basic_song_information_array, artist_key_words)
 
-	for (let i = 0; i < start_position_of_first_part; i++) {	// From Beginning of Song to the end of the Title Part (beginning of first Song Part)
-		if (complete_song_line_by_line_array[i] !== "") {
-			let artistline = complete_song_line_by_line_array[i].split(":");
-			if (artistline.length == 2) {
-				let artist_lowercase = artistline[0].toLowerCase();
-				if (artist_lowercase === "artist" || artist_lowercase === "interpret") {
-					artist = artistline[1].replace(" ", "");
-				}
-			}
-		}
-
-		if (artist != "") break;
-	}
-
-	return artist;
+	return returned_artist == "" ? artist : returned_artist;
 }
 
-function getDefaultSongKey(complete_song_line_by_line_array, start_position_of_first_part) {
-	let key = "";
+function getDefaultSongKey(basic_song_information_array) {
+	let key = "Unknown Key";
+	let key_key_words = ["key", "gama", "gamă"];
+	let returned_key = getInfoFromLine(basic_song_information_array, key_key_words)
 
-	for (let i = 0; i < start_position_of_first_part; i++) {	//From Beginning of Song to the end of the Title Part (beginning of first Song Part)
-		if (complete_song_line_by_line_array[i] !== "") {
-			let key_line = complete_song_line_by_line_array[i].split(":");
-			if (key_line.length == 2) {
-				let keyline_lowercase = key_line[0].toLowerCase();
-				if (keyline_lowercase === "key" || keyline_lowercase === "gama" || keyline_lowercase === "gamă") {
-					key = key_line[1].replace(" ", "");
-				}
-			}
-		}
-
-		if (key != "") break;
-	}
-
-	return key;
+	return returned_key == "" ? key : returned_key;
 }
 
-function getDefaultSongStructure(parts) {
-	let structure = "";
+function getDefaultSongStructure(info_part) {
+	let structure = "No structure given";
+	let structure_key_words = ["structure", "struktur", "structura", "structură"];
+	let returned_structure = getInfoFromLine(info_part, structure_key_words)
 
-	for (let i = 0; i < parts.length - 1; i++) {
-		if (parts[i].name == "[Info]") continue;	// Exclude the Info Part
-		structure = structure + parts[i].name + ", ";
-	}
-	structure = structure.concat(parts[parts.length - 2].name);
-
-	return structure;
+	return returned_structure == "" ? structure : returned_structure;
 }
