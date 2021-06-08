@@ -6,6 +6,16 @@ function getIndexInArray(needle, haystack) {
 	return haystack.indexOf(needle);
 }
 
+function getIndexOfPart(parts, key_word) {
+	for (let i = 0; i < parts.length; i++) {
+		if (parts[i].name === key_word) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 function getInfoFromLine(basic_song_information_array, key_words) {
 	let info = "";
 
