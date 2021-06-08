@@ -1,8 +1,8 @@
 // Advanced functions
 
 function extractAndPrepareInformationFromEditor() {
-	let song = document.getElementById("songtext").innerHTML;
-	createTextAndChords(song);
+	let complete_song_text = document.getElementById("songtext").innerHTML;
+	createTextAndChords(complete_song_text);
 
 	//let node = document.getElementById('output');	// Gets the Place where the Lyrics should go in the HTML
 	//node.innerText = lyrics;	// Displays the Lyrics
@@ -61,7 +61,7 @@ function extractParts(complete_song_line_by_line_array, starting_positions_of_pa
 	let parts = [];
 
 	parts = splitCompleteSongIntoParts(complete_song_line_by_line_array, starting_positions_of_parts);
-// ToDo from here
+	// ToDo from here
 	parts["title"] = getSongTitle(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Title
 	parts["artist"] = getArtist(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Artist
 	parts["default_key"] = getDefaultSongKey(complete_song_line_by_line_array, starting_positions_of_parts[0]);	// Get Default Key
@@ -108,10 +108,6 @@ function processSong(parts) {
 	}
 
 	return parts;
-}
-
-function isInArray(needle, haystack) {
-	return (haystack.indexOf(needle) > -1);
 }
 
 function separateLyricsFromChords(part2) {
