@@ -163,19 +163,21 @@ function transformChords(chords) {
 	return step3;
 }
 
-function getChordsAsStrings(chords3) {
-	for (let i = 0; i < chords3.length; i++) {
-		let help = chords3[i].split(" ");
+function getChordsAsStrings(chords) {
+	for (let i = 0; i < chords.length; i++) {
+		let help = chords[i].split(" ");
 		let newchords = [];	// Declare a new Array with only the Chords
+
 		for (let j = 0; j < help.length; j++) {
 			if (help[j] != "") {
 				newchords.push(help[j]);
 			}
 		}
-		chords3[i] = newchords;
+
+		chords[i] = newchords;
 	}
 
-	return chords3;
+	return chords;
 }
 
 // TODO
