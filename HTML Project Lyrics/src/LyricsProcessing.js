@@ -153,11 +153,8 @@ function getSongWithTransformedChords(separated_and_processed_song_array) {
 
 // TODO
 function transformChords(chords) {
-	// First get the Chords as Strings
 	let step1 = getChordsAsStrings(chords);
-	// Then search their position in the Chords-String
 	let step2 = searchChordsPositionsInChordsString(chords, step1);
-	// Then tranform the chords
 	let step3 = transformChordsAndMakeAnArray(step1, step2);
 
 	return step3;
