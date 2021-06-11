@@ -1,62 +1,62 @@
 function isInArray(needle, haystack) {
-	return (haystack.indexOf(needle) > -1);
+  return (haystack.indexOf(needle) > -1);
 }
 
-function getIndexInArray(needle, haystack) {
-	return haystack.indexOf(needle);
+export function getIndexInArray(needle, haystack) {
+  return haystack.indexOf(needle);
 }
 
-function getIndexOfPart(parts, key_word) {
-	for (let i = 0; i < parts.length; i++) {
-		if (parts[i].name === key_word) {
-			return i;
-		}
-	}
+export function getIndexOfPart(parts, keyWord) {
+  for (let i = 0; i < parts.length; i++) {
+    if (parts[i].name === keyWord) {
+      return i;
+    }
+  }
 
-	return -1;
+  return -1;
 }
 
-function getInfoFromLine(basic_song_information_array, key_words) {
-	let info = "";
+export function getInfoFromLine(basicSongInformationArray, keyWords) {
+  let info = "";
 
-	for (let i = 0; i < basic_song_information_array.length; i++) {
-		let one_line_array = basic_song_information_array[i].split(/:(.+)/);
-		if (isInArray(one_line_array[0].toLowerCase(), key_words)) {
-			info = one_line_array[1].trim();
-		}
-	}
+  for (let i = 0; i < basicSongInformationArray.length; i++) {
+    const oneLineArray = basicSongInformationArray[i].split(/:(.+)/);
+    if (isInArray(oneLineArray[0].toLowerCase(), keyWords)) {
+      info = oneLineArray[1].trim();
+    }
+  }
 
-	return info;
+  return info;
 }
 
-function getSongTitle(basic_song_information_array) {
-	let title = "Unknown Song";
-	let title_key_words = ["title", "name"];
-	let returned_title = getInfoFromLine(basic_song_information_array, title_key_words)
+export function getSongTitle(basicSongInformationArray) {
+  const title = "Unknown Song";
+  const titleKeyWords = ["title", "name"];
+  const returnedTitle = getInfoFromLine(basicSongInformationArray, titleKeyWords);
 
-	return returned_title == "" ? title : returned_title;
+  return returnedTitle === "" ? title : returnedTitle;
 }
 
-function getArtist(basic_song_information_array) {
-	let artist = "Unknown Artist";
-	let artist_key_words = ["artist", "interpret"];
-	let returned_artist = getInfoFromLine(basic_song_information_array, artist_key_words)
+export function getArtist(basicSongInformationArray) {
+  const artist = "Unknown Artist";
+  const artistKeyWords = ["artist", "interpret"];
+  const returnedArtist = getInfoFromLine(basicSongInformationArray, artistKeyWords);
 
-	return returned_artist == "" ? artist : returned_artist;
+  return returnedArtist === "" ? artist : returnedArtist;
 }
 
-function getDefaultSongKey(basic_song_information_array) {
-	let key = "Unknown Key";
-	let key_key_words = ["key", "gama", "gamă"];
-	let returned_key = getInfoFromLine(basic_song_information_array, key_key_words)
+export function getDefaultSongKey(basicSongInformationArray) {
+  const key = "Unknown Key";
+  const keyKeyWords = ["key", "gama", "gamă"];
+  const returnedKey = getInfoFromLine(basicSongInformationArray, keyKeyWords);
 
-	return returned_key == "" ? key : returned_key;
+  return returnedKey === "" ? key : returnedKey;
 }
 
-function getDefaultSongStructure(info_part) {
-	let structure = "No structure given";
-	let structure_key_words = ["structure", "struktur", "structura", "structură"];
-	let returned_structure = getInfoFromLine(info_part, structure_key_words)
+export function getDefaultSongStructure(infoPart) {
+  const structure = "No structure given";
+  const structureKeyWords = ["structure", "struktur", "structura", "structură"];
+  const returnedStructure = getInfoFromLine(infoPart, structureKeyWords);
 
-	return returned_structure == "" ? structure : returned_structure;
+  return returnedStructure === "" ? structure : returnedStructure;
 }
