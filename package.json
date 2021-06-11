@@ -1,0 +1,25 @@
+{
+  "name": "web-dev",
+  "version": "1.0.0",
+  "description": "Stuff and Stuff",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onisoralex/WEB-Dev.git"
+  },
+  "author": "onisoralex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onisoralex/WEB-Dev/issues"
+  },
+  "homepage": "https://github.com/onisoralex/WEB-Dev#readme"
+}
