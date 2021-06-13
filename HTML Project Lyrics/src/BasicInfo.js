@@ -1,7 +1,3 @@
-function isInArray(needle, haystack) {
-  return (haystack.indexOf(needle) > -1);
-}
-
 function deepCopy(inObject) {
   if (typeof inObject !== "object" || inObject === null) {
     return inObject; // Return the value if inObject is not an object
@@ -19,6 +15,10 @@ function deepCopy(inObject) {
 
 function getIndexInArray(needle, haystack) {
   return haystack.indexOf(needle);
+}
+
+function isInArray(needle, haystack) {
+  return (getIndexInArray(haystack, needle) > -1);
 }
 
 function getIndexOfPart(parts, keyWord) {
