@@ -2,18 +2,19 @@ function isInArray(needle, haystack) {
   return (haystack.indexOf(needle) > -1);
 }
 
-function deepCopyPartsArray(parts) {
-  let arr = [];
-  arr = JSON.parse(JSON.stringify(parts)); // Adds all enumerables
+function deepCopy(inObject) {
+  if (typeof inObject !== "object" || inObject === null) {
+    return inObject; // Return the value if inObject is not an object
+  }
 
-  arr.artist = parts.artist.repeat(1);
-  arr.defaultKey = parts.defaultKey.repeat(1);
-  arr.defaultStructure = parts.defaultStructure.repeat(1);
-  arr.title = parts.title.repeat(1);
+  const outObject = Array.isArray(inObject) ? [] : {};
 
-  parts.forEach((e, i) => { arr[i].name = e.name.repeat(1); });
+  for (const key in inObject) {
+    const value = inObject[key];
+    outObject[key] = deepCopy(value);
+  }
 
-  return arr;
+  return outObject;
 }
 
 function getIndexInArray(needle, haystack) {
