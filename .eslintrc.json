@@ -11,6 +11,8 @@
   "rules": {
     "quotes": ["error", "double"],
     "linebreak-style": ["error", "windows"],
+    "no-restricted-syntax": "off",
+    "guard-for-in": "off",
     "no-plusplus": [
       "error",
       {
