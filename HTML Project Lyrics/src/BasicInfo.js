@@ -13,6 +13,10 @@ function deepCopy(inObject) {
   return outObject;
 }
 
+function getIndexInArrayStartingFrom(needle, haystack, n) {
+  return haystack.indexOf(needle, n);
+}
+
 function getIndexInArray(needle, haystack) {
   return haystack.indexOf(needle);
 }
