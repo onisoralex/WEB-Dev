@@ -18,7 +18,7 @@ function getIndexInArray(needle, haystack) {
 }
 
 function isInArray(needle, haystack) {
-  return (getIndexInArray(haystack, needle) > -1);
+  return (getIndexInArray(needle, haystack) > -1);
 }
 
 function getIndexOfPart(parts, keyWord) {
