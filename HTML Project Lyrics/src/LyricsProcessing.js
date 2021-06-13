@@ -73,15 +73,15 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
   return parts;
 }
 
-function splitCompleteSongIntoParts(completeSongEveryLineArray, startingPositionsOfParts) {
+function splitCompleteSongIntoParts(completeSongEveryLineArray, StartingPositionsOfParts) {
   const partsArray = [];
-  startingPositionsOfParts.push(completeSongEveryLineArray.length - 1);
+  const extendedStartingPositionsOfParts = deepCopy(StartingPositionsOfParts).push(completeSongEveryLineArray.length - 1);
 
-  for (let i = 0; i < startingPositionsOfParts.length - 1; i++) {
+  for (let i = 0; i < extendedStartingPositionsOfParts.length - 1; i++) {
     const part = [];
-    part.name = completeSongEveryLineArray[startingPositionsOfParts[i]]; // Extract the name of a specific part
+    part.name = completeSongEveryLineArray[extendedStartingPositionsOfParts[i]]; // Extract the name of a specific part
 
-    for (let j = startingPositionsOfParts[i] + 1; j < startingPositionsOfParts[i + 1]; j++) { // Start with the first line of a part (line after the Part Tag)
+    for (let j = extendedStartingPositionsOfParts[i] + 1; j < extendedStartingPositionsOfParts[i + 1]; j++) { // Start with the first line of a part (line after the Part Tag)
       part.push(completeSongEveryLineArray[j]); // Push every line from the new part into an array
     }
 
@@ -96,14 +96,14 @@ function splitCompleteSongIntoParts(completeSongEveryLineArray, startingPosition
 
 function removeInfoPartFromPartsArray(parts) {
   const partIndex = getIndexOfPart(parts, "Info");
-  parts.splice(partIndex, 1);
+  const reducedParts = deepCopy(parts).splice(partIndex, 1);
 
-  return parts;
+  return reducedParts;
 }
 
 function extendPartsWithInfoAboutLyrics(parts) {
   const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Outro]"];
-  const partsArray = deepCopyPartsArray(parts);
+  const partsArray = deepCopy(parts);
 
   for (let i = 0; i < partsArray.length; i++) {
     if (isInArray(partsArray[i].name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
@@ -117,7 +117,7 @@ function extendPartsWithInfoAboutLyrics(parts) {
 }
 
 function processSong(parts) {
-  const partsArray = parts;
+  const partsArray = deepCopy(parts);
   for (let i = 0; i < partsArray.length; i++) {
     if (partsArray[i].hasLyrics === true) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
       partsArray[i] = separateLyricsFromChords(partsArray[i]); // Transform mormally because it has lyrics
@@ -131,16 +131,16 @@ function processSong(parts) {
 
 function separateLyricsFromChords(part) {
   const newpart = [];
-  newpart.name = part.name;
-  newpart.chords = part.hasLyrics === false ? part.filter((e) => e) : [];
+  newpart.name = deepCopy(part.name);
+  newpart.chords = part.hasLyrics === false ? part.filter((e) => deepCopy(e)) : [];
   newpart.lyrics = part.hasLyrics === false ? undefined : [];
 
   if (part.hasLyrics === true) {
     for (let i = 0; i < part.length; i++) {
       if (i % 2 === 0) { // Check if index is even
-        newpart.chords.push(part[i]);
+        newpart.chords.push(deepCopy(part[i]));
       } else {
-        newpart.lyrics.push(part[i]);
+        newpart.lyrics.push(deepCopy(part[i]));
       }
     }
   }
@@ -149,7 +149,8 @@ function separateLyricsFromChords(part) {
 }
 
 function getSongWithTransformedChords(separatedAndProcessedSongArray) {
-  const parts = separatedAndProcessedSongArray;
+  const parts = deepCopy(separatedAndProcessedSongArray);
+
   for (let i = 0; i < parts.length; i++) {
     parts[i].transformedChords = transformChords(parts[i].chords); // Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
   }
@@ -158,42 +159,30 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
 }
 
 // TODO
-function transformChords(chords) {
-  const step1 = getChordsAsStrings(chords);
-  const step2 = searchChordsPositionsInChordsString(chords, step1);
-  const step3 = transformChordsAndMakeAnArray(step1, step2);
+function transformChords(chordsArray) {
+  const singleChordsArray = getSingleChords(chordsArray);
+  const chordsPositionsInChordsString = searchChordsPositionsInChordsString(chordsArray, singleChordsArray);
+  const finalChordsArray = transformChordsAndMakeAnArray(singleChordsArray, chordsPositionsInChordsString);
 
-  return step3;
+  return finalChordsArray;
 }
 
-// TODO
-function getChordsAsStrings(chordsToTransform) {
-  const chords = chordsToTransform;
-  for (let i = 0; i < chords.length; i++) {
-    const help = chords[i].split(" ");
-    const newchords = []; // Declare a new Array with only the Chords
+function getSingleChords(chordsToTransformArray) {
+  const chords = [];
 
-    for (let j = 0; j < help.length; j++) {
-      if (help[j] !== "") {
-        newchords.push(help[j]);
-      }
-    }
-
-    chords[i] = newchords;
+  for (let i = 0; i < chordsToTransformArray.length; i++) {
+    chords.push(chordsToTransformArray[i].split(" ").filter((e) => e));
   }
 
   return chords;
 }
 
 // TODO
-function searchChordsPositionsInChordsString(chords4, singleChords) {
-  // console.log("----- Chordsstring to be transformed:");
-  // console.log(chords4);
-  // console.log("----- Single separaed cCords to get the positions from:");
-  // console.log(singleChords);
+function searchChordsPositionsInChordsString(chordsArray, singleChordsArray) {
+ 
 }
 
 // TODO
-function transformChordsAndMakeAnArray(step1, singleChordPositions) {
+function transformChordsAndMakeAnArray(singleChordsArray, chordsPositionsInChordsString) {
 
 }
