@@ -161,8 +161,8 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
 // TODO
 function transformChords(chordsArray) {
   const singleChordsArray = getSingleChords(chordsArray);
-  const chordsPositionsInChordsString = searchChordsPositionsInChordsString(chordsArray, singleChordsArray);
-  const finalChordsArray = transformChordsAndMakeAnArray(singleChordsArray, chordsPositionsInChordsString);
+  const chordPositionsOfPartArray = searchChordPositionsOfPartArray(chordsArray, singleChordsArray);
+  const finalChordsArray = transformChordsAndMakeAnArray(singleChordsArray, chordPositionsOfPartArray);
 
   return finalChordsArray;
 }
@@ -177,9 +177,26 @@ function getSingleChords(chordsToTransformArray) {
   return chords;
 }
 
-// TODO
-function searchChordsPositionsInChordsString(chordsArray, singleChordsArray) {
- 
+function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
+  if (chordsArray.length !== singleChordsArray.length) {
+    return null;
+  }
+
+  const chordPositionsOfPart = [];
+
+  for (let i = 0; i < singleChordsArray.length; i++) { // Line by line
+    let start = 0;
+    const chordPositionArray = [];
+
+    for (let j = 0; j < singleChordsArray[i].length; j++) { // Chord by chord
+      start = getIndexInArrayStartingFrom(singleChordsArray[i][j], chordsArray[i], start);
+      chordPositionArray.push(start);
+    }
+
+    chordPositionsOfPart.push(chordPositionArray);
+  }
+
+  return chordPositionsOfPart;
 }
 
 // TODO
