@@ -2,11 +2,25 @@ function isInArray(needle, haystack) {
   return (haystack.indexOf(needle) > -1);
 }
 
-export function getIndexInArray(needle, haystack) {
+function deepCopyPartsArray(parts) {
+  let arr = [];
+  arr = JSON.parse(JSON.stringify(parts)); // Adds all enumerables
+
+  arr.artist = parts.artist.repeat(1);
+  arr.defaultKey = parts.defaultKey.repeat(1);
+  arr.defaultStructure = parts.defaultStructure.repeat(1);
+  arr.title = parts.title.repeat(1);
+
+  parts.forEach((e, i) => { arr[i].name = e.name.repeat(1); });
+
+  return arr;
+}
+
+function getIndexInArray(needle, haystack) {
   return haystack.indexOf(needle);
 }
 
-export function getIndexOfPart(parts, keyWord) {
+function getIndexOfPart(parts, keyWord) {
   for (let i = 0; i < parts.length; i++) {
     if (parts[i].name === keyWord) {
       return i;
@@ -16,7 +30,7 @@ export function getIndexOfPart(parts, keyWord) {
   return -1;
 }
 
-export function getInfoFromLine(basicSongInformationArray, keyWords) {
+function getInfoFromLine(basicSongInformationArray, keyWords) {
   let info = "";
 
   for (let i = 0; i < basicSongInformationArray.length; i++) {
@@ -29,7 +43,7 @@ export function getInfoFromLine(basicSongInformationArray, keyWords) {
   return info;
 }
 
-export function getSongTitle(basicSongInformationArray) {
+function getSongTitle(basicSongInformationArray) {
   const title = "Unknown Song";
   const titleKeyWords = ["title", "name"];
   const returnedTitle = getInfoFromLine(basicSongInformationArray, titleKeyWords);
@@ -37,7 +51,7 @@ export function getSongTitle(basicSongInformationArray) {
   return returnedTitle === "" ? title : returnedTitle;
 }
 
-export function getArtist(basicSongInformationArray) {
+function getArtist(basicSongInformationArray) {
   const artist = "Unknown Artist";
   const artistKeyWords = ["artist", "interpret"];
   const returnedArtist = getInfoFromLine(basicSongInformationArray, artistKeyWords);
@@ -45,7 +59,7 @@ export function getArtist(basicSongInformationArray) {
   return returnedArtist === "" ? artist : returnedArtist;
 }
 
-export function getDefaultSongKey(basicSongInformationArray) {
+function getDefaultSongKey(basicSongInformationArray) {
   const key = "Unknown Key";
   const keyKeyWords = ["key", "gama", "gamă"];
   const returnedKey = getInfoFromLine(basicSongInformationArray, keyKeyWords);
@@ -53,7 +67,7 @@ export function getDefaultSongKey(basicSongInformationArray) {
   return returnedKey === "" ? key : returnedKey;
 }
 
-export function getDefaultSongStructure(infoPart) {
+function getDefaultSongStructure(infoPart) {
   const structure = "No structure given";
   const structureKeyWords = ["structure", "struktur", "structura", "structură"];
   const returnedStructure = getInfoFromLine(infoPart, structureKeyWords);

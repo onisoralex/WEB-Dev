@@ -1,10 +1,10 @@
-// Advanced functions
+// import * as base from "./BasicInfo";
 
-import * as base from "./BasicInfo";
+// Advanced functions
 
 function extractAndPrepareInformationFromEditor() {
   const completeSongText = document.getElementById("songtext").innerHTML;
-  createTextAndChords(completeSongText);
+  return createTextAndChords(completeSongText);
 
   // let node = document.getElementById('output');  // Gets the Place where the Lyrics should go in the HTML
   // node.innerText = lyrics;  // Displays the Lyrics
@@ -19,6 +19,7 @@ function createTextAndChords(completeSongText) {
 
   // console.log("----- Whole Array with transformed chords (when it works):");
   // console.log(songWithTransormedChords);
+  return songWithTransformedChords;
 }
 
 function convertTextToArray(completeSongText) {
@@ -62,29 +63,14 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
   let parts = [];
 
   parts = splitCompleteSongIntoParts(completeSongLineByLineArray, startingPositionsOfParts);
-  parts.title = base.getSongTitle(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.artist = base.getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.defaultKey = base.getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.defaultStructure = base.getDefaultSongStructure(parts[parts.length - 1]);
+  parts.title = getSongTitle(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.artist = getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.defaultKey = getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.defaultStructure = getDefaultSongStructure(parts[parts.length - 1]);
 
   parts = removeInfoPartFromPartsArray(parts);
 
   return parts;
-}
-
-function extendPartsWithInfoAboutLyrics(parts) {
-  const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Outro]"];
-  const partsArray = parts;
-
-  for (let i = 0; i < partsArray.length; i++) {
-    if (base.isInArray(partsArray[i].name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
-      partsArray[i].hasLyrics = false;
-    } else {
-      partsArray[i].hasLyrics = true;
-    }
-  }
-
-  return partsArray;
 }
 
 function splitCompleteSongIntoParts(completeSongEveryLineArray, startingPositionsOfParts) {
@@ -109,10 +95,25 @@ function splitCompleteSongIntoParts(completeSongEveryLineArray, startingPosition
 }
 
 function removeInfoPartFromPartsArray(parts) {
-  const partIndex = base.getIndexOfPart(parts, "Info");
+  const partIndex = getIndexOfPart(parts, "Info");
   parts.splice(partIndex, 1);
 
   return parts;
+}
+
+function extendPartsWithInfoAboutLyrics(parts) {
+  const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Outro]"];
+  const partsArray = deepCopyPartsArray(parts);
+
+  for (let i = 0; i < partsArray.length; i++) {
+    if (isInArray(partsArray[i].name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
+      partsArray[i].hasLyrics = false;
+    } else {
+      partsArray[i].hasLyrics = true;
+    }
+  }
+
+  return partsArray;
 }
 
 function processSong(parts) {
@@ -165,6 +166,7 @@ function transformChords(chords) {
   return step3;
 }
 
+// TODO
 function getChordsAsStrings(chordsToTransform) {
   const chords = chordsToTransform;
   for (let i = 0; i < chords.length; i++) {
