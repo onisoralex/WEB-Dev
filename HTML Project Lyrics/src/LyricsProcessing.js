@@ -162,7 +162,7 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
 function transformChords(chordsArray) {
   const singleChordsArray = getSingleChords(chordsArray);
   const chordPositionsOfPartArray = searchChordPositionsOfPartArray(chordsArray, singleChordsArray);
-  const finalChordsArray = transformChordsAndMakeAnArray(singleChordsArray, chordPositionsOfPartArray);
+  const finalChordsArray = transformChordsIntoCoding(singleChordsArray, chordPositionsOfPartArray);
 
   return finalChordsArray;
 }
@@ -200,6 +200,6 @@ function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
 }
 
 // TODO
-function transformChordsAndMakeAnArray(singleChordsArray, chordsPositionsInChordsString) {
+function transformChordsIntoCoding(singleChordsArray, chordPositionsOfPartArray) {
 
 }
