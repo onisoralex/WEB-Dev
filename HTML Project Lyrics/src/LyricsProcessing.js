@@ -67,6 +67,7 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
   parts.artist = getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
   parts.defaultKey = getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
   parts.defaultStructure = getDefaultSongStructure(parts[parts.length - 1]);
+  parts.tempo = getTempo(parts[parts.length - 1]);
 
   parts = removeInfoPartFromPartsArray(parts);
 
@@ -203,6 +204,28 @@ function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
 }
 
 // TODO
-function transformChordsIntoCoding(singleChordsArray, chordPositionsOfPartArray) {
+function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPartArray) {
+  const re = /(^[A-G]|^[a-g])(#|b)?(m)?([1-9])?(sus2|sus4)?/;
+  const codedChordsOfPart = [];
+
+  for (let i = 0; i < singleChordsOfPartArray.length; i++) {
+    const chordsOfLine = [];
+
+    for (let j = 0; j < singleChordsOfPartArray[i].length; j++) {
+      const chord = singleChordsOfPartArray[i][j];
+      const slashSplitChord = chord.split("/");
+      const chordMatches = slashSplitChord[0].match(re);
+      const codedChord = chordMatches === null ? null : standardizeAndCodeChords(slashSplitChord);
+
+      if (codedChord === null) throw new Error(`Invalid chord found! (${chord}) Delete this chord!`);
+
+      chordsOfLine.push(codedChord);
+    }
+
+    codedChordsOfPart.push(chordsOfLine);
+  }
+}
+
+function standardizeAndCodeChords(slashSplitChord) {
 
 }
