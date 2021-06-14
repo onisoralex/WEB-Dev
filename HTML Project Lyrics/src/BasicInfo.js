@@ -49,33 +49,41 @@ function getInfoFromLine(basicSongInformationArray, keyWords) {
 }
 
 function getSongTitle(basicSongInformationArray) {
-  const title = "Unknown Song";
-  const titleKeyWords = ["title", "name"];
+  const emptyTitle = "Unknown Song";
+  const titleKeyWords = ["title", "name", "nume", "titlu"];
   const returnedTitle = getInfoFromLine(basicSongInformationArray, titleKeyWords);
 
-  return returnedTitle === "" ? title : returnedTitle;
+  return returnedTitle === "" ? emptyTitle : returnedTitle;
 }
 
 function getArtist(basicSongInformationArray) {
-  const artist = "Unknown Artist";
+  const emptyArtist = "Unknown Artist";
   const artistKeyWords = ["artist", "interpret"];
   const returnedArtist = getInfoFromLine(basicSongInformationArray, artistKeyWords);
 
-  return returnedArtist === "" ? artist : returnedArtist;
+  return returnedArtist === "" ? emptyArtist : returnedArtist;
 }
 
 function getDefaultSongKey(basicSongInformationArray) {
-  const key = "Unknown Key";
+  const emptyKey = "Unknown Key";
   const keyKeyWords = ["key", "gama", "gamă"];
   const returnedKey = getInfoFromLine(basicSongInformationArray, keyKeyWords);
 
-  return returnedKey === "" ? key : returnedKey;
+  return returnedKey === "" ? emptyKey : returnedKey;
+}
+
+function getTempo(basicSongInformationArray) {
+  const tempo = "Unknown Tempo";
+  const tempoKeyWords = ["tempo"];
+  const returnedTempo = getInfoFromLine(basicSongInformationArray, tempoKeyWords);
+
+  return returnedTempo === "" ? tempo : returnedTempo;
 }
 
 function getDefaultSongStructure(infoPart) {
-  const structure = "No structure given";
+  const emptyStructure = "No structure given";
   const structureKeyWords = ["structure", "struktur", "structura", "structură"];
   const returnedStructure = getInfoFromLine(infoPart, structureKeyWords);
 
-  return returnedStructure === "" ? structure : returnedStructure;
+  return returnedStructure === "" ? emptyStructure : returnedStructure;
 }

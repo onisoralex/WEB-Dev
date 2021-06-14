@@ -75,7 +75,8 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
 
 function splitCompleteSongIntoParts(completeSongEveryLineArray, StartingPositionsOfParts) {
   const partsArray = [];
-  const extendedStartingPositionsOfParts = deepCopy(StartingPositionsOfParts).push(completeSongEveryLineArray.length - 1);
+  const extendedStartingPositionsOfParts = deepCopy(StartingPositionsOfParts);
+  extendedStartingPositionsOfParts.push(completeSongEveryLineArray.length - 1);
 
   for (let i = 0; i < extendedStartingPositionsOfParts.length - 1; i++) {
     const part = [];
@@ -96,13 +97,14 @@ function splitCompleteSongIntoParts(completeSongEveryLineArray, StartingPosition
 
 function removeInfoPartFromPartsArray(parts) {
   const partIndex = getIndexOfPart(parts, "Info");
-  const reducedParts = deepCopy(parts).splice(partIndex, 1);
+  const reducedParts = deepCopy(parts);
+  reducedParts.splice(partIndex, 1);
 
   return reducedParts;
 }
 
 function extendPartsWithInfoAboutLyrics(parts) {
-  const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Outro]"];
+  const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Instrumental]", "[Outro]"];
   const partsArray = deepCopy(parts);
 
   for (let i = 0; i < partsArray.length; i++) {
@@ -160,11 +162,12 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
 
 // TODO
 function transformChords(chordsArray) {
-  const singleChordsArray = getSingleChords(chordsArray);
-  const chordPositionsOfPartArray = searchChordPositionsOfPartArray(chordsArray, singleChordsArray);
-  const finalChordsArray = transformChordsIntoCoding(singleChordsArray, chordPositionsOfPartArray);
+  const transformedChords = [];
+  transformedChords.singleChords = getSingleChords(chordsArray);
+  transformedChords.chordPositions = searchChordPositionsOfPartArray(chordsArray, transformedChords.singleChords);
+  transformedChords.codedChords = transformChordsIntoCoding(transformedChords.singleChords, transformedChords.chordPositions);
 
-  return finalChordsArray;
+  return transformedChords;
 }
 
 function getSingleChords(chordsToTransformArray) {
@@ -179,7 +182,7 @@ function getSingleChords(chordsToTransformArray) {
 
 function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
   if (chordsArray.length !== singleChordsArray.length) {
-    return null;
+    throw new Error("Something isn't right at all! Check the code again!");
   }
 
   const chordPositionsOfPart = [];
