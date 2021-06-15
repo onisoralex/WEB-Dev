@@ -215,6 +215,7 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
       const chord = singleChordsOfPartArray[i][j];
       const slashSplitChord = chord.split("/");
       const chordMatches = slashSplitChord[0].match(re);
+      slashSplitChord[0] = chordMatches;
       const codedChord = chordMatches === null ? null : standardizeAndCodeChords(slashSplitChord);
 
       if (codedChord === null) throw new Error(`Invalid chord found! (${chord}) Delete this chord!`);
@@ -227,5 +228,23 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
 }
 
 function standardizeAndCodeChords(slashSplitChord) {
+  const chord = deepCopy(slashSplitChord[0]);
+  let slash = deepCopy(slashSplitChord[1]);
+
+  chord[1] = majorOrMinor(chord);
+  chord[1] = getNumberOfChord(chord[1].toUpperCase());
+  slash = getNumberOfChord(slash);
+
+  return [chord, slash];
+}
+
+function majorOrMinor(chord) {
+  if (chord[1].toLowerCase() === chord[1]) {
+    chord[3] = "m";
+  }
+  return chord;
+}
+
+function getNumberOfChord(chord) {
 
 }
