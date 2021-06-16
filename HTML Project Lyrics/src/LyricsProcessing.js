@@ -155,17 +155,17 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
   const parts = deepCopy(separatedAndProcessedSongArray);
 
   for (let i = 0; i < parts.length; i++) {
-    parts[i].transformedChords = transformChords(parts[i].chords); // Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
+    parts[i].transformedChords = transformChordsOfPart(parts[i].chords); // Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
   }
 
   return parts;
 }
 
 // TODO
-function transformChords(chordsArray) {
+function transformChordsOfPart(chordsOfPartArray) {
   const transformedChords = [];
-  transformedChords.singleChords = getSingleChords(chordsArray);
-  transformedChords.chordPositions = searchChordPositionsOfPartArray(chordsArray, transformedChords.singleChords);
+  transformedChords.singleChords = getSingleChords(chordsOfPartArray);
+  transformedChords.chordPositions = searchChordPositionsOfPartArray(chordsOfPartArray, transformedChords.singleChords);
   transformedChords.codedChords = transformChordsIntoCoding(transformedChords.singleChords, transformedChords.chordPositions);
 
   return transformedChords;
@@ -209,42 +209,92 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
   const codedChordsOfPart = [];
 
   for (let i = 0; i < singleChordsOfPartArray.length; i++) {
-    const chordsOfLine = [];
+    const chordsOfLine = singleChordsOfPartArray[i];
+    const codedChordsOfLine = [];
 
-    for (let j = 0; j < singleChordsOfPartArray[i].length; j++) {
-      const chord = singleChordsOfPartArray[i][j];
-      const slashSplitChord = chord.split("/");
-      const chordMatches = slashSplitChord[0].match(re);
-      slashSplitChord[0] = chordMatches;
-      const codedChord = chordMatches === null ? null : standardizeAndCodeChords(slashSplitChord);
+    for (let j = 0; j < chordsOfLine.length; j++) {
+      const chord = chordsOfLine[j];
+      const slashSplitChordArray = chord.split("/");
+      const chordMatches = slashSplitChordArray[0].match(re);
+      chordMatches.shift(); // Remove first element which is the  whole match. We only need the match groups.
+      slashSplitChordArray[0] = chordMatches;
+      const codedChord = chordMatches === null ? null : standardizeAndCodeChords(slashSplitChordArray);
 
       if (codedChord === null) throw new Error(`Invalid chord found! (${chord}) Delete this chord!`);
 
-      chordsOfLine.push(codedChord);
+      codedChordsOfLine.push(codedChord);
     }
 
-    codedChordsOfPart.push(chordsOfLine);
+    codedChordsOfPart.push(codedChordsOfLine);
   }
+
+  return codedChordsOfPart;
 }
 
-function standardizeAndCodeChords(slashSplitChord) {
-  const chord = deepCopy(slashSplitChord[0]);
-  let slash = deepCopy(slashSplitChord[1]);
+function standardizeAndCodeChords(slashSplitChordArray) {
+  const chord = deepCopy(slashSplitChordArray[0]);
+  let slash = deepCopy(slashSplitChordArray[1]);
+  let baseNote = "";
 
-  chord[1] = majorOrMinor(chord);
-  chord[1] = getNumberOfChord(chord[1].toUpperCase());
-  slash = getNumberOfChord(slash);
+  chord = majorOrMinorAndStandardize(chord);
+  baseNote = getNumberOfBaseChord(chord[1], chord[2]);
+  slash = getNumberOfBaseChord(slash, "");
 
   return [chord, slash];
 }
 
-function majorOrMinor(chord) {
+function majorOrMinorAndStandardize(chord) {
   if (chord[1].toLowerCase() === chord[1]) {
     chord[3] = "m";
   }
   return chord;
 }
 
-function getNumberOfChord(chord) {
+function noteToNumber(note, sharpFlat) {
+  const Notes = {
+    "B#": 1,
+    C: 1,
+    "C#": 2,
+    Db: 2,
+    D: 3,
+    "D#": 4,
+    Eb: 4,
+    E: 5,
+    Fb: 5,
+    "E#": 6,
+    F: 6,
+    "F#": 7,
+    Gb: 7,
+    G: 8,
+    "G#": 9,
+    Ab: 9,
+    A: 10,
+    "A#": 11,
+    Bb: 11,
+    B: 12,
+    Cb: 12,
+  };
+  Object.freeze(Notes);
 
+  return Notes[note + sharpFlat];
+}
+
+function numberToNote(number) {
+  const Numbers = {
+    1: "C",
+    2: "C#",
+    3: "D",
+    4: "D#",
+    5: "E",
+    6: "F",
+    7: "F#",
+    8: "G",
+    9: "G#",
+    10: "A",
+    11: "Bb",
+    12: "B",
+  };
+  Object.freeze(Numbers);
+
+  return Numbers[number];
 }
