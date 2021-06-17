@@ -7,10 +7,10 @@
 	<script>
 		function start() {
 			const completeSongText = document.getElementById("songtext").innerHTML;
-			let lyrics = createTextAndChords(completeSongText);
+			window.convertedStuff = createTextAndChords(completeSongText);
 
 			let ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
-			ouputNode.innerText = lyrics; // Displays the Lyrics
+			ouputNode.innerText = window.convertedStuff; // Displays the Lyrics
 		}
 	</script>
 </header>
@@ -53,7 +53,7 @@ WHERE WOULD I BE WITHOUT YOU
 F#
 WHERE WOULD I BE WITHOUT YOU
 A2                                      E
-WHERE WOULD I BE WITHOUT YOU x 2
+WHERE WOULD I BE WITHOUT YOU
 [2]
 E                             F#/E
 You promise hope for tomorrow
@@ -65,7 +65,7 @@ And when I stray from the narrow
 You lead me back in Your amazing grace
 G#7                                      C#m7
     My fears distract me from living
-                A            B        C#m      E     F#dim.
+                A            B        C#m      E     F#dim
 But good thing all fear's afraid of Your love
 
 [Solo]
@@ -81,7 +81,7 @@ I would be something less than better without You
 E F# A E
 
 [Info]
-Struktur: V1, Ch x 2, V2, Ch x 2, Solo, Br, Ch, Outro x 2
+Struktur: V1, Ch x 2, V2, Ch x 2, Solo, Br, Ch x 2, Outro x 2
 
 das
 
