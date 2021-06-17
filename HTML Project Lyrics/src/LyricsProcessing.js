@@ -1,24 +1,11 @@
 // import * as base from "./BasicInfo";
 
-// Advanced functions
-
-function extractAndPrepareInformationFromEditor() {
-  const completeSongText = document.getElementById("songtext").innerHTML;
-  return createTextAndChords(completeSongText);
-
-  // let node = document.getElementById('output');  // Gets the Place where the Lyrics should go in the HTML
-  // node.innerText = lyrics;  // Displays the Lyrics
-}
-
-// TODO after subfunctions are done
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);
   const songDividedInDifferentParts = searchAndGetLyricsParts(songLinesArray); // Gets the different Parts of a Song
   const separatedAndProcessedSongArray = processSong(songDividedInDifferentParts); // Divides the Parts in separateAarrays, extracts Informations and splits the relevant parts in Chords an Text
   const songWithTransformedChords = getSongWithTransformedChords(separatedAndProcessedSongArray);
 
-  // console.log("----- Whole Array with transformed chords (when it works):");
-  // console.log(songWithTransormedChords);
   return songWithTransformedChords;
 }
 
@@ -161,7 +148,6 @@ function getSongWithTransformedChords(separatedAndProcessedSongArray) {
   return parts;
 }
 
-// TODO
 function transformChordsOfPart(chordsOfPartArray) {
   const transformedChords = [];
   transformedChords.singleChords = getSingleChords(chordsOfPartArray);
@@ -203,9 +189,8 @@ function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
   return chordPositionsOfPart;
 }
 
-// TODO
 function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPartArray) {
-  const re = /(^[A-G]|^[a-g])(#|b)?(m)?([1-9])?(sus2|sus4)?/;
+  const re = /(^[A-G]|^[a-g])(#|b)?(m)?([1-9])?(sus2|sus4|sus|dim|aug)?/;
   const codedChordsOfPart = [];
 
   for (let i = 0; i < singleChordsOfPartArray.length; i++) {
@@ -214,15 +199,16 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
 
     for (let j = 0; j < chordsOfLine.length; j++) {
       const chord = chordsOfLine[j];
-      const slashSplitChordArray = chord.split("/");
-      const chordMatches = slashSplitChordArray[0].match(re);
-      chordMatches.shift(); // Remove first element which is the complete match found. We only need the match groups.
+      const [mainChordArray, slashChord] = chord.split("/").map((e) => e || "");
+      let matches = mainChordArray.match(re);
       let codedChord;
-      
-      if (chordMatches === null || chordMatches === undefined) {
+
+      if (matches === null || matches === undefined) {
         throw new Error(`Invalid chord found! (${chord}) Delete this chord!`);
       } else {
-        codedChord = new Chord(chordMatches[0], chordMatches[1], chordMatches[2], chordMatches[3], chordMatches[4], chordMatches[5], chordPositionsOfPartArray[i][j]);
+        matches.shift(); // Remove first element which is the complete match found. We only need the match groups.
+        matches = matches.map((e) => e || "");
+        codedChord = new Chord(matches[0], matches[1], matches[2], matches[3], matches[4], slashChord, chordPositionsOfPartArray[i][j]);
       }
 
       codedChordsOfLine.push(codedChord);

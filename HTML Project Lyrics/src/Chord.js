@@ -40,13 +40,13 @@ const NUMBERS = {
 Object.freeze(NUMBERS);
 
 class Chord {
-  constructor(_note, _sharpFlat, _majMin, _number, _sus, _slash, _position) {
-    this.noteNumber = this.noteToNumber(_note.toUpperCase() + _sharpFlat);
+  constructor(_note, _sharpFlat, _majMin, _number, _special, _slash, _position) {
+    this.noteNumber = Chord.noteToNumber(_note.toUpperCase() + _sharpFlat);
     this.majmin = _majMin;
     this.majorOrMinor(_note);
     this.number = _number;
-    this.sus = _sus;
-    this.slashNumber = this.noteToNumber(_slash);
+    this.special = _special;
+    this.slashNumber = Chord.noteToNumber(_slash);
     this.position = _position;
   }
 
@@ -65,37 +65,10 @@ class Chord {
   }
 
   static noteToNumber(note) {
-    return NOTES[note];
+    return typeof note === "undefined" ? "" : NOTES[note];
   }
 
   getNote() {
     return NUMBERS[this.noteNumber];
   }
 }
-
-/* Variation with String note information before reducing it to only numberic notes
-class Chord {
-  constructor(_note, _sharpflat, _minmaj, _sus, _slash, _position) {
-    this.baseNote = _note;
-    this.sharpFlat = _sharpflat;
-    this.noteNumber = noteToNumber(this.baseNote, this.sharpFlat);
-    this.minmaj = _minmaj;
-    this.sus = _sus;
-    this.slash = _slash;
-    this.slashNumber = noteToNumber(_slash, "");
-    this.position = _position;
-  }
-
-  transpose(ammount) {
-    const transposedNoteNummber = (this.noteNumber + ammount) % 12;
-    this.noteNumber = transposedNoteNummber === 0 ? transposedNoteNummber + 12 : transposedNoteNummber;
-    const newNote = numberToNote(this.noteNumber);
-    [this.baseNote, this.sharpFlat] = newNote.split("");
-    if (this.sharpFlat === undefined) this.sharpFlat = "";
-
-    const transposedSlashNumber = (this.slashNumber + ammount) % 12;
-    this.slashNumber = transposedSlashNumber === 0 ? transposedSlashNumber + 12 : transposedSlashNumber;
-    this.slash = numberToNote(this.slashNumber);
-  }
-}
-*/
