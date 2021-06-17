@@ -13,6 +13,18 @@ function deepCopy(inObject) {
   return outObject;
 }
 
+function openFile(event, fileTarget) {
+  const input = event.target; // Takes Information from the HTML that executed this Script
+  const reader = new FileReader(); // Create a new File Reader
+  const node = fileTarget;
+
+  reader.onload = () => {
+    node.innerText = reader.result; // Reads the Lyrics from the Object and display them
+  };
+
+  reader.readAsText(input.files[0]); // Reads first File from Array
+}
+
 function getIndexInArrayStartingFrom(needle, haystack, n) {
   return haystack.indexOf(needle, n);
 }

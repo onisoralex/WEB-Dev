@@ -1,21 +1,29 @@
 <html>
 <header>
 	<title>JS Test</title>
-	<script src="./Basicinfo.js"></script>
+	<script src="./BasicFunctions.js"></script>
 	<script src="./Chord.js"></script>
 	<script src="./LyricsProcessing.js"></script>
+	<script src="./DBHandler.js"></script>
 	<script>
 		function start() {
 			const completeSongText = document.getElementById("songtext").innerHTML;
 			window.convertedStuff = createTextAndChords(completeSongText);
 
-			let ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
-			ouputNode.innerText = window.convertedStuff; // Displays the Lyrics
+			// let ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
+			// ouputNode.innerText = window.convertedStuff; // Displays the Lyrics
 		}
 	</script>
+	<style>
+		body {
+			font-family: "Calibri";
+		}
+	</style>
 </header>
 
 <body onload="start()">
+	<input type='file' accept='text/plain' onchange='openFile(event, document.getElementById("output"))'>
+	<hr>
 	<div id="output"></div>
 	<pre id="songtext" style="visibility: hidden">
 Title: Where Would I Be Without You
