@@ -169,7 +169,7 @@ function getSingleChords(chordsToTransformArray) {
 
 function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
   if (chordsArray.length !== singleChordsArray.length) {
-    throw new Error("Something isn't right at all! Check the code again!");
+    throw new Error(`Length of ${chordsArray} and ${singleChordsArray} is not the same!`);
   }
 
   const chordPositionsOfPart = [];
