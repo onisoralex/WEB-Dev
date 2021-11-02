@@ -1,59 +1,75 @@
 // Compare daily rights changes
 var service = appCtx.getBean("TaJournalService");
-var d1 = "01";
-var m1 = "08";
-var y1 = "2021";
-var d2 = "13";
-var m2 = "08";
-var y2 = "2021";
-// Expected daily Values
-var twbue = "J";
+// Date Format is MM.dd.yyyy
+var fromDateFormated = "09.06.2021";
+var toDateFormated = "09.13.2021";
 
-var fromDate = Packages.at.workflow.webdesk.tools.date.DateTools.parse(d1 + "."+m1+"."+y1, "dd.MM.yyyy");
-var toDate = Packages.at.workflow.webdesk.tools.date.DateTools.parse(d2 + "."+m2+"."+y2, "dd.MM.yyyy");
-var taId = "1454";
+// var fromDate = Packages.at.workflow.webdesk.tools.date.DateTools.parse(fromDateFormated, "MM.dd.yyyy");
+var taId = "19";
+// Values configured in Stammsatz; TODO: Take values automatically from 6020
+var dailyValues = {
+  "twbue" : "N",
+  "twbzus" : "N",
+  "twbsw" : "N",
+  "twbso1" : "N",
+  "twbbonus" : "N",
+  "twbzutritt" : "N",
+  "twbzeiterf" : "N",
+  "twbkst" : "N",
+  "twbbde" : "N",
+  "twbfrei1" : "N",
+  "twbfrei2" : "N",
+  "twbfrei3" : "N",
+  "twbfrei4" : "N",
+  "twbfrei5" : "N",
+  "twbfrei6" : "N"};
+// Values that dont work currently: stbue, stbzus, stbsw
+// var stFields = java.util.Arrays.asList("stbso1","stbbonus","stbzutritt","stbzeiterf","stbkst","stbbde","stbfrei1","stbfrei2","stbfrei3","stbfrei4","stbfrei5","stbfrei6");
+// var journal = service.getJournal(taId, fromDate, toDate, stFields);
+// journal.getPersonValues()
 
 // Get the daily values
 var twFields = java.util.Arrays.asList("twbue","twbzus","twbsw","twbso1","twbbonus","twbzutritt","twbzeiterf","twbkst","twbbde","twbfrei1","twbfrei2","twbfrei3","twbfrei4","twbfrei5","twbfrei6");
 // var journalDay = service.getJournalDay(taId, fromDate, twFields);
 // journalDay.getValues()
 
-// Values that dont work currently: stbue, stbzus, stbsw
-var stFields = java.util.Arrays.asList("stbso1","stbbonus","stbzutritt","stbzeiterf","stbkst","stbbde","stbfrei1","stbfrei2","stbfrei3","stbfrei4","stbfrei5","stbfrei6");
-// var journal = service.getJournal(taId, fromDate, toDate, stFields);
-// journal.getPersonValues()
-
-var date1 = new Date(m1 + "."+d1+"."+y1);
-var date2 = new Date(m2 + "."+d2+"."+y2);
+var startingDate = new Date(fromDateFormated);
+var endingDate = new Date(toDateFormated);
 
 // To calculate the time difference of two dates
-var differenceInTime = date2.getTime() - date1.getTime();
+var differenceInTime = endingDate.getTime() - startingDate.getTime();
 
 // To calculate the no. of days between two dates
 var differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
-var startingDate = date1;
 var currentlyCheckedDate = startingDate;
 var list = [];
 
-for (var i = 0; i < differenceInDays; i++) {
-  currentlyCheckedDate = new Date(currentlyCheckedDate.getTime() + (1000 * 3600 * 24));
-  var values = service.getJournalDay(taId, fromDate, twFields).getValues();
+for (var i = 0; i <= differenceInDays; i++) {
+  var dailyValuesOfADay = service.getJournalDay(taId, Packages.at.workflow.webdesk.tools.date.DateTools.parse(currentlyCheckedDate.toISOString().replace(/T.*/,"").split(/-(.+)/).slice(0, 2).reverse().join(".").replace("-", "."), "MM.dd.yyyy"), twFields).getValues();
   var sortable = [];
-
-  for (var value in values) {
-    sortable.push([value, values[value]]);
+  // Separate 
+  for (var value in dailyValuesOfADay) {
+    sortable.push([value, dailyValuesOfADay[value]]);
   }
-
+  // Sort fields of every day
   sortable.sort(function (a, b) {a[0] - b[0]});
 
-  // var temp = [];
-  // for (var i = 0; i < sortable.length; i++){
-  //   temp.push(sortable[i][0] + " = " + sortable[i][1]);
-  //   Object.assign({}, temp);
-  // }
+  // Add the date to the begining of the list of accounts
+  sortable.unshift("".concat(("0" + currentlyCheckedDate.getDate()).slice(-2), ".", ("0" + (currentlyCheckedDate.getMonth() + 1)).slice(-2), ".", currentlyCheckedDate.getFullYear()));
 
   list.push(sortable);
+
+  currentlyCheckedDate = new Date(currentlyCheckedDate.getTime() + (1000 * 3600 * 24));
 }
 
-java.util.Arrays.asList(list);
+var problems = [];
+for (var i = 0; i < list.length; i++) {
+  for (var j = 1; j < list[i].length; j++) {
+    if (list[i][j][1] !== dailyValues[list[i][j][0]]) {
+      problems.push(JSON.stringify([list[i][0], list[i][j]]));
+    }
+  }
+}
+
+java.util.Arrays.asList(problems);
