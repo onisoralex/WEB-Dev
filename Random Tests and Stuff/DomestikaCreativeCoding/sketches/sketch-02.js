@@ -18,10 +18,8 @@ const rgbToHex = (rgb) => `#${numToHex(rgb.r)}${numToHex(rgb.g)}${numToHex(rgb.b
 const params = {
   exercise2: false,
   animate: false,
-  background: { r: 0, g: 0, b: 0 },
-  fontColor: {
-    r: 255, g: 255, b: 255, a: 1,
-  },
+  background: "#000000",
+  fontColor: "#ffffff",
   posx: 0.5,
   posy: 0.5,
   radius: 0.3,
@@ -37,10 +35,10 @@ const degToRad = (degrees) => (degrees / 180) * Math.PI;
 const randomRange = (min, max) => Math.random() * (max - min) + min;
 
 const sketch = () => ({ context, width, height }) => {
-  context.fillStyle = rgbToHex(params.background);
+  context.fillStyle = params.background;
   context.fillRect(0, 0, width, height);
 
-  context.fillStyle = rgbToHex(params.fontColor);
+  context.fillStyle = params.fontColor;
 
   const cx = width * (params.exercise2 ? 0 : params.posx);
   const cy = height * (params.exercise2 ? 0 : params.posy);
@@ -75,7 +73,7 @@ const sketch = () => ({ context, width, height }) => {
     context.rotate(-angle);
 
     context.lineWidth = random.range(5, 20);
-    context.strokeStyle = rgbToHex(params.fontColor);
+    context.strokeStyle = params.fontColor;
 
     context.beginPath();
     context.arc(0, 0, radius * random.range(0.7, 1.3), slice * random.range(1, -8), slice * random.range(1, 5));

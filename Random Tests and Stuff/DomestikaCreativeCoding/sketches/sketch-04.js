@@ -59,6 +59,7 @@ const sketch = () => ({
     const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
 
     context.save();
+    
     context.translate(x, y);
     context.translate(margx, margy);
     context.translate(cellw * 0.5, cellh * 0.5);
