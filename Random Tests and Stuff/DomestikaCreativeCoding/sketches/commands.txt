@@ -1,0 +1,11 @@
+https://github.com/mattdesl/canvas-sketch
+npm install canvas-sketch-cli -g
+mkdir my-sketches
+canvas-sketch sketch.js --new
+
+While in the browser, hit Cmd + S or Ctrl + S to export a high-resolution PNG of your artwork to your ~/Downloads folder.
+Change the output folder with following command:
+canvas-sketch src/foobar.js --output=./tmp/
+
+Start the live Server
+canvas-sketch src/foobar.js --hot
