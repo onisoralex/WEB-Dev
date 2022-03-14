@@ -23,6 +23,7 @@ const params = {
   posx: 0.5,
   posy: 0.5,
   radius: 0.3,
+  dials: 40,
 };
 
 const settings = {
@@ -48,7 +49,7 @@ const sketch = () => ({ context, width, height }) => {
   const w = width * 0.01;
   const h = height * 0.1;
 
-  const num = 40;
+  const num = params.dials;
   const radius = width * (params.exercise2 ? 0.7 : params.radius);
 
   for (let i = 0; i < num; i++) {
@@ -96,6 +97,8 @@ const createPane = () => {
   folder.addInput(params, "fontColor");
   folder.addInput(params, "posx", { min: 0, max: 1, step: 0.01 });
   folder.addInput(params, "posy", { min: 0, max: 1, step: 0.01 });
+  folder.addInput(params, "radius", { min: 0, max: 1, step: 0.01 });
+  folder.addInput(params, "dials", { min: 0, max: 100, step: 1 });
 };
 
 createPane();
