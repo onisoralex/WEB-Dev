@@ -84,7 +84,7 @@ const sketch = ({ context, width, height }) => {
 
       context.save();
       context.translate(x, y);
-      context.translate(cell * 0.5, cell * 0.5); // Better add another translate instead of adding that values to the x & y coordinates to offset the circle. The result and intention may be more clear that way.
+      context.translate(cell * 0.5, cell * 0.5); // Better adding another translate instead of adding that values to the x & y coordinates to offset the circle. The result and intention may be more clear that way.
 
       // context.fillRect(0, 0, cell, cell);
       /*
