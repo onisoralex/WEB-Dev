@@ -1,0 +1,42 @@
+https://github.com/mattdesl/canvas-sketch
+npm install canvas-sketch-cli -g
+mkdir my-sketches
+canvas-sketch sketch.js --new
+
+While in the browser, hit Cmd + S or Ctrl + S to export a high-resolution PNG of your artwork to your ~/Downloads folder.
+Change the output folder with following command:
+canvas-sketch src/foobar.js --output=./tmp/
+
+Start the live Server
+canvas-sketch src/foobar.js --hot
+
+
+ANIMATE
+Tweakpane: Tweakpane settings won't work without animate, since the new settings won't be applied on a static image.
+The frame needs to be refreshed in order to apply a new Tweakpane setting.
+
+Random: Using random values inside the sketch() function will create a new set of random values for every frame.
+That means the animation will create a new sketch every frame additionaly to the animation movements.
+To have every sketch different random values, but still animate the sketch, the random values need to be created in arrays outside of the sketch() function.
+This brings a problem. You need to know how many values are needed, since some parameters can be changed with Tweakpane and then need a random value assigned. Generating a set of values for the hoighest allowed number of elements/objects (configured in Tweakpane) could be a costly, but effective solution.
+
+canvasSketch(sketch, settings);:
+This function starts the sketch with the settings.
+The settings will only be applied once to the sketch.
+Changing the settings with tweakpane while sketch is running will not affect the settings of the currently running sketch.
+This means you can't activate or deactivate the animation while the sketch is running using Tweakpane!
+You can use an external animate function as a workaround though, which you would have control over:
+/*
+const animate = () => {
+  console.log("domestika");
+  requestAnimationFrame(animate); // Every time the browser is ready to animate a frame it willl call this function.
+};
+// animate();
+*/
+Alternatively an event handler on the Tweakpane animation option to call canvasSketch(sketch, settings); again with the new settings could be a viable solution. All new settings would e applied, because the sketch is already started and no new Values would be creted.
+
+
+==> test results:
+Best use the an event handler on the Tweakpane animation setting: .on("change", () => togglePlay());
+Leave the animation setting hardcoded set to true and then the toggle will just pause and unpause the animation.
+Since the animation remains active changes to settings can still be made. Use the update function to update on change for the other settings: .on("change", () => update());
