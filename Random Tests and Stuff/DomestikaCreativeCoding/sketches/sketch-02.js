@@ -15,17 +15,16 @@ const numToHex = (n) => (n <= 15 ? "0" : "") + n.toString(16);
 const rgbToHex = (rgb) => `#${numToHex(rgb.r)}${numToHex(rgb.g)}${numToHex(rgb.b)}`;
 // const rgbToHex = (rgb) => `#${((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1)}`;
 
-const params = {
-  exercise2: false,
-  animate: true,
-  background: "#000000",
-  fontColor: "#ffffff",
-  lineCap: "butt",
-  posx: 0.5,
-  posy: 0.5,
-  radius: 0.3,
-  dials: 40,
-  lineDial: false,
+const degToRad = (degrees) => (degrees / 180) * Math.PI;
+
+const randomRange = (min, max) => Math.random() * (max - min) + min;
+
+const getRandomRangeArray = (n, min, max) => {
+  const arr = [];
+  for (let i = 0; i < n; i++) {
+    arr.push(randomRange(min, max));
+  }
+  return arr;
 };
 
 const animate = () => {
@@ -34,18 +33,48 @@ const animate = () => {
 };
 // animate();
 
+const params = {
+  exercise2: false,
+  animate: true,
+  background: "#000000",
+  dialColor: "#ffffff",
+  arcColor: "#ffffff",
+  lineCap: "butt",
+  posx: 0.5,
+  posy: 0.5,
+  radius: 0.3,
+  radiusFactorMin: 1,
+  radiusFactorMax: 1,
+  dials: 40,
+  dialWidthFactor: 1,
+  maxNumOfElements: 100,
+};
+
 const settings = {
   dimensions: [1080, 1080],
   animate: true,
 };
 
-const degToRad = (degrees) => (degrees / 180) * Math.PI;
-
-const randomRange = (min, max) => Math.random() * (max - min) + min;
-
-const sketch = ({ update, togglePlay }) => {
+const sketch = ({
+  width, height, update, togglePlay,
+}) => {
   // window.addEventListener("click", () => update(settings));
 
+  const w = width * 0.01;
+  const h = height * 0.1;
+  const radiusArrMin = 0.7;
+  const radiusArrMax = 1.3;
+
+  // Create all random values so they aren't created anew every frame
+  const scaleXArr = getRandomRangeArray(params.maxNumOfElements, 0.1, 2);
+  const scaleYArr = getRandomRangeArray(params.maxNumOfElements, 0.2, 0.5);
+  const ycoordArr = getRandomRangeArray(params.maxNumOfElements, 0, -h * 0.5);
+  const arcLineWidth = getRandomRangeArray(params.maxNumOfElements, 5, 20);
+  const radiusArr = getRandomRangeArray(params.maxNumOfElements, radiusArrMin, radiusArrMax);
+  const sliceFrom = getRandomRangeArray(params.maxNumOfElements, 1, -8);
+  const sliceTo = getRandomRangeArray(params.maxNumOfElements, 1, 5);
+
+  // Configure and initialize the pane
   (createPane = () => {
     const pane = new Tweakpane.Pane();
     let folder;
@@ -57,102 +86,67 @@ const sketch = ({ update, togglePlay }) => {
     folder.addInput(params, "lineCap", { options: { butt: "butt", round: "round", square: "square" } }).on("change", () => update());
 
     folder = pane.addFolder({ title: "Art" });
-    folder.addInput(params, "fontColor").on("change", () => update());
+    folder.addInput(params, "dialColor").on("change", () => update());
+    folder.addInput(params, "arcColor").on("change", () => update());
     folder.addInput(params, "posx", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
     folder.addInput(params, "posy", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
     folder.addInput(params, "radius", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
-    folder.addInput(params, "dials", { min: 0, max: 100, step: 1 }).on("change", () => update());
-    folder.addInput(params, "lineDial").on("change", () => update());
+    folder.addInput(params, "radiusFactorMin", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
+    folder.addInput(params, "radiusFactorMax", { min: 1, max: 2, step: 0.01 }).on("change", () => update());
+    folder.addInput(params, "dials", { min: 0, max: params.maxNumOfElements, step: 1 }).on("change", () => update());
+    folder.addInput(params, "dialWidthFactor", { min: 0, max: 3, step: 0.01 }).on("change", () => update());
   })();
 
   return ({ context, width, height }) => {
     context.fillStyle = params.background;
     context.fillRect(0, 0, width, height);
 
-    context.fillStyle = params.fontColor;
+    // Default settings for repeatedly used settings to improve performance
+    context.fillStyle = params.dialColor;
+    context.strokeStyle = params.arcColor;
+    context.lineCap = params.lineCap;
 
+    // Center of circle
     const cx = width * (params.exercise2 ? 0 : params.posx);
     const cy = height * (params.exercise2 ? 0 : params.posy);
 
-    let x; let y;
-
-    const w = width * 0.01;
-    const h = height * 0.1;
-
     const num = params.dials;
+    const dialWidth = w * params.dialWidthFactor;
     const radius = width * (params.exercise2 ? 0.7 : params.radius);
-
-    context.lineCap = params.lineCap;
+    const newradiusrange = radiusArr.map((e) => math.mapRange(e, radiusArrMin, radiusArrMax, radiusArrMin * params.radiusFactorMin, radiusArrMax * params.radiusFactorMax));
 
     for (let i = 0; i < num; i++) {
       const slice = math.degToRad(360 / num);
       const angle = slice * i;
 
-      x = cx + radius * Math.sin(angle);
-      y = cy + radius * Math.cos(angle);
+      const x = cx + radius * Math.sin(angle);
+      const y = cy + radius * Math.cos(angle);
 
-      const wi = 500;
-      const he = 500;
-      context.lineWidth = 1;
-      context.strokeStyle = params.fontColor;
-      context.save();
-      context.translate(wi, he);
-      context.beginPath();
-      context.moveTo(0, -he);
-      context.lineTo(0, 1080 - he);
-      context.stroke();
-      context.beginPath();
-      context.moveTo(-wi, 0);
-      context.lineTo(1080 - wi, 0);
-      context.stroke();
-      context.restore();
-      context.save();
-      context.translate(wi + w, he + h);
-      context.beginPath();
-      context.moveTo(0, -he - h);
-      context.lineTo(0, 1080 - he - h);
-      context.stroke();
-      context.beginPath();
-      context.moveTo(-wi - h, 0);
-      context.lineTo(1080 - wi - w, 0);
-      context.stroke();
-      context.restore();
-      context.save();
-      context.translate(wi, he);
-
-      context.beginPath();
-      context.rect(-w * 0.5, -random.range(0, h * 0.5), w, h);
-      context.fill();
-      context.restore();
+      const ycoord = ycoordArr[i];
 
       context.save();
       context.translate(x, y);
       context.rotate(-angle);
-      if (params.lineDial) {
-        // context.rotate(math.degToRad(90));
-        const xFactor = random.range(0.1, 2);
-        const yFactor = random.range(0.2, 0.5);
-        context.lineWidth = 5;
-        context.strokeStyle = params.fontColor;
-        context.beginPath();
-        context.moveTo(0, random.range(0, -h * 0.5));
-        context.lineTo(w, h);
-        context.stroke();
-      } else {
-        // context.scale(random.range(0.1, 2), random.range(0.2, 0.5));
-        context.beginPath();
-        context.rect(-w * 0.5, random.range(0, -h * 0.5), w, h);
+      context.scale(scaleXArr[i], scaleYArr[i]);
+      context.beginPath();
+      if (params.lineCap === "butt") {
+        context.rect(-dialWidth * 0.5, ycoord, dialWidth, h);
         context.fill();
+      } else {
+        context.lineWidth = dialWidth;
+        context.strokeStyle = params.dialColor;
+        context.moveTo(0, ycoord);
+        context.lineTo(0, ycoord + h);
+        context.stroke();
       }
       context.restore();
 
       context.save();
+      context.lineWidth = arcLineWidth[i];
       context.translate(cx, cy);
       context.rotate(-angle);
-      context.lineWidth = random.range(5, 20);
-      context.strokeStyle = params.fontColor;
       context.beginPath();
-      context.arc(0, 0, radius * random.range(0.7, 1.3), slice * random.range(1, -8), slice * random.range(1, 5));
+      context.arc(0, 0, radius * newradiusrange[i], slice * sliceFrom[i], slice * sliceTo[i]);
       context.stroke();
       context.restore();
     }
