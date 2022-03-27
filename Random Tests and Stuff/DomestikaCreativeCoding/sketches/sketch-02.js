@@ -82,8 +82,8 @@ const sketch = ({
     folder = pane.addFolder({ title: "General" });
     folder.addInput(params, "exercise2").on("change", () => update());
     folder.addInput(params, "animate").on("change", () => togglePlay());
-    folder.addInput(params, "background").on("change", () => update());
     folder.addInput(params, "lineCap", { options: { butt: "butt", round: "round", square: "square" } }).on("change", () => update());
+    folder.addInput(params, "background").on("change", () => update());
 
     folder = pane.addFolder({ title: "Art" });
     folder.addInput(params, "dialColor").on("change", () => update());
