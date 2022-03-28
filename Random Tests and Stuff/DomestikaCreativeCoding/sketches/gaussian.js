@@ -54,20 +54,66 @@ const sketch = ({
     folder.addInput(params, "background").on("change", () => update());
 
     folder = pane.addFolder({ title: "Art" });
-    folder.addInput(params, "dialColor").on("change", () => update());
-    folder.addInput(params, "arcColor").on("change", () => update());
+    folder.addInput(params, "scaleColor").on("change", () => update());
+    folder.addInput(params, "graphColor").on("change", () => update());
     folder.addInput(params, "posx", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
     folder.addInput(params, "posy", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
-    folder.addInput(params, "radius", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
-    folder.addInput(params, "radiusFactorMin", { min: 0, max: 1, step: 0.01 }).on("change", () => update());
-    folder.addInput(params, "radiusFactorMax", { min: 1, max: 2, step: 0.01 }).on("change", () => update());
-    folder.addInput(params, "dials", { min: 0, max: params.maxNumOfElements, step: 1 }).on("change", () => update());
-    folder.addInput(params, "dialWidthFactor", { min: 0, max: 3, step: 0.01 }).on("change", () => update());
   })();
 
   return ({ context, width, height }) => {
-    context.fillStyle = "white";
+    context.fillStyle = params.background;
     context.fillRect(0, 0, width, height);
+    
+
+    // Default settings for repeatedly used settings to improve performance
+    context.fillStyle = params.dialColor;
+    context.strokeStyle = params.arcColor;
+    context.lineCap = params.lineCap;
+
+    // Center of circle
+    const cx = width * (params.exercise2 ? 0 : params.posx);
+    const cy = height * (params.exercise2 ? 0 : params.posy);
+
+    const num = params.dials;
+    const dialWidth = w * params.dialWidthFactor;
+    const radius = width * (params.exercise2 ? 0.7 : params.radius);
+    const newradiusrange = radiusArr.map((e) => math.mapRange(e, radiusArrMin, radiusArrMax, radiusArrMin * params.radiusFactorMin, radiusArrMax * params.radiusFactorMax));
+
+    for (let i = 0; i < num; i++) {
+      const slice = math.degToRad(360 / num);
+      const angle = slice * i;
+
+      const x = cx + radius * Math.sin(angle);
+      const y = cy + radius * Math.cos(angle);
+
+      const ycoord = ycoordArr[i];
+
+      context.save();
+      context.translate(x, y);
+      context.rotate(-angle);
+      context.scale(scaleXArr[i], scaleYArr[i]);
+      context.beginPath();
+      if (params.lineCap === "butt") {
+        context.rect(-dialWidth * 0.5, ycoord, dialWidth, h);
+        context.fill();
+      } else {
+        context.lineWidth = dialWidth;
+        context.strokeStyle = params.dialColor;
+        context.moveTo(0, ycoord);
+        context.lineTo(0, ycoord + h);
+        context.stroke();
+      }
+      context.restore();
+
+      context.save();
+      context.lineWidth = arcLineWidth[i];
+      context.translate(cx, cy);
+      context.rotate(-angle);
+      context.beginPath();
+      context.arc(0, 0, radius * newradiusrange[i], slice * sliceFrom[i], slice * sliceTo[i]);
+      context.stroke();
+      context.restore();
+    }
   };
 };
 
