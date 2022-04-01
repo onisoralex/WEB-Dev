@@ -1,16 +1,16 @@
-function deepCopy(inObject) {
-  if (typeof inObject !== "object" || inObject === null) {
-    return inObject; // Return the value if inObject is not an object
+function deepCopy(inputObject) {
+  if (typeof inputObject !== "object" || inputObject === null) {
+    return inputObject; // Return the value if inObject is not an object
   }
 
-  const outObject = Array.isArray(inObject) ? [] : {};
+  const outputObject = Array.isArray(inputObject) ? [] : {};
 
-  for (const key in inObject) {
-    const value = inObject[key];
-    outObject[key] = deepCopy(value);
+  for (const key in inputObject) {
+    const value = inputObject[key];
+    outputObject[key] = deepCopy(value);
   }
 
-  return outObject;
+  return outputObject;
 }
 
 function openFile(event, fileTarget) {
