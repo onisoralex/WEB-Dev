@@ -199,8 +199,8 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
 
     for (let j = 0; j < chordsOfLine.length; j++) {
       const chord = chordsOfLine[j];
-      const [mainChordArray, slashChord] = chord.split("/").map((e) => e || "");
-      let matches = mainChordArray.match(re);
+      const [mainChord, slashChord] = chord.split("/").map((e) => e || "");
+      let matches = mainChord.match(re);
       let codedChord;
 
       if (matches === null || matches === undefined) {
