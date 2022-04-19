@@ -190,7 +190,6 @@ function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
 }
 
 function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPartArray) {
-  const re = /(^[A-G]|^[a-g])(#|b)?(m)?([1-9])?(sus2|sus4|sus|dim|aug)?/;
   const codedChordsOfPart = [];
 
   for (let i = 0; i < singleChordsOfPartArray.length; i++) {
@@ -198,20 +197,7 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
     const codedChordsOfLine = [];
 
     for (let j = 0; j < chordsOfLine.length; j++) {
-      const chord = chordsOfLine[j];
-      const [mainChord, slashChord] = chord.split("/").map((e) => e || "");
-      let matches = mainChord.match(re);
-      let codedChord;
-
-      if (matches === null || matches === undefined) {
-        throw new Error(`Invalid chord found! (${chord}) Delete this chord!`);
-      } else {
-        matches.shift(); // Remove first element which is the complete match found. We only need the match groups.
-        matches = matches.map((e) => e || "");
-        codedChord = new Chord(matches[0], matches[1], matches[2], matches[3], matches[4], slashChord, chordPositionsOfPartArray[i][j]);
-      }
-
-      codedChordsOfLine.push(codedChord);
+      codedChordsOfLine.push(new Chord(chordPositionsOfPartArray[i][j], chordsOfLine[j]));
     }
 
     codedChordsOfPart.push(codedChordsOfLine);
