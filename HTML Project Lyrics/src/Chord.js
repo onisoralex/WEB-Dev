@@ -52,7 +52,6 @@ class Chord {
       && _slashNote === undefined) {
       const chord = _note;
       const [mainChord, slashChord] = chord.split("/").map((e) => e || "");
-      console.log(`main: ${mainChord}; slash: ${slashChord}`);
       const matches = mainChord.match(regExpr);
       // let codedChord;
 
@@ -81,11 +80,12 @@ class Chord {
   }
 
   transpose(ammount) {
-    const transposedNoteNummber = (this.noteNumber + ammount) % 12;
-    this.noteNumber = transposedNoteNummber === 0 ? 12 : transposedNoteNummber;
+    this.noteNumber = (this.noteNumber + ammount) % 12;
+    this.noteNumber += (this.noteNumber <= 0) ? 12 : 0;
 
-    const transposedSlashNumber = (this.slashNoteNumber + ammount) % 12;
-    this.slashNoteNumber = transposedSlashNumber === 0 ? 12 : transposedSlashNumber;
+    this.slashNoteNumber = (this.slashNoteNumber + ammount) % 12;
+    this.slashNoteNumber += (this.slashNoteNumber <= 0) ? 12 : 0;
+    return this;
   }
 
   // Am = min, am = min, a = min, A = maj
@@ -105,6 +105,8 @@ class Chord {
   }
 }
 
+// Tests
+/*
 const a = [];
 a.push(new Chord(5, "G", "#", "m", 7, "sus4", "D").getChord() === "G#m7sus4/D");
 a.push(new Chord(5, "B", "#", "m", 7, "sus2", "").getChord() === "Cm7sus2");
@@ -118,3 +120,7 @@ a.push(new Chord(5, "Em7dim/d").getChord() === "Em7dim/D");
 a.push(new Chord(5, "g#7/D").getChord() === "G#m7/D");
 a.push(new Chord(5, "G#maug/D").getChord() === "G#maug/D");
 a.push(new Chord(5, "Gm").getChord() === "Gm");
+a.push(new Chord(5, "G#m7sus4/D").transpose(5).getChord() === "C#m7sus4/G");
+a.push(new Chord(5, "G#m7sus4/D").transpose(-4).getChord() === "Em7sus4/Bb");
+a.push(new Chord(5, "G#m7sus4/D").transpose(12).getChord() === "G#m7sus4/D");
+*/
