@@ -60,12 +60,21 @@ function getInfoFromLine(basicSongInformationArray, keyWords) {
   return info;
 }
 
-function getSongTitle(basicSongInformationArray) {
-  const emptyTitle = "Unknown Song";
-  const titleKeyWords = ["title", "name", "nume", "titlu"];
-  const returnedTitle = getInfoFromLine(basicSongInformationArray, titleKeyWords);
+// Should replace the below info methods later to make it more cleaner
+const titleInfoObj = { emptyInfo: "Unknown Song", keyWords: ["title", "name", "nume", "titlu"] };
+function getGeneralInfo(infoType, basicSongInformationArray) {
+  const result = getInfoFromLine(basicSongInformationArray, infoType.keyWords);
 
-  return returnedTitle === "" ? emptyTitle : returnedTitle;
+  return result === "" ? infoType.emptyInfo : result;
+}
+
+// Separate functions until the geneal function is working
+function getSongTitle(basicSongInformationArray) {
+  const empty = "Unknown Song";
+  const keyWords = ["title", "name", "nume", "titlu"];
+  const result = getInfoFromLine(basicSongInformationArray, keyWords);
+
+  return result === "" ? empty : result;
 }
 
 function getArtist(basicSongInformationArray) {
@@ -85,17 +94,17 @@ function getDefaultSongKey(basicSongInformationArray) {
 }
 
 function getTempo(basicSongInformationArray) {
-  const tempo = "Unknown Tempo";
+  const emptyTempo = "Unknown Tempo";
   const tempoKeyWords = ["tempo"];
   const returnedTempo = getInfoFromLine(basicSongInformationArray, tempoKeyWords);
 
-  return returnedTempo === "" ? tempo : returnedTempo;
+  return returnedTempo === "" ? emptyTempo : returnedTempo;
 }
 
-function getDefaultSongStructure(infoPart) {
+function getDefaultSongStructure(basicSongInformationArray) {
   const emptyStructure = "No structure given";
   const structureKeyWords = ["structure", "struktur", "structura", "structură"];
-  const returnedStructure = getInfoFromLine(infoPart, structureKeyWords);
+  const returnedStructure = getInfoFromLine(basicSongInformationArray, structureKeyWords);
 
   return returnedStructure === "" ? emptyStructure : returnedStructure;
 }
