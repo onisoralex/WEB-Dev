@@ -1,4 +1,4 @@
-// import * as base from "./BasicInfo";
+// import * as base from "./BasicFunctions";
 
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);

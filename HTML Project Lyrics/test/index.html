@@ -2,9 +2,10 @@
 <header>
 	<title>JS Test</title>
 	<script src="./ProcessingTests/ProcessingTests.js"></script>
+	<script src="../src/Chord.js"></script>
 	<script src="../src/LyricsProcessing.js"></script>
 	<script src="./BasicTests/BasicTest.js"></script>
-	<script src="../src/BasicInfo.js"></script>
+	<script src="../src/BasicFunctions.js"></script>
 </header>
 
 <body>
@@ -14,7 +15,7 @@
 
 
 
-	Where Would I Be Without You
+		Title: Where Would I Be Without You
 
 	artist: Citizen Way
 
@@ -83,12 +84,14 @@
 	<script>
 		preparations();
 
+		// Processing Tests
 		extractAndPrepareInformationFromEditorTest();
 		createTextAndChordsTest();
 		searchAndGetLyricsPartsTest();
 		getStartingPositionOfPartsTest();
 		extractPartsTest();
 
+		// basic Tests
 		getSongTitleTest();
 		getArtistTest();
 		getDefaultSongKeyTest();
