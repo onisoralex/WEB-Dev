@@ -22,3 +22,5 @@ function drop(ev) {
   // Get the element that has to be transferred and append it to the bottom of the list of child elements of the actually valid target
   target.appendChild(document.getElementById(data));
 }
+
+export {drag, drop, allowDrop}
