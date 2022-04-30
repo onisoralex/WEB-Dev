@@ -1,6 +1,6 @@
 function deepCopy(inputObject) {
   if (typeof inputObject !== "object" || inputObject === null) {
-    return inputObject; // Return the value if inObject is not an object
+    return inputObject; // Return the value if input is not an object
   }
 
   const outputObject = Array.isArray(inputObject) ? [] : {};
