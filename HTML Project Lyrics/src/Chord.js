@@ -124,3 +124,5 @@ a.push(new Chord(5, "G#m7sus4/D").transpose(5).getChord() === "C#m7sus4/G");
 a.push(new Chord(5, "G#m7sus4/D").transpose(-4).getChord() === "Em7sus4/Bb");
 a.push(new Chord(5, "G#m7sus4/D").transpose(12).getChord() === "G#m7sus4/D");
 */
+
+export { Chord as default };

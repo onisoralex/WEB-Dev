@@ -61,12 +61,13 @@ function getInfoFromLine(basicSongInformationArray, keyWords) {
 }
 
 // Should replace the below info methods later to make it more cleaner
-const titleInfoObj = { emptyInfo: "Unknown Song", keyWords: ["title", "name", "nume", "titlu"] };
+/* const titleInfoObj = { emptyInfo: "Unknown Song", keyWords: ["title", "name", "nume", "titlu"] };
 function getGeneralInfo(infoType, basicSongInformationArray) {
   const result = getInfoFromLine(basicSongInformationArray, infoType.keyWords);
 
   return result === "" ? infoType.emptyInfo : result;
 }
+*/
 
 // Separate functions until the geneal function is working
 function getSongTitle(basicSongInformationArray) {
@@ -108,3 +109,18 @@ function getDefaultSongStructure(basicSongInformationArray) {
 
   return returnedStructure === "" ? emptyStructure : returnedStructure;
 }
+
+export {
+  deepCopy,
+  openFile,
+  getIndexInArrayStartingFrom,
+  getIndexInArray,
+  isInArray,
+  getIndexOfPart,
+  getInfoFromLine,
+  getSongTitle,
+  getArtist,
+  getDefaultSongKey,
+  getTempo,
+  getDefaultSongStructure,
+};

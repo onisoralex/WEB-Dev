@@ -1,4 +1,20 @@
 // import * as base from "./BasicFunctions";
+import Song from "./Song";
+import Chord from "./Chord";
+import {
+  deepCopy,
+  openFile,
+  getIndexInArrayStartingFrom,
+  getIndexInArray,
+  isInArray,
+  getIndexOfPart,
+  getInfoFromLine,
+  getSongTitle,
+  getArtist,
+  getDefaultSongKey,
+  getTempo,
+  getDefaultSongStructure,
+} from "./BasicFunctions";
 
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);
