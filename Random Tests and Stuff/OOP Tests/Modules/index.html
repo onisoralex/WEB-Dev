@@ -3,7 +3,9 @@
 <head>
   <title>Module Test</title>
   <link rel="stylesheet" href="Style.css">
-  <script type="module" acync src="script.js"></script>
+  <script type="module" acync src="script.js"></script><!--If async is present: The script is downloaded in parallel to parsing the page, and executed as soon as it is available (before parsing completes)-->
+  <!--script type="module" defer src="script.js"></script--><!--If defer is present (and not async): The script is downloaded in parallel to parsing the page, and executed after the page has finished parsing-->
+  <!--script type="module" src="script.js"></script--><!--If neither async or defer is present: The script is downloaded and executed immediately, blocking parsing until the script is completed-->
 </head>
 
 <body>
