@@ -9,35 +9,20 @@ const bluestyle = "<span style=\"color: DodgerBlue;\"> ";
 const closespan = "</span>";
 const nextline = "<br>";
 
-function testPass(id) {
-  return `${id}${greenstyle}PASS${closespan}${nextline}`;
+function testPass(id, info) {
+  return `${id} ${greenstyle}PASS${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 }
 
-function testFail(id) {
-  return `${id}${redstyle}FAIL${closespan}${nextline}`;
+function testFail(id, info) {
+  return `${id} ${redstyle}FAIL${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 }
 
-function testSkip(id) {
-  return `${id}${bluestyle}SKIP${closespan}${nextline}`;
-}
-
-function testPassInfo(id, info) {
-  return `${id} ${greenstyle}PASS${closespan} ${info}${nextline}`;
-}
-
-function testFailInfo(id, info) {
-  return `${id} ${redstyle}FAIL${closespan} ${info}${nextline}`;
-}
-
-function testSkipInfo(id, info) {
-  return `${id} ${bluestyle}SKIP${closespan} ${info}${nextline}`;
+function testSkip(id, info) {
+  return `${id} ${bluestyle}SKIP${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 }
 
 export {
   testPass,
   testFail,
   testSkip,
-  testPassInfo,
-  testFailInfo,
-  testSkipInfo,
 };

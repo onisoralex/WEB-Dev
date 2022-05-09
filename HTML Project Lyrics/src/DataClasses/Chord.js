@@ -105,24 +105,4 @@ class Chord {
   }
 }
 
-// Tests
-/*
-const a = [];
-a.push(new Chord(5, "G", "#", "m", 7, "sus4", "D").getChord() === "G#m7sus4/D");
-a.push(new Chord(5, "B", "#", "m", 7, "sus2", "").getChord() === "Cm7sus2");
-a.push(new Chord(5, "F", "b", "m", 7, "dim", "D").getChord() === "Em7dim/D");
-a.push(new Chord(5, "G", "#", "", 7, "", "D").getChord() === "G#7/D");
-a.push(new Chord(5, "g", "#", "m", 0, "aug", "D").getChord() === "G#maug/D");
-a.push(new Chord(5, "g", "", "", 0, "", "").getChord() === "Gm");
-a.push(new Chord(5, "G#m7sus4/D").getChord() === "G#m7sus4/D");
-a.push(new Chord(5, "Cm7sus2").getChord() === "Cm7sus2");
-a.push(new Chord(5, "Em7dim/d").getChord() === "Em7dim/D");
-a.push(new Chord(5, "g#7/D").getChord() === "G#m7/D");
-a.push(new Chord(5, "G#maug/D").getChord() === "G#maug/D");
-a.push(new Chord(5, "Gm").getChord() === "Gm");
-a.push(new Chord(5, "G#m7sus4/D").transpose(5).getChord() === "C#m7sus4/G");
-a.push(new Chord(5, "G#m7sus4/D").transpose(-4).getChord() === "Em7sus4/Bb");
-a.push(new Chord(5, "G#m7sus4/D").transpose(12).getChord() === "G#m7sus4/D");
-*/
-
-// export { Chord as default };
+export { Chord as default };

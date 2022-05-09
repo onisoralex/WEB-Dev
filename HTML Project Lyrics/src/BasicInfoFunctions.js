@@ -1,30 +1,3 @@
-function deepCopy(inputObject) {
-  if (typeof inputObject !== "object" || inputObject === null) {
-    return inputObject; // Return the value if input is not an object
-  }
-
-  const outputObject = Array.isArray(inputObject) ? [] : {};
-
-  for (const key in inputObject) {
-    const value = inputObject[key];
-    outputObject[key] = deepCopy(value);
-  }
-
-  return outputObject;
-}
-
-function openFile(event, fileTarget) {
-  const input = event.target; // Takes Information from the HTML that executed this Script
-  const reader = new FileReader(); // Create a new File Reader
-  const node = fileTarget;
-
-  reader.onload = () => {
-    node.innerText = reader.result; // Reads the Lyrics from the Object and display them
-  };
-
-  reader.readAsText(input.files[0]); // Reads first File from Array
-}
-
 function getIndexInArrayStartingFrom(needle, haystack, n) {
   return haystack.indexOf(needle, n);
 }
@@ -62,14 +35,14 @@ function getInfoFromLine(basicSongInformationArray, keyWords) {
 
 // Should replace the below info methods later to make it more cleaner
 /* const titleInfoObj = { emptyInfo: "Unknown Song", keyWords: ["title", "name", "nume", "titlu"] };
-function getGeneralInfo(infoType, basicSongInformationArray) {
-  const result = getInfoFromLine(basicSongInformationArray, infoType.keyWords);
+function getGeneralInfo(infoObj, basicSongInformationArray) {
+  const result = getInfoFromLine(basicSongInformationArray, infoObj.keyWords);
 
-  return result === "" ? infoType.emptyInfo : result;
+  return result === "" ? infoObj.emptyInfo : result;
 }
 */
 
-// Separate functions until the geneal function is working
+// Separate functions until the aforementioned geneal function is working
 function getSongTitle(basicSongInformationArray) {
   const empty = "Unknown Song";
   const keyWords = ["title", "name", "nume", "titlu"];
@@ -111,8 +84,6 @@ function getDefaultSongStructure(basicSongInformationArray) {
 }
 
 export {
-  deepCopy,
-  openFile,
   getIndexInArrayStartingFrom,
   getIndexInArray,
   isInArray,

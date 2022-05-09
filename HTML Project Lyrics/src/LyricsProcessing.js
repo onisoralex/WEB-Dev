@@ -1,10 +1,10 @@
-// import * as base from "./BasicFunctions";
-/*
-import Song from "./Song";
-import Chord from "./Chord";
+import * as base from "./BasicInfoFunctions.js";
+import Chord from "./DataClasses/Chord.js";
 import {
   deepCopy,
   openFile,
+} from "./Utils.js";
+import {
   getIndexInArrayStartingFrom,
   getIndexInArray,
   isInArray,
@@ -15,8 +15,7 @@ import {
   getDefaultSongKey,
   getTempo,
   getDefaultSongStructure,
-} from "./BasicFunctions";
-*/
+} from "./BasicInfoFunctions.js";
 
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);
@@ -223,3 +222,5 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
 
   return codedChordsOfPart;
 }
+
+export { getStartingPositionsOfParts };
