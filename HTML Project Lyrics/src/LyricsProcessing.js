@@ -221,4 +221,4 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
   return codedChordsOfPart;
 }
 
-export default { getStartingPositionsOfParts };
+export { getStartingPositionsOfParts };
