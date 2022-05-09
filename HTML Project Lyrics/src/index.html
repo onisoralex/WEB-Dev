@@ -2,25 +2,12 @@
 
 <head>
 	<title>JS Test</title>
-	<script type="module" src="./LyricsProcessing.js"></script>
-	<script>
-		function start() {
-			const completeSongText = document.getElementById("songtext").innerHTML;
-			window.convertedStuff = createTextAndChords(completeSongText);
-
-			// let ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
-			// ouputNode.innerText = window.convertedStuff; // Displays the Lyrics
-		}
-	</script>
-	<style>
-		body {
-			font-family: "Calibri";
-		}
-	</style>
+	<script type="module" src="./main.js"></script>
+	<link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="start()">
-	<input type='file' accept='text/plain' onchange='openFile(event, document.getElementById("output"))'>
+<body onload="window.start()">
+	<input type='file' accept='text/plain' onchange='window.openFile(event, document.getElementById("output"))'>
 	<hr>
 	<div id="output"></div>
 	<pre id="songtext" style="visibility: hidden">

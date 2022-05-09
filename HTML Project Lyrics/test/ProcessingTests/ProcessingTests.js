@@ -1,8 +1,4 @@
-import {
-  testPass,
-  testFail,
-  testSkip,
-} from "../BasicTestingFunctions.js";
+import * as BasicTestingFunctions from "../BasicTestingFunctions.js";
 import { getStartingPositionsOfParts } from "../../src/LyricsProcessing.js";
 
 // ====================================
@@ -16,19 +12,19 @@ function extractAndPrepareInformationFromEditorTest(id, song) {
   const expected = true;
   const given = (song.match(regex).index !== 0); // Check if the regex value exists
 
-  return expected === given ? testPass(id, info) : testFail(id, info);
+  return expected === given ? BasicTestingFunctions.testPass(id, info) : BasicTestingFunctions.testFail(id, info);
 }
 
 // Not yet tested - maybe not testable, since it's a function that uses many other not yet tested functions
 function createTextAndChordsTest(id) {
   // TODO
-  return testSkip(id, info);
+  return BasicTestingFunctions.testSkip(id, info);
 }
 
 // Not yet tested - maybe not testable, since it's a function that uses many other not yet tested functions
 function searchAndGetLyricsPartsTest(id) {
   // TODO
-  return testSkip(id, info);
+  return BasicTestingFunctions.testSkip(id, info);
 }
 
 function getStartingPositionOfPartsTest(id) {
@@ -37,12 +33,12 @@ function getStartingPositionOfPartsTest(id) {
   const expected = JSON.stringify([2, 5]);
   const given = JSON.stringify(getStartingPositionsOfParts(cleanedTestdata));
 
-  return expected == given ? testPass(id, info) : testFail(id, info);
+  return expected == given ? BasicTestingFunctions.testPass(id, info) : BasicTestingFunctions.testFail(id, info);
 }
 
 // Not yet tested - maybe not testable, since it's a function that uses many other not yet tested functions
 function extractPartsTest(id) {
-  return testSkip(id, info);
+  return BasicTestingFunctions.testSkip(id, info);
 }
 
 export {

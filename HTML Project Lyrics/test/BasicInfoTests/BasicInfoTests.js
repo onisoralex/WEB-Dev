@@ -1,8 +1,4 @@
-import {
-  testPass,
-  testFail,
-  testSkip,
-} from "../BasicTestingFunctions.js";
+import * as BasicTestingFunctions from "../BasicTestingFunctions.js";
 import {
   getSongTitle,
   getArtist,
@@ -19,7 +15,7 @@ function getSongTitleTest(id) {
   const expected = "testtitle";
   const given = getSongTitle(testdata, testdata.length);
 
-  return given === expected ? testPass(id, "Songtext") : testFail(id, "Songtext");
+  return given === expected ? BasicTestingFunctions.testPass(id, "Songtext") : BasicTestingFunctions.testFail(id, "Songtext");
 }
 
 function getArtistTest(id) {
@@ -27,7 +23,7 @@ function getArtistTest(id) {
   const expected = "artistname";
   const given = getArtist(testdata, testdata.length);
 
-  return given === expected ? testPass(id, "Artist") : testFail(id, "Artist");
+  return given === expected ? BasicTestingFunctions.testPass(id, "Artist") : BasicTestingFunctions.testFail(id, "Artist");
 }
 
 function getDefaultSongKeyTest(id) {
@@ -35,7 +31,7 @@ function getDefaultSongKeyTest(id) {
   const expected = "G#";
   const given = getDefaultSongKey(testdata, testdata.length);
 
-  return given === expected ? testPass(id, "Key") : testFail(id, "Key");
+  return given === expected ? BasicTestingFunctions.testPass(id, "Key") : BasicTestingFunctions.testFail(id, "Key");
 }
 
 function getDefaultSongStructureTest(id) {
@@ -43,7 +39,7 @@ function getDefaultSongStructureTest(id) {
   const expected = "V1, Ch x 2, V2, Ch x 2, Solo, Br, Ch x 2, Outro x 2";
   const given = getDefaultSongStructure(testdata);
 
-  return given === expected ? testPass(id, "Songstructure") : testFail(id, "Songstructure");
+  return given === expected ? BasicTestingFunctions.testPass(id, "Songstructure") : BasicTestingFunctions.testFail(id, "Songstructure");
 }
 
 export {

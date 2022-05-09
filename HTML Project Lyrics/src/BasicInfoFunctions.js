@@ -1,4 +1,4 @@
-import { isInArray } from "./Utils.js";
+import * as Utils from "./Utils.js";
 
 function getIndexOfPart(parts, keyWord) {
   for (let i = 0; i < parts.length; i++) {
@@ -15,7 +15,7 @@ function getInfoFromLine(basicSongInformationArray, keyWords) {
 
   for (let i = 0; i < basicSongInformationArray.length; i++) {
     const oneLineArray = basicSongInformationArray[i].split(/:(.+)/);
-    if (isInArray(oneLineArray[0].toLowerCase(), keyWords)) {
+    if (Utils.isInArray(oneLineArray[0].toLowerCase(), keyWords)) {
       info = oneLineArray[1].trim();
     }
   }

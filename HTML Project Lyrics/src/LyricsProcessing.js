@@ -1,19 +1,6 @@
-import * as base from "./BasicInfoFunctions.js";
+import * as Base from "./BasicInfoFunctions.js";
 import Chord from "./DataClasses/Chord.js";
-import {
-  deepCopy,
-  isInArray,
-  getIndexInArrayStartingFrom,
-} from "./Utils.js";
-import {
-  getIndexOfPart,
-  getInfoFromLine,
-  getSongTitle,
-  getArtist,
-  getDefaultSongKey,
-  getTempo,
-  getDefaultSongStructure,
-} from "./BasicInfoFunctions.js";
+import * as Utils from "./Utils.js";
 
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);
@@ -65,11 +52,11 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
   let parts = [];
 
   parts = splitCompleteSongIntoParts(completeSongLineByLineArray, startingPositionsOfParts);
-  parts.title = getSongTitle(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.artist = getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.defaultKey = getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.defaultStructure = getDefaultSongStructure(parts[parts.length - 1]);
-  parts.tempo = getTempo(parts[parts.length - 1]);
+  parts.title = Base.getSongTitle(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.artist = Base.getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.defaultKey = Base.getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  parts.defaultStructure = Base.getDefaultSongStructure(parts[parts.length - 1]);
+  parts.tempo = Base.getTempo(parts[parts.length - 1]);
 
   parts = removeInfoPartFromPartsArray(parts);
 
@@ -78,7 +65,7 @@ function extractParts(completeSongLineByLineArray, startingPositionsOfParts) {
 
 function splitCompleteSongIntoParts(completeSongEveryLineArray, StartingPositionsOfParts) {
   const partsArray = [];
-  const extendedStartingPositionsOfParts = deepCopy(StartingPositionsOfParts);
+  const extendedStartingPositionsOfParts = Utils.deepCopy(StartingPositionsOfParts);
   extendedStartingPositionsOfParts.push(completeSongEveryLineArray.length - 1);
 
   for (let i = 0; i < extendedStartingPositionsOfParts.length - 1; i++) {
@@ -99,8 +86,8 @@ function splitCompleteSongIntoParts(completeSongEveryLineArray, StartingPosition
 }
 
 function removeInfoPartFromPartsArray(parts) {
-  const partIndex = getIndexOfPart(parts, "Info");
-  const reducedParts = deepCopy(parts);
+  const partIndex = Base.getIndexOfPart(parts, "Info");
+  const reducedParts = Utils.deepCopy(parts);
   reducedParts.splice(partIndex, 1);
 
   return reducedParts;
@@ -108,10 +95,10 @@ function removeInfoPartFromPartsArray(parts) {
 
 function extendPartsWithInfoAboutLyrics(parts) {
   const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Instrumental]", "[Outro]"];
-  const partsArray = deepCopy(parts);
+  const partsArray = Utils.deepCopy(parts);
 
   for (let i = 0; i < partsArray.length; i++) {
-    if (isInArray(partsArray[i].name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
+    if (Utils.isInArray(partsArray[i].name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
       partsArray[i].hasLyrics = false;
     } else {
       partsArray[i].hasLyrics = true;
@@ -122,7 +109,7 @@ function extendPartsWithInfoAboutLyrics(parts) {
 }
 
 function processSong(parts) {
-  const partsArray = deepCopy(parts);
+  const partsArray = Utils.deepCopy(parts);
   for (let i = 0; i < partsArray.length; i++) {
     if (partsArray[i].hasLyrics === true) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
       partsArray[i] = separateLyricsFromChords(partsArray[i]); // Transform mormally because it has lyrics
@@ -136,16 +123,16 @@ function processSong(parts) {
 
 function separateLyricsFromChords(part) {
   const newpart = [];
-  newpart.name = deepCopy(part.name);
-  newpart.chords = part.hasLyrics === false ? part.filter((e) => deepCopy(e)) : [];
+  newpart.name = Utils.deepCopy(part.name);
+  newpart.chords = part.hasLyrics === false ? part.filter((e) => Utils.deepCopy(e)) : [];
   newpart.lyrics = part.hasLyrics === false ? undefined : [];
 
   if (part.hasLyrics === true) {
     for (let i = 0; i < part.length; i++) {
       if (i % 2 === 0) { // Check if index is even
-        newpart.chords.push(deepCopy(part[i]));
+        newpart.chords.push(Utils.deepCopy(part[i]));
       } else {
-        newpart.lyrics.push(deepCopy(part[i]));
+        newpart.lyrics.push(Utils.deepCopy(part[i]));
       }
     }
   }
@@ -154,7 +141,7 @@ function separateLyricsFromChords(part) {
 }
 
 function getSongWithTransformedChords(separatedAndProcessedSongArray) {
-  const parts = deepCopy(separatedAndProcessedSongArray);
+  const parts = Utils.deepCopy(separatedAndProcessedSongArray);
 
   for (let i = 0; i < parts.length; i++) {
     parts[i].transformedChords = transformChordsOfPart(parts[i].chords); // Send selected Parts to Transformation and replace the chords in the previous Part with the new chords
@@ -194,7 +181,7 @@ function searchChordPositionsOfPartArray(chordsArray, singleChordsArray) {
     const chordPositionArray = [];
 
     for (let j = 0; j < singleChordsArray[i].length; j++) { // Chord by chord
-      start = getIndexInArrayStartingFrom(singleChordsArray[i][j], chordsArray[i], start);
+      start = Utils.getIndexInArrayStartingFrom(singleChordsArray[i][j], chordsArray[i], start);
       chordPositionArray.push(start);
     }
 
@@ -221,4 +208,7 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
   return codedChordsOfPart;
 }
 
-export { getStartingPositionsOfParts };
+export {
+  getStartingPositionsOfParts,
+  createTextAndChords,
+};
