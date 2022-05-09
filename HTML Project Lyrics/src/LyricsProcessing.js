@@ -1,4 +1,5 @@
 // import * as base from "./BasicFunctions";
+/*
 import Song from "./Song";
 import Chord from "./Chord";
 import {
@@ -15,6 +16,7 @@ import {
   getTempo,
   getDefaultSongStructure,
 } from "./BasicFunctions";
+*/
 
 function createTextAndChords(completeSongText) {
   const songLinesArray = convertTextToArray(completeSongText);
