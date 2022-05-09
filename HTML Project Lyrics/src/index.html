@@ -1,10 +1,8 @@
 <html>
-<header>
+
+<head>
 	<title>JS Test</title>
-	<!--script src="./BasicFunctions.js"></script-->
-	<!--script src="./Chord.js"></script-->
-	<script src="./LyricsProcessing.js"></script>
-	<!--script src="./DBHandler.js"></script-->
+	<script type="module" src="./LyricsProcessing.js"></script>
 	<script>
 		function start() {
 			const completeSongText = document.getElementById("songtext").innerHTML;
@@ -19,7 +17,7 @@
 			font-family: "Calibri";
 		}
 	</style>
-</header>
+</head>
 
 <body onload="start()">
 	<input type='file' accept='text/plain' onchange='openFile(event, document.getElementById("output"))'>
