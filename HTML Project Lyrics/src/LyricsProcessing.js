@@ -2,7 +2,8 @@ import * as base from "./BasicInfoFunctions.js";
 import Chord from "./DataClasses/Chord.js";
 import {
   deepCopy,
-  openFile,
+  isInArray,
+  getIndexInArrayStartingFrom,
 } from "./Utils.js";
 import {
   getIndexOfPart,
@@ -220,4 +221,4 @@ function transformChordsIntoCoding(singleChordsOfPartArray, chordPositionsOfPart
   return codedChordsOfPart;
 }
 
-export { getStartingPositionsOfParts };
+export default { getStartingPositionsOfParts };
