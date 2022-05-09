@@ -49,6 +49,10 @@
         "classes": true,
         "variables": true
       }
+    ],
+    "import/extensions": [
+      "error",
+      "always"
     ]
   }
 }
