@@ -1,11 +1,8 @@
 <html>
+
 <head>
 	<title>JS Test</title>
-	<script src="./ProcessingTests/ProcessingTests.js"></script>
-	<script src="../src/Chord.js"></script>
-	<script src="../src/LyricsProcessing.js"></script>
-	<script src="./BasicTests/BasicTest.js"></script>
-	<script src="../src/BasicFunctions.js"></script>
+	<script type="module" src="./TestSuite.js"></script>
 </head>
 
 <body>
@@ -81,22 +78,9 @@
 	das
 
 	</pre>
-	<script>
-		preparations();
-
-		// Processing Tests
-		extractAndPrepareInformationFromEditorTest();
-		createTextAndChordsTest();
-		searchAndGetLyricsPartsTest();
-		getStartingPositionOfPartsTest();
-		extractPartsTest();
-
-		// basic Tests
-		getSongTitleTest();
-		getArtistTest();
-		getDefaultSongKeyTest();
-		getDefaultSongStructureTest();
-
+	<script type="module">
+		init();
+		execTests(result);
 		setResult();
 	</script>
 </body>

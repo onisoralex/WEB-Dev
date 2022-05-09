@@ -110,7 +110,6 @@ function getDefaultSongStructure(basicSongInformationArray) {
   return returnedStructure === "" ? emptyStructure : returnedStructure;
 }
 
-/*
 export {
   deepCopy,
   openFile,
@@ -125,4 +124,3 @@ export {
   getTempo,
   getDefaultSongStructure,
 };
-*/
