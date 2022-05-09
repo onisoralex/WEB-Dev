@@ -1,14 +1,4 @@
-function getIndexInArrayStartingFrom(needle, haystack, n) {
-  return haystack.indexOf(needle, n);
-}
-
-function getIndexInArray(needle, haystack) {
-  return haystack.indexOf(needle);
-}
-
-function isInArray(needle, haystack) {
-  return (getIndexInArray(needle, haystack) > -1);
-}
+import { isInArray } from "./Utils.js";
 
 function getIndexOfPart(parts, keyWord) {
   for (let i = 0; i < parts.length; i++) {
@@ -84,9 +74,6 @@ function getDefaultSongStructure(basicSongInformationArray) {
 }
 
 export {
-  getIndexInArrayStartingFrom,
-  getIndexInArray,
-  isInArray,
   getIndexOfPart,
   getInfoFromLine,
   getSongTitle,

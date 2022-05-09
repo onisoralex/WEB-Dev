@@ -25,7 +25,22 @@ function openFile(event, fileTarget) {
   reader.readAsText(input.files[0]); // Reads first File from Array
 }
 
+function getIndexInArrayStartingFrom(needle, haystack, n) {
+  return haystack.indexOf(needle, n);
+}
+
+function getIndexInArray(needle, haystack) {
+  return haystack.indexOf(needle);
+}
+
+function isInArray(needle, haystack) {
+  return (getIndexInArray(needle, haystack) > -1);
+}
+
 export {
   deepCopy,
   openFile,
+  getIndexInArrayStartingFrom,
+  getIndexInArray,
+  isInArray,
 };

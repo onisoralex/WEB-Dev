@@ -4,15 +4,9 @@ import {
   testSkip,
 } from "../BasicTestingFunctions.js";
 import {
-  getIndexInArrayStartingFrom,
-  getIndexInArray,
-  isInArray,
-  getIndexOfPart,
-  getInfoFromLine,
   getSongTitle,
   getArtist,
   getDefaultSongKey,
-  getTempo,
   getDefaultSongStructure,
 } from "../../src/BasicInfoFunctions.js";
 

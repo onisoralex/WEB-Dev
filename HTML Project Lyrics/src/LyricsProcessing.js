@@ -5,9 +5,6 @@ import {
   openFile,
 } from "./Utils.js";
 import {
-  getIndexInArrayStartingFrom,
-  getIndexInArray,
-  isInArray,
   getIndexOfPart,
   getInfoFromLine,
   getSongTitle,
