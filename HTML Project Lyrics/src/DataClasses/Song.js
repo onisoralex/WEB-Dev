@@ -1,12 +1,20 @@
 import Chord from "./Chord.js";
 
 class Song {
-  constructor(song) {
-    this.noteNumber = 0;
+  constructor(_partsArray) {
+    this.parts = this.splitParts(_partsArray);
+
     // declarations only to avoid errors. To be deleted
     this.parts = `${song}`;
     this.lines = "";
     this.chords = "";
+  }
+
+  // TODO
+  static splitParts(partsArray) {
+    for (let i = 0; i < partsArray.length; i++) {
+
+    }
   }
 
   static transposeSong(ammount) {

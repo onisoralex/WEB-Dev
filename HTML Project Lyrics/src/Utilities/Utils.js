@@ -1,4 +1,4 @@
-function deepCopy(inputObject) {
+const deepCopy = (inputObject) => {
   if (typeof inputObject !== "object" || inputObject === null) {
     return inputObject; // Return the value if input is not an object
   }
@@ -11,9 +11,9 @@ function deepCopy(inputObject) {
   }
 
   return outputObject;
-}
+};
 
-function openFile(event, fileTarget) {
+const openFile = (event, fileTarget) => {
   const input = event.target; // Takes Information from the HTML that executed this Script
   const reader = new FileReader(); // Create a new File Reader
   const node = fileTarget;
@@ -23,19 +23,13 @@ function openFile(event, fileTarget) {
   };
 
   reader.readAsText(input.files[0]); // Reads first File from Array
-}
+};
 
-function getIndexInArrayStartingFrom(needle, haystack, n) {
-  return haystack.indexOf(needle, n);
-}
+const getIndexInArrayStartingFrom = (needle, haystack, n) => haystack.indexOf(needle, n);
 
-function getIndexInArray(needle, haystack) {
-  return haystack.indexOf(needle);
-}
+const getIndexInArray = (needle, haystack) => haystack.indexOf(needle);
 
-function isInArray(needle, haystack) {
-  return (getIndexInArray(needle, haystack) > -1);
-}
+const isInArray = (needle, haystack) => (getIndexInArray(needle, haystack) > -1);
 
 export {
   deepCopy,

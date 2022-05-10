@@ -9,17 +9,11 @@ const bluestyle = "<span style=\"color: DodgerBlue;\"> ";
 const closespan = "</span>";
 const nextline = "<br>";
 
-function testPass(id, info) {
-  return `${id} ${greenstyle}PASS${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
-}
+const testPass = (id, info) => `${id} ${greenstyle}PASS${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 
-function testFail(id, info) {
-  return `${id} ${redstyle}FAIL${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
-}
+const testFail = (id, info) => `${id} ${redstyle}FAIL${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 
-function testSkip(id, info) {
-  return `${id} ${bluestyle}SKIP${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
-}
+const testSkip = (id, info) => `${id} ${bluestyle}SKIP${closespan} ${typeof (info) === "undefined" ? "" : info}${nextline}`;
 
 export {
   testPass,
