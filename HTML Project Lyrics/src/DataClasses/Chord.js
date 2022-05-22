@@ -79,6 +79,7 @@ class Chord {
     }
   }
 
+  // Destructive transpose
   transpose(ammount) {
     this.noteNumber = (this.noteNumber + ammount) % 12;
     this.noteNumber += (this.noteNumber <= 0) ? 12 : 0;
@@ -98,7 +99,11 @@ class Chord {
     return typeof note === "undefined" ? "" : NUMBERS[note];
   }
 
-  getChord() {
+  getPosition() {
+    return this.position;
+  }
+
+  getChordAsText() {
     const extraNoteNumber = this.extraNoteNumber === 0 ? "" : this.extraNoteNumber;
     const slashNoteNumberString = ((this.slashNoteNumber === 0) ? "" : "/") + NOTES[this.slashNoteNumber];
     return `${NOTES[this.noteNumber]}${this.majMin}${extraNoteNumber}${this.special}${slashNoteNumberString}`;

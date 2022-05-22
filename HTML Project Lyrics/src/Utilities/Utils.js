@@ -13,6 +13,8 @@ const deepCopy = (inputObject) => {
   return outputObject;
 };
 
+const isIterateable = (o) => o.toString().match(/[0-9]+/) !== null;
+
 const openFile = (event, fileTarget) => {
   const input = event.target; // Takes Information from the HTML that executed this Script
   const reader = new FileReader(); // Create a new File Reader
@@ -33,6 +35,7 @@ const isInArray = (needle, haystack) => (getIndexInArray(needle, haystack) > -1)
 
 export {
   deepCopy,
+  isIterateable,
   openFile,
   getIndexInArrayStartingFrom,
   getIndexInArray,

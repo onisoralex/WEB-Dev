@@ -10,8 +10,5 @@ window.start = () => {
 
   // window.ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
   // window.ouputNode.innerText = convertedStuff; // Displays the Lyrics
-  console.log(convertedStuff);
-  const a = JSON.stringify(convertedStuff);
-  const b = JSON.parse(a);
-  console.log(b === convertedStuff);
+  // console.log(convertedStuff);
 };
