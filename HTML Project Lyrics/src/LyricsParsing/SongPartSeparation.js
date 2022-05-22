@@ -23,6 +23,7 @@ const splitCompleteSongIntoParts = (completeSongEveryLineArray, StartingPosition
   for (let i = 0; i < extendedStartingPositionsOfParts.length - 1; i++) {
     const part = [];
     part.name = completeSongEveryLineArray[extendedStartingPositionsOfParts[i]]; // Extract the name of a specific part
+    part.name = part.name.substring(1, part.name.length - 1);
 
     for (let j = extendedStartingPositionsOfParts[i] + 1; j < extendedStartingPositionsOfParts[i + 1]; j++) { // Start with the first line of a part (line after the Part Tag)
       part.push(completeSongEveryLineArray[j]); // Push every line from the new part into an array

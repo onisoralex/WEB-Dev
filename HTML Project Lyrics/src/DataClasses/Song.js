@@ -1,10 +1,12 @@
 import * as Utils from "../Utilities/Utils.js";
 import Chord from "./Chord.js";
+import { NUMBERS, NOTES } from "../Utilities/Constants.js";
 
 class Song {
   constructor(song) {
     this.artist = song.artist;
     this.defaultKey = song.defaultKey;
+    this.key = this.defaultKey;
     this.defaultStructure = song.defaultStructure;
     this.tempo = song.tempo;
     this.title = song.title;
@@ -12,8 +14,8 @@ class Song {
   }
 
   transpose(ammount) {
-    // Can be simplified a bit, but is currently necessary, because deepCopy of the whole song doesn't copy Chord objects
-    const newSong = Utils.deepCopy(this);
+    // Can be simplified a bit, but is currently necessary to be done like this, because deepCopy of the whole song doesn't copy Chord objects
+    const newSong = new Song(Utils.deepCopy(this));
 
     for (let i = 0; i < this.songParts.length; i++) {
       const originalSongPart = this.songParts[i];
@@ -29,7 +31,12 @@ class Song {
       }
     }
 
-    return new Song(newSong);
+    const key = newSong.getKey();
+    const keynumber = NUMBERS[key];
+    const newkeynumber = keynumber + ammount;
+    newSong.setKey(NOTES[newkeynumber]);
+
+    return newSong;
   }
 
   // Getters/Setters
@@ -39,6 +46,10 @@ class Song {
 
   getDefaultKey() {
     return this.defaultKey;
+  }
+
+  getKey() {
+    return this.key;
   }
 
   getDefaultStructure() {
@@ -67,6 +78,10 @@ class Song {
 
   setDefaultKey(key) {
     this.defaultKey = key;
+  }
+
+  setKey(key) {
+    this.key = key;
   }
 
   setDefaultStructure(defaultStructure) {

@@ -1,14 +1,17 @@
 import * as Utils from "./Utilities/Utils.js";
-import { createTextAndChords } from "./LyricsProcessing/LyricsProcessing.js";
+import { parseSongFromText } from "./LyricsParsing/LyricsParsing.js";
+import { createText } from "./display/Transformer.js";
 
 window.openFile = Utils.openFile;
-window.createTextAndChords = createTextAndChords;
+window.parseSongFromText = parseSongFromText;
 
 window.start = () => {
-  const completeSongText = document.getElementById("songtext").innerHTML;
-  const convertedStuff = createTextAndChords(completeSongText);
+  const completeSongTextNode = document.getElementById("song-text__input");
+  const ouputNode = document.getElementById("song-text__output"); // Gets the Place where the Lyrics should go in the HTML
 
-  // window.ouputNode = document.getElementById("output"); // Gets the Place where the Lyrics should go in the HTML
-  // window.ouputNode.innerText = convertedStuff; // Displays the Lyrics
-  // console.log(convertedStuff);
+  const song = parseSongFromText(completeSongTextNode.innerHTML);
+  console.log("Original");
+  console.log(song);
+
+  ouputNode.innerHTML = createText(song);
 };

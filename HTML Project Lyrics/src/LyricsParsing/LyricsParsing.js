@@ -16,7 +16,7 @@ const convertTextToArray = (completeSongText) => {
   return arr;
 };
 
-const createTextAndChords = (completeSongText) => {
+const parseSongFromText = (completeSongText) => {
   const songLinesArray = convertTextToArray(completeSongText);
   const songDividedInDifferentParts = searchAndGetLyricsParts(songLinesArray); // Gets the different Parts of a Song
   const songWithTransformedChordsAsArray = getSongWithTransformedChords(songDividedInDifferentParts);
@@ -25,4 +25,4 @@ const createTextAndChords = (completeSongText) => {
   return song;
 };
 
-export { createTextAndChords };
+export { parseSongFromText };

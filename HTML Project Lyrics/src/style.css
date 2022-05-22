@@ -1,3 +1,39 @@
 body {
   font-family: "Calibri";
+  color: white;
+  background-color: rgb(33, 33, 33);
+  font-size: 1.3em;
+}
+
+.js-song__part-name--invisible {
+  display: none;
+}
+
+.js-song__part-name--visible {
+  display: block;
+}
+
+.js-song__part-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* 
+  Furigana/Ruby-style text 
+  c-b = chord-block 
+*/
+c-b::before {
+  content: attr(t);
+  display: block;
+  text-align: start;
+  line-height: 1;
+  padding-top: 10px;
+}
+
+c-b {
+  display: inline-block;
+  text-indent: 0px;
+  /*-webkit-text-emphasis: none;*/
+  text-align: start;
+  line-height: 1;
 }
