@@ -32,6 +32,7 @@ class Song {
     return new Song(newSong);
   }
 
+  // Getters/Setters
   getArtist() {
     return this.artist;
   }
@@ -84,6 +85,7 @@ class Song {
     this.songParts = songParts;
   }
 
+  // Special Getters/Setters
   setChordWithNewPosition(songPart, chordLine, chord, position, newChord) {
     this.songParts[songPart].codedChords[chordLine][chord] = new Chord(position, newChord.getChordAsText());
   }

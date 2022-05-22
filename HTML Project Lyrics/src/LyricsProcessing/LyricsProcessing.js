@@ -2,7 +2,6 @@ import searchAndGetLyricsParts from "./SongPartSeparation.js";
 import getSongWithTransformedChords from "./ChordTransformation.js";
 import { getSongFromParsedText } from "./ObjectifySongArray.js";
 import Song from "../DataClasses/Song.js";
-import Chord from "../DataClasses/Chord.js";
 
 const convertTextToArray = (completeSongText) => {
   const arr = (completeSongText.replace(/\r/g, "")).split("\n"); // Also delete all the Carriage Return Characters in the File to be able to see the Linebreaks
@@ -22,7 +21,7 @@ const createTextAndChords = (completeSongText) => {
   const songDividedInDifferentParts = searchAndGetLyricsParts(songLinesArray); // Gets the different Parts of a Song
   const songWithTransformedChordsAsArray = getSongWithTransformedChords(songDividedInDifferentParts);
   const song = new Song(getSongFromParsedText(songWithTransformedChordsAsArray));
-  console.log(song);
+
   return song;
 };
 
