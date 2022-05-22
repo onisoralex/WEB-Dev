@@ -99,10 +99,56 @@ class Chord {
     return typeof note === "undefined" ? "" : NUMBERS[note];
   }
 
+  // Getters/Setters
   getPosition() {
     return this.position;
   }
 
+  getNoteNumber() {
+    return this.noteNumber;
+  }
+
+  getMajMin() {
+    return this.majMin;
+  }
+
+  getExtraNoteNumber() {
+    return this.extraNoteNumber;
+  }
+
+  getSpecial() {
+    return this.special;
+  }
+
+  getSlashNoteNumber() {
+    return this.slashNoteNumber;
+  }
+
+  setPosition(position) {
+    this.position = position;
+  }
+
+  setNoteNumber(noteNumber) {
+    this.noteNumber = noteNumber;
+  }
+
+  setMajMin(majMin) {
+    this.majMin = majMin;
+  }
+
+  setExtraNoteNumber(extraNoteNumber) {
+    this.extraNoteNumber = extraNoteNumber;
+  }
+
+  setSpecial(special) {
+    this.special = special;
+  }
+
+  setSlashNoteNumber(slashNoteNumber) {
+    this.slashNoteNumber = slashNoteNumber;
+  }
+
+  // Special Getters/Setters
   getChordAsText() {
     const extraNoteNumber = this.extraNoteNumber === 0 ? "" : this.extraNoteNumber;
     const slashNoteNumberString = ((this.slashNoteNumber === 0) ? "" : "/") + NOTES[this.slashNoteNumber];
