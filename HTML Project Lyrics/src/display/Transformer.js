@@ -1,7 +1,11 @@
 // Replace the space (and eventuall multiple trailing spaces) with a nonbreaking space
 // It's the only solution to create fixed spaces. Will cause nonbreaking points in text.
 // Could eventually be fixed with usage of CSS Grid-View
-const removeTrailingSpaces = (text) => `${text.slice(0, -1).trimEnd()}&nbsp;`;
+const removeTrailingSpacesAddNBSP = (text) => `${text.trimEnd()}&nbsp;`;
+
+const removeLeadingSpacesAddNBSP = (text) => `&nbsp;${text.trimStart()}`;
+
+const isLastElement = (i, e) => (i + 1) === e.length;
 
 const makeLine = (chordsLine, lyricsLine) => {
   let text = "";
@@ -10,13 +14,19 @@ const makeLine = (chordsLine, lyricsLine) => {
     const a = chordsLine[i].getChordAsText();
 
     const chordStart = chordsLine[i].getPosition();
-    const chordEnd = ((i + 1) === chordsLine.length) ? lyricsLine.length : chordsLine[i + 1].getPosition();
+    const chordEnd = (isLastElement(i, chordsLine)) ? lyricsLine.length : chordsLine[i + 1].getPosition();
+    let preChord = "";
+    const postChord = "&nbsp;";
     let b = lyricsLine.substring(chordStart, chordEnd);
-
-    // If a block ends with a space remove trailing spaces
-    if (b.charAt(b.length - 1) === " ") b = removeTrailingSpaces(b);
-    if (b === "") b = " ";
-    text += `<c-b t="${a}">${b}</c-b>`;
+    console.log(i, b);
+    // If a block ends with a space remove trailing spaces and replace it with a non-breaking space
+    if (b.at(b.length - 1) === " ") b = removeTrailingSpacesAddNBSP(b);
+    if (b.at(0) === " ") b = removeLeadingSpacesAddNBSP(b);
+    if (b === "") {
+      b = "&nbsp;";
+      preChord = (chordStart === 0) ? "&nbsp;" : "&nbsp;&nbsp;&nbsp;";
+    }
+    text += `<c-b t="${preChord}${a}${postChord}">${b}</c-b>`;
   }
   text += "<br>";
   console.log(text);
@@ -51,7 +61,7 @@ const createText = (song) => {
   display += `<div id="js-song__defaultKey"><strong>Default Key:</strong> ${song.getDefaultKey()}</div>`;
   display += `<div id="js-song__currentKey"><strong>Current Key:</strong> ${song.getKey()}</div>`;
   display += `<div id="js-song__tempo"><strong>Tempo:</strong> ${song.getTempo()}</div>`;
-  display += `<div id="js-song__text">${makeText(song.songParts)}</div>`;
+  display += `<div id="js-song__text"><br>${makeText(song.songParts)}<br></div>`;
   display += `<div id="js-song__defaultStructure"><strong>Default Structure:</strong> ${song.getDefaultStructure()}<strong></div>`;
 
   return display;
