@@ -18,6 +18,10 @@ body {
   padding-bottom: 15px;
 }
 
+.song-text-no-line-height {
+  line-height: 0em;
+}
+
 /* 
   Furigana/Ruby-style text 
   c-b = chord-block 
