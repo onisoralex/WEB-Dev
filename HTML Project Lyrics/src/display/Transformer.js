@@ -1,11 +1,11 @@
+import { isLastElement } from "../Utilities/Utils.js";
+
 // Replace the space (and eventuall multiple trailing spaces) with a nonbreaking space
 // It's the only solution to create fixed spaces. Will cause nonbreaking points in text.
 // Could eventually be fixed with usage of CSS Grid-View
 const removeTrailingSpaces = (text) => `${text.trimEnd()}`;
 
 const removeLeadingSpaces = (text) => `${text.trimStart()}`;
-
-const isLastElement = (i, e) => i === e.length - 1;
 
 const makeLine = (chordsLine, lyricsLine, readableChords) => {
   let text = "";
