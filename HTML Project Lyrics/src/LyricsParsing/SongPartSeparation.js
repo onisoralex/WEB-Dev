@@ -62,7 +62,7 @@ const extractParts = (completeSongLineByLineArray, startingPositionsOfParts) => 
 };
 
 const separateLyricsFromChords = (_parts) => {
-  const namesOfPartsWithNoLyrics = ["[Intro]", "[Solo]", "[Instrumental]", "[Outro]"];
+  const namesOfPartsWithNoLyrics = ["Intro", "Solo", "Instrumental", "Outro"];
   const parts = Utils.deepCopy(_parts);
 
   for (let i = 0; i < parts.length; i++) {
