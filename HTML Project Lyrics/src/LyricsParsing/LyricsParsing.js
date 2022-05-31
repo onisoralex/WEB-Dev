@@ -1,5 +1,5 @@
-import searchAndGetLyricsParts from "./SongPartSeparation.js";
-import getSongWithTransformedChords from "./ChordTransformation.js";
+import { searchAndGetLyricsParts } from "./SongPartSeparation.js";
+import { getSongWithTransformedChords } from "./ChordTransformation.js";
 import { getSongFromParsedText } from "./ObjectifySongArray.js";
 import Song from "../DataClasses/Song.js";
 

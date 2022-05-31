@@ -1,6 +1,8 @@
 import * as Utils from "./Utilities/Utils.js";
 import { parseSongFromText } from "./LyricsParsing/LyricsParsing.js";
-import { createText } from "./display/Transformer.js";
+import { createText } from "./Display/Transformer.js";
+import { importFromDBFile } from "./ImportExport/DBImport.js";
+import { exportToDBFile } from "./ImportExport/DBExport.js";
 
 window.openFile = Utils.openFile;
 window.parseSongFromText = parseSongFromText;
