@@ -17,16 +17,16 @@ const isIterateable = (o) => o.toString().match(/[0-9]+/) !== null;
 
 const isLastElement = (i, e) => i === e.length - 1;
 
-const openFile = (event, fileTarget) => {
-  const input = event.target; // Takes Information from the HTML that executed this Script
-  const reader = new FileReader(); // Create a new File Reader
-  const node = fileTarget;
+const openAndDisplayFile = (eventNode, fileTarget) => {
+  const input = eventNode.target; // Takes Information from the HTML element that executed this Script
+  const fileReader = new FileReader(); // Create a new File Reader
+  const targetNode = fileTarget;
 
-  reader.onload = () => {
-    node.innerText = reader.result; // Reads the Lyrics from the Object and display them
+  fileReader.onload = () => {
+    targetNode.innerText = fileReader.result; // Reads the Lyrics from the Object and display them
   };
 
-  reader.readAsText(input.files[0]); // Reads first File from Array
+  fileReader.readAsText(input.files[0]); // Reads first File from Array
 };
 
 const getIndexInArrayStartingFrom = (needle, haystack, n) => haystack.indexOf(needle, n);
@@ -39,7 +39,7 @@ export {
   deepCopy,
   isIterateable,
   isLastElement,
-  openFile,
+  openAndDisplayFile,
   getIndexInArrayStartingFrom,
   getIndexInArray,
   isInArray,

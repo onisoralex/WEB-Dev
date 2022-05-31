@@ -7,10 +7,19 @@
 </head>
 
 <body onload="window.start()">
+	<hr>
 	<input type="checkbox" id="song-text-readability-setting">Make Text more readable (not working yet)
-	<br>
+	<hr>
+	Display File:&nbsp;
 	<input type="file" accept="text/plain"
-		onchange="window.openFile(event, document.getElementById('song-text__output'))">
+		onchange="window.openAndDisplayFile(event, document.getElementById('song-text__output'))">
+	<hr>
+	Import File:&nbsp;
+	<input type="file" accept="text/plain"
+		onchange="window.Import.importFromDBFile(event, document.getElementById('song-text__output'))">
+	Export File:&nbsp;
+	<input type="file" accept="text/plain"
+		onchange="window.Export.exportToDBFile(event, document.getElementById('song-text__output'))">
 	<hr>
 	<div id="song-text__output"></div>
 	<pre id="song-text__input" style="display: none">
