@@ -64,4 +64,4 @@ const getSongWithTransformedChords = (separatedAndProcessedSongArray) => {
   return parts;
 };
 
-export { getSongWithTransformedChords as default };
+export { getSongWithTransformedChords };

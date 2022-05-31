@@ -99,5 +99,5 @@ const searchAndGetLyricsParts = (songLinesArray) => {
   return extendedParts;
 };
 
-export { searchAndGetLyricsParts as default };
+export { searchAndGetLyricsParts };
 export const SongPartSeparation = { getStartingPositionsOfParts };
