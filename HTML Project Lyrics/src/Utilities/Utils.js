@@ -28,6 +28,15 @@ const openAndDisplayFile = (eventNode, fileTarget) => {
 
   fileReader.readAsText(input.files[0]); // Reads first File from Array
 };
+const createFileDownloadLink = (obj, filename, element) => {
+  const mimeType = "text/plain";
+  const downloadlinkElement = element;
+  const content = JSON.stringify(obj);
+  const theFile = new Blob([content], { type: mimeType });
+
+  downloadlinkElement.href = URL.createObjectURL(theFile);
+  downloadlinkElement.download = filename;
+};
 
 const getIndexInArrayStartingFrom = (needle, haystack, n) => haystack.indexOf(needle, n);
 
@@ -40,6 +49,7 @@ export {
   isIterateable,
   isLastElement,
   openAndDisplayFile,
+  createFileDownloadLink,
   getIndexInArrayStartingFrom,
   getIndexInArray,
   isInArray,

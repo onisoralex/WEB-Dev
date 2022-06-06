@@ -1,25 +1,37 @@
 <html>
 
 <head>
-	<title>JS Test</title>
+	<title>Lyrics</title>
 	<script type="module" src="./main.js"></script>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body onload="window.start()">
 	<hr>
 	<input type="checkbox" id="song-text-readability-setting">Make Text more readable (not working yet)
 	<hr>
-	Display File:&nbsp;
+	<label>Display File:&nbsp;</label>
 	<input type="file" accept="text/plain"
 		onchange="window.openAndDisplayFile(event, document.getElementById('song-text__output'))">
 	<hr>
-	Import File:&nbsp;
-	<input type="file" accept="text/plain"
-		onchange="window.Import.importFromDBFile(event, document.getElementById('song-text__output'))">
-	Export File:&nbsp;
-	<input type="file" accept="text/plain"
-		onchange="window.Export.exportToDBFile(event, document.getElementById('song-text__output'))">
+	<label>Import File:&nbsp;</label>
+	<input type="file" accept="text/plain" onchange="window.import(event)">
+	<br>
+	<label>Export File:&nbsp;</label>
+	<input type="button" onclick="window.export()" value="Create settings file">
+	<button class="dloadbtn">
+		<a href="" id="exportlink" class="dloadlink">
+			<svg class="arrow-svg" viewBox="0 0 512 512">
+				<path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 
+					256-256C512 114.6 397.4 0 256 0zM382.6 302.6l-103.1 103.1C270.7 414.6 260.9 
+					416 256 416c-4.881 0-14.65-1.391-22.65-9.398L129.4 302.6c-12.5-12.5-12.5-32.75 
+					0-45.25s32.75-12.5 45.25 0L224 306.8V128c0-17.69 14.33-32 32-32s32 14.31 32 
+					32v178.8l49.38-49.38c12.5-12.5 32.75-12.5 45.25 0S395.1 290.1 382.6 302.6z" />
+			</svg>
+		</a>
+	</button>
 	<hr>
 	<div id="song-text__output"></div>
 	<pre id="song-text__input" style="display: none">

@@ -1,19 +1,20 @@
 import Song from "../DataClasses/Song.js";
 
-const openDBImportFile = () => console.log("import");
-const importFromDBFile = (eventNode, fileTarget) => {
+let fileText = "dd";
+
+const openAndReadFile = (eventNode) => {
   const input = eventNode.target; // Takes Information from the HTML element that executed this Script
   const fileReader = new FileReader(); // Create a new File Reader
-  const targetNode = fileTarget;
 
-  fileReader.onload = () => {
-    targetNode.innerText = fileReader.result; // Reads the Lyrics from the Object and display them
-  };
+  // Add an event listener which executes when the file has been loaded
+  fileReader.onload = () => { fileText = fileReader.result; }; // Reads the file and returns the content
 
   fileReader.readAsText(input.files[0]); // Reads first File from Array
 };
 
-export {
-  importFromDBFile,
-  openDBImportFile,
+const importFromDBFile = (eventNode) => {
+  openAndReadFile(eventNode);
+  return fileText;
 };
+
+export { importFromDBFile };
