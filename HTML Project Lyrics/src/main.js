@@ -16,10 +16,14 @@ window.start = () => {
   const readableChords = false;
 
   const song = parseSongFromText(completeSongTextNode.innerHTML);
+  songCollection.push(song);
+  songCollection.push(song);
+  songCollection.push(song);
+  window.son = songCollection;
   console.log("Original");
   console.log(song);
   console.log("Exported and imported Song");
-  console.log(song);
+  console.log(JSON.stringify(song));
 
   ouputNode.innerHTML = createText(song, readableChords);
 };
