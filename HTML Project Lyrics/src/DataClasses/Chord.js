@@ -1,9 +1,9 @@
 import { NUMBERS, NOTES, chordRegEx } from "../Utilities/Constants.js";
 
 class Chord {
-  constructor(_position, _note, _sharpFlat, _majMin, _extraNoteNumber, _special, _slashNote) {
+  constructor(_position, _note, _sharpFlat, _minMaj, _extraNoteNumber, _special, _slashNote) {
     if (_sharpFlat === undefined
-      && _majMin === undefined
+      && _minMaj === undefined
       && _extraNoteNumber === undefined
       && _special === undefined
       && _slashNote === undefined) {
@@ -21,7 +21,7 @@ class Chord {
 
         this.position = _position; // Position in the text
         this.noteNumber = Chord.noteToNumber(cleanMatches[0].toUpperCase() + cleanMatches[1]);
-        this.majMin = Chord.majorOrMinor(cleanMatches[0], cleanMatches[2]); // duh...
+        this.minMaj = Chord.majorOrMinor(cleanMatches[0], cleanMatches[2]); // duh...
         this.extraNoteNumber = cleanMatches[3]; // The 7 in a G7
         this.special = cleanMatches[4]; // The "sus" in Gsus, "sus2" in a Gsus2, "sus4" in Gsus4, "dim" in Gdim or "dim7" in Gdim7
         this.slashNoteNumber = (slashChord === undefined) ? 0 : Chord.noteToNumber(slashChord.toUpperCase()); // The F# in a D/F#
@@ -29,7 +29,7 @@ class Chord {
     } else {
       this.position = _position; // Position in the text
       this.noteNumber = Chord.noteToNumber(_note.toUpperCase() + _sharpFlat);
-      this.majMin = Chord.majorOrMinor(_note, _majMin); // duh...
+      this.minMaj = Chord.majorOrMinor(_note, _minMaj); // duh...
       this.extraNoteNumber = _extraNoteNumber; // The 7 in a G7
       this.special = _special; // The "sus" in Gsus, "sus2" in a Gsus2, "sus4" in Gsus4, "dim" in Gdim or "dim7" in Gdim7
       this.slashNoteNumber = (_slashNote === "") ? 0 : Chord.noteToNumber(_slashNote.toUpperCase()); // The F# in a D/F#
@@ -47,8 +47,8 @@ class Chord {
   }
 
   // Am = min, am = min, a = min, A = maj
-  static majorOrMinor(note, majMin) {
-    if (majMin === "m") return majMin;
+  static majorOrMinor(note, minMaj) {
+    if (minMaj === "m") return minMaj;
     return (note.toLowerCase() === note) ? "m" : "";
   }
 
@@ -65,8 +65,8 @@ class Chord {
     return this.noteNumber;
   }
 
-  getMajMin() {
-    return this.majMin;
+  getminMaj() {
+    return this.minMaj;
   }
 
   getExtraNoteNumber() {
@@ -89,8 +89,8 @@ class Chord {
     this.noteNumber = noteNumber;
   }
 
-  setMajMin(majMin) {
-    this.majMin = majMin;
+  setminMaj(minMaj) {
+    this.minMaj = minMaj;
   }
 
   setExtraNoteNumber(extraNoteNumber) {
@@ -109,7 +109,7 @@ class Chord {
   getChordAsText() {
     const extraNoteNumber = this.extraNoteNumber === 0 ? "" : this.extraNoteNumber;
     const slashNoteNumberString = ((this.slashNoteNumber === 0) ? "" : "/") + NOTES[this.slashNoteNumber];
-    return `${NOTES[this.noteNumber]}${this.majMin}${extraNoteNumber}${this.special}${slashNoteNumberString}`;
+    return `${NOTES[this.noteNumber]}${this.minMaj}${extraNoteNumber}${this.special}${slashNoteNumberString}`;
   }
 }
 
