@@ -6,16 +6,19 @@ import * as Export from "./ImportExport/DBExport.js";
 
 window.openAndDisplayFile = Utils.openAndDisplayFile;
 window.parseSongFromText = parseSongFromText;
-const songCollection = [];
+let importedText = "";
+let songCollection = [];
 
 window.export = () => {
   const elementID = "exportlink";
   Export.exportToDBFile(songCollection, elementID);
 };
 
-window.import = (event) => {
-  console.log(Import.importFromDBFile(event));
+window.import = async (event) => {
+  importedText = await Import.importFromDBFile(event);
+  songCollection = Import.transformIntoSongObjectArray(importedText);
   window.sson = songCollection;
+  console.log(importedText);
 };
 
 window.start = () => {
