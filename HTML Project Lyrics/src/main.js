@@ -17,7 +17,6 @@ window.export = () => {
 window.import = async (event) => {
   importedText = await Import.importFromDBFile(event);
   songCollection = Import.transformIntoSongObjectArray(importedText);
-  window.sson = songCollection;
   console.log(importedText);
 };
 
@@ -30,7 +29,6 @@ window.start = () => {
   songCollection.push(song);
   songCollection.push(song);
   songCollection.push(song);
-  window.son = songCollection;
   // console.log("Original");
   // console.log(song);
   // console.log("Exported and imported Song");
