@@ -5,6 +5,34 @@ body {
   font-size: 1.3em;
 }
 
+.button {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 0.2em;
+  font-size: inherit;
+  color: inherit;
+  background-color: rgb(55, 55, 55);
+  padding: 0 0.5em 0.1em 0.5em;
+  margin: 0.2em;
+}
+
+/*
+  Hide the actual buttons to let the labels become the buttons
+*/
+.hidden-element {
+  display: none;
+}
+
+.arrow-svg {
+  width: 1em;
+  height: 1em;
+  filter: invert(100%);
+}
+
+/*
+  Songrelated CSS from here on
+*/
 .js-song__part-name--invisible {
   display: none;
 }
@@ -20,31 +48,6 @@ body {
 
 .song-text-no-line-height {
   line-height: 0em;
-}
-
-.arrow-svg {
-  width: 1em;
-  height: 1em;
-  filter: invert(100%);
-}
-
-button,
-input {
-  cursor: pointer;
-}
-
-.dloadbtn {
-  border: none;
-  padding: 0px;
-  background-color: inherit;
-  color: white;
-}
-
-.dloadlink {
-  background-color: inherit;
-  color: white;
-  font-size: 20px;
-  padding: 0px;
 }
 
 /* 
