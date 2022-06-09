@@ -14,10 +14,10 @@ window.export = () => {
   Export.exportToDBFile(songCollection, elementID);
 };
 
+// Import has to be done in 2 steps because of how async/await works (await automatically returns the Promise object, making it impossible to return the necessary Object later)
 window.import = async (event) => {
   importedText = await Import.importFromDBFile(event);
   songCollection = Import.transformIntoSongObjectArray(importedText);
-  console.log(importedText);
 };
 
 window.start = () => {
@@ -26,13 +26,6 @@ window.start = () => {
   const readableChords = false;
 
   const song = parseSongFromText(completeSongTextNode.innerHTML);
-  songCollection.push(song);
-  songCollection.push(song);
-  songCollection.push(song);
-  // console.log("Original");
-  // console.log(song);
-  // console.log("Exported and imported Song");
-  // console.log(JSON.stringify(song));
 
   ouputNode.innerHTML = createText(song, readableChords);
 };
