@@ -28,11 +28,11 @@ class Chord {
       }
     } else {
       this.position = _position; // Position in the text
-      this.noteNumber = Chord.noteToNumber(_note.toUpperCase() + _sharpFlat);
-      this.minMaj = Chord.majorOrMinor(_note, _minMaj); // duh...
+      this.noteNumber = (typeof _note === "number") ? _note : Chord.noteToNumber(_note.toUpperCase() + _sharpFlat);
+      this.minMaj = (typeof _note === "number") ? _minMaj : Chord.majorOrMinor(_note, _minMaj); // duh...
       this.extraNoteNumber = _extraNoteNumber; // The 7 in a G7
       this.special = _special; // The "sus" in Gsus, "sus2" in a Gsus2, "sus4" in Gsus4, "dim" in Gdim or "dim7" in Gdim7
-      this.slashNoteNumber = (_slashNote === "") ? 0 : Chord.noteToNumber(_slashNote.toUpperCase()); // The F# in a D/F#
+      this.slashNoteNumber = (typeof _slashNote === "number") ? _slashNote : (_slashNote === "") ? 0 : Chord.noteToNumber(_slashNote.toUpperCase()); // The F# in a D/F#
     }
   }
 
@@ -65,7 +65,7 @@ class Chord {
     return this.noteNumber;
   }
 
-  getminMaj() {
+  getMinMaj() {
     return this.minMaj;
   }
 
@@ -89,7 +89,7 @@ class Chord {
     this.noteNumber = noteNumber;
   }
 
-  setminMaj(minMaj) {
+  setMinMaj(minMaj) {
     this.minMaj = minMaj;
   }
 
