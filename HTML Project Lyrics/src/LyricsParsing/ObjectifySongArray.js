@@ -60,6 +60,7 @@ const getSongFromParsedText = (songArray) => {
   const o = {};
   o.artist = songArray.artist;
   o.defaultKey = songArray.defaultKey;
+  o.key = songArray.key;
   o.defaultStructure = songArray.defaultStructure;
   o.tempo = songArray.tempo;
   o.title = songArray.title;
