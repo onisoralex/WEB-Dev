@@ -16,6 +16,11 @@ body {
   margin: 0.2em;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row
+}
+
 .flexing {
   display: flex;
   justify-content: space-between;

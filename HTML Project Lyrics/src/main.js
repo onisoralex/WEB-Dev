@@ -9,9 +9,10 @@ window.parseSongFromText = parseSongFromText;
 let importedText = "";
 let songCollection = [];
 
-window.export = () => {
+window.export = (event) => {
   const elementID = "exportlink";
   Export.exportToDBFile(songCollection, elementID);
+  document.getElementById("exportlink").classList.remove("hidden-element");
 };
 
 // Import has to be done in 2 steps because of how async/await works (await automatically returns the Promise object, making it impossible to return the necessary Object later)
