@@ -38,6 +38,10 @@ const createFileDownloadLink = (obj, filename, element) => {
   downloadlinkElement.download = filename;
 };
 
+const showElement = (elementID) => document.getElementById(elementID).classList.remove("hidden-element");
+
+const hideElement = (elementID) => document.getElementById(elementID).classList.add("hidden-element");
+
 const getIndexInArrayStartingFrom = (needle, haystack, n) => haystack.indexOf(needle, n);
 
 const getIndexInArray = (needle, haystack) => haystack.indexOf(needle);
@@ -50,6 +54,8 @@ export {
   isLastElement,
   openAndDisplayFile,
   createFileDownloadLink,
+  showElement,
+  hideElement,
   getIndexInArrayStartingFrom,
   getIndexInArray,
   isInArray,
