@@ -8,13 +8,19 @@
 
 <body onload="window.start()">
 	<hr>
-	<input type="checkbox" id="song-text-readability-setting">Make Text more readable (not working yet)
+	<input type="checkbox" id="song-text-readability-setting" onchange="">Make Text more readable (not working yet)
 	<hr>
-	<label class="button flexing">
-		Display File
-		<input type="file" accept="text/plain" class="hidden-element"
-			onchange="window.openAndDisplayFile(event, document.getElementById('song-text__output'))">
-	</label>
+	<div class="flex-row">
+		<label class="button flexing">
+			Display File
+			<input type="file" accept="text/plain" class="hidden-element"
+				onchange="window.openAndDisplayFile(event, document.getElementById('song-text__output'))">
+		</label>
+		<label class="button flexing">
+			Add Song from File
+			<input type="file" accept="text/plain" class="hidden-element" onchange="window.addSong(event)">
+		</label>
+	</div>
 	<hr>
 	<label class="button flexing">
 		Import File
@@ -23,9 +29,9 @@
 	<div class="flex-row">
 		<label class="button flexing">
 			Create Export File
-			<input type="button" class="hidden-element" onclick="window.export(event)">
+			<input type="button" class="hidden-element" onclick="window.export()">
 		</label>
-		<a href="" id="exportlink" class="button flexing hidden-element">
+		<a href="" id="download-link" class="button flexing hidden-element">
 			Download&nbsp;
 			<svg class="arrow-svg" viewBox="0 0 512 512">
 				<path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 
@@ -38,66 +44,6 @@
 	</div>
 	<hr>
 	<div id="song-text__output"></div>
-	<pre id="song-text__input" style="display: none">
-Title: Where Would I Be Without You
-
-Artist: Citizen Way
-
-Key: E
-
-
-[Vers 1]
-E  G#7sus2/B# D                F#/E
-I've been    no stranger to struggle
-A                                 E
-I've made my share of mistakes
-E D         F                   F#
-  My foolish heart led to trouble
-A                                 E
-But I followed anyway
-G#7dim/B                     C#m7
-    I'd be one big disappointment
-          A         B C#m7dim/B     G    E          F#dim 
-If You hadn't rescued me     (beep) from me
-
-[Chorus]
-E
-WHERE WOULD I BE WITHOUT YOU
-F#
-WHERE WOULD I BE WITHOUT YOU
-A2                                      E
-WHERE WOULD I BE WITHOUT YOU
-[Vers 2]
-E                             F#/E
-You promise hope for tomorrow
-A                              E
-You meet my need for today
-E                                 F#
-And when I stray from the narrow
-                     A                      E
-You lead me back in Your amazing grace
-G#7                                      C#m7
-    My fears distract me from living
-                A            B        C#m      E     F#dim
-But good thing all fear's afraid of Your love
-
-[Solo]
-G#7 C#m7 G#7 C#m7 G#7 C#m7 A B C#m E F#dim.
-G#7 C#m7 G#7 C#m7 G#7 C#m7 A B C#m E F#dim.
-
-[Bridge]
-E
-I would be nothing nowhere
-F#/E                                                    A               E
-I would be something less than better without You
-
-[Outro]
-E F# A E
-
-[Info]
-Struktur: V1, Ch x 2, V2, Ch x 2, Solo, Br, Ch x 2, Outro x 2
-
-		</pre>
 </body>
 
 </html>

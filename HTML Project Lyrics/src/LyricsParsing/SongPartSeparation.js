@@ -18,12 +18,12 @@ const getStartingPositionsOfParts = (completeSongLineByLineArray) => {
 const splitCompleteSongIntoParts = (completeSongEveryLineArray, StartingPositionsOfParts) => {
   const partsArray = [];
   const extendedStartingPositionsOfParts = Utils.deepCopy(StartingPositionsOfParts);
-  extendedStartingPositionsOfParts.push(completeSongEveryLineArray.length - 1);
+  extendedStartingPositionsOfParts.push(completeSongEveryLineArray.length); // Add Ending as last Entry
 
   for (let i = 0; i < extendedStartingPositionsOfParts.length - 1; i++) {
     const part = [];
     part.name = completeSongEveryLineArray[extendedStartingPositionsOfParts[i]]; // Extract the name of a specific part
-    part.name = part.name.substring(1, part.name.length - 1);
+    part.name = part.name.substring(1, part.name.length - 1); // Remove brackets
 
     for (let j = extendedStartingPositionsOfParts[i] + 1; j < extendedStartingPositionsOfParts[i + 1]; j++) { // Start with the first line of a part (line after the Part Tag)
       part.push(completeSongEveryLineArray[j]); // Push every line from the new part into an array
@@ -50,11 +50,13 @@ const extractParts = (completeSongLineByLineArray, startingPositionsOfParts) => 
   let parts = [];
 
   parts = splitCompleteSongIntoParts(completeSongLineByLineArray, startingPositionsOfParts);
-  parts.title = Base.getSongTitle(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.artist = Base.getArtist(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
-  parts.defaultKey = Base.getDefaultSongKey(completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]));
+  const basicSongInformationPart = completeSongLineByLineArray.slice(0, startingPositionsOfParts[0]);
+
+  parts.title = Base.getSongTitle(basicSongInformationPart);
+  parts.artist = Base.getArtist(basicSongInformationPart);
+  parts.defaultKey = Base.getDefaultSongKey(basicSongInformationPart);
   parts.defaultStructure = Base.getDefaultSongStructure(parts[parts.length - 1]);
-  parts.tempo = Base.getTempo(parts[parts.length - 1]);
+  parts.tempo = Base.getTempo(basicSongInformationPart);
 
   parts = removeInfoPartFromPartsArray(parts);
 
