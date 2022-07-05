@@ -7,7 +7,7 @@ import * as FileLoader from "./Utilities/FileLoader.js";
 
 window.openAndDisplayFile = Utils.openAndDisplayFile;
 window.parseSongFromText = parseSongFromText;
-let songCollection = [];
+window.songCollection = [];
 
 window.export = () => {
   const downloadLinkID = "download-link";
