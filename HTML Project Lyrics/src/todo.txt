@@ -1,0 +1,28 @@
+!!! add posibility to extract text even if notes are missing
+!!! add possibility to display text where notes are missing
+!!! add possibility to export and import text where notes are missing
+--> relevant for texts that have chords only on the first verse
+
+
+features to be added
+- editing of songtext and chords
+-- include a texteditor that opens the song in text format and then you can save it again. saving again is like parsing from a text file.
+- advanced editing
+-- editmode toggle
+-- edit chords by clicking on them
+-- edit sentence/line by clicking on it
+- improve, so the info block doesn't have to be mandatory
+-- if there's no onfo block, the last part won't be parsed
+- when parsing from a file, create a Song Object directly and push to the song object
+
+information to be added
+- repertoire/Collection + Entry number
+- custom Tag List
+- original Song
+-- title
+-- artist
+-- link
+- cover Song
+-- title
+-- artist
+-- link
