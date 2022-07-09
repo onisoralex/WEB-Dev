@@ -23,62 +23,14 @@ const getInfoFromLine = (basicSongInformationArray, keyWords) => {
   return info;
 };
 
-// Should replace the below info methods later to make it more cleaner
-/* const titleInfoObj = { emptyInfo: "Unknown Song", keyWords: ["title", "name", "nume", "titlu"] };
-function getGeneralInfo(infoObj, basicSongInformationArray) {
-  const result = getInfoFromLine(basicSongInformationArray, infoObj.keyWords);
+function getBasicInfo(keyWords, emptyInfo, basicSongInformationArray) {
+  const basicInfo = getInfoFromLine(basicSongInformationArray, keyWords);
 
-  return result === "" ? infoObj.emptyInfo : result;
+  return basicInfo === "" ? emptyInfo : basicInfo;
 }
-*/
-
-// Separate functions until the aforementioned geneal function is working
-const getSongTitle = (basicSongInformationArray) => {
-  const empty = "Unknown Song";
-  const keyWords = ["title", "name", "nume", "titlu"];
-  const result = getInfoFromLine(basicSongInformationArray, keyWords);
-
-  return result === "" ? empty : result;
-};
-
-const getArtist = (basicSongInformationArray) => {
-  const emptyArtist = "Unknown Artist";
-  const artistKeyWords = ["artist", "interpret"];
-  const returnedArtist = getInfoFromLine(basicSongInformationArray, artistKeyWords);
-
-  return returnedArtist === "" ? emptyArtist : returnedArtist;
-};
-
-const getDefaultSongKey = (basicSongInformationArray) => {
-  const emptyKey = "Unknown Key";
-  const keyKeyWords = ["key", "gama", "gamă"];
-  const returnedKey = getInfoFromLine(basicSongInformationArray, keyKeyWords);
-
-  return returnedKey === "" ? emptyKey : returnedKey;
-};
-
-const getTempo = (basicSongInformationArray) => {
-  const emptyTempo = "Unknown Tempo";
-  const tempoKeyWords = ["tempo"];
-  const returnedTempo = getInfoFromLine(basicSongInformationArray, tempoKeyWords);
-
-  return returnedTempo === "" ? emptyTempo : returnedTempo;
-};
-
-const getDefaultSongStructure = (basicSongInformationArray) => {
-  const emptyStructure = "No structure given";
-  const structureKeyWords = ["structure", "struktur", "structura", "structură"];
-  const returnedStructure = getInfoFromLine(basicSongInformationArray, structureKeyWords);
-
-  return returnedStructure === "" ? emptyStructure : returnedStructure;
-};
 
 export {
   getIndexOfPart,
   getInfoFromLine,
-  getSongTitle,
-  getArtist,
-  getDefaultSongKey,
-  getTempo,
-  getDefaultSongStructure,
+  getBasicInfo,
 };
