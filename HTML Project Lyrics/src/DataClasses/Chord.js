@@ -53,7 +53,7 @@ class Chord {
   }
 
   static noteToNumber(note) {
-    return typeof note === "undefined" ? "" : NUMBERS[note];
+    return note === undefined ? "" : NUMBERS[note];
   }
 
   // Getters/Setters
