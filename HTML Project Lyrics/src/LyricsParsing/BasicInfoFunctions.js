@@ -23,11 +23,7 @@ const getInfoFromLine = (basicSongInformationArray, keyWords) => {
   return info;
 };
 
-function getBasicInfo(keyWords, emptyInfo, basicSongInformationArray) {
-  const basicInfo = getInfoFromLine(basicSongInformationArray, keyWords);
-
-  return basicInfo === "" ? emptyInfo : basicInfo;
-}
+const getBasicInfo = (keyWords, emptyInfo, basicSongInformationArray) => getInfoFromLine(basicSongInformationArray, keyWords) || emptyInfo;
 
 export {
   getIndexOfPart,
