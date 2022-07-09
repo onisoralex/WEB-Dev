@@ -11,14 +11,14 @@ window.songCollection = [];
 
 window.export = () => {
   const downloadLinkID = "download-link";
-  Export.exportToDBFile(songCollection, downloadLinkID);
+  Export.exportToDBFile(window.songCollection, downloadLinkID);
   Utils.showElement(downloadLinkID);
 };
 
 // Import has to be done in 2 steps because of how async/await works (await automatically returns the Promise object, making it impossible to return the necessary Object later)
 window.import = async (event) => {
   const importedText = await FileLoader.getFileText(event);
-  songCollection = Import.transformIntoSongObjectArray(importedText);
+  window.songCollection = Import.transformIntoSongObjectArray(importedText);
 };
 
 window.start = () => {};
@@ -28,7 +28,7 @@ window.addSong = async (event) => {
   const readableChords = false;
   const songText = await FileLoader.getFileText(event);
   const song = parseSongFromText(songText);
-  songCollection.push(song);
+  window.songCollection.push(song);
 
   ouputNode.innerHTML = createText(song, readableChords);
 };
