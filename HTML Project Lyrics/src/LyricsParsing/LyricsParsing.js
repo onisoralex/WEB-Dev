@@ -1,4 +1,5 @@
-import { searchAndGetLyricsParts } from "./SongPartSeparation.js";
+import * as Utils from "../Utilities/Utils.js";
+import { searchAndGetLyricsPartsAndChordLines } from "./SongPartSeparation.js";
 import { getSongWithTransformedChords } from "./ChordTransformation.js";
 import { getSongFromParsedText } from "./ObjectifySongArray.js";
 import Song from "../DataClasses/Song.js";
@@ -9,12 +10,12 @@ import Song from "../DataClasses/Song.js";
  * @returns An Array with all lines of the text file
  */
 const convertTextToArray = (completeSongText) => {
-  const arr = (completeSongText.replace(/\r/g, "")).split("\n"); // Also delete all the Carriage Return Characters in the File to be able to see the Linebreaks
+  const arr = Utils.textToArray(completeSongText);
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === "") {
       arr.splice(i, 1);
-      i -= 1; // Repeat same line in case of repeating empty lines
+      i -= 1; // Check same line in case of repeating empty lines
     }
   }
 
@@ -23,7 +24,7 @@ const convertTextToArray = (completeSongText) => {
 
 const parseSongFromText = (completeSongText) => {
   const songLinesArray = convertTextToArray(completeSongText);
-  const songDividedInDifferentParts = searchAndGetLyricsParts(songLinesArray); // Gets the different Parts of a Song
+  const songDividedInDifferentParts = searchAndGetLyricsPartsAndChordLines(songLinesArray); // Gets the different Parts of a Song
   const songWithTransformedChordsAsArray = getSongWithTransformedChords(songDividedInDifferentParts);
   const song = new Song(getSongFromParsedText(songWithTransformedChordsAsArray));
 

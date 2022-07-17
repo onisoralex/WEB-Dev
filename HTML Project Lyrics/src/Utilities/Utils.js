@@ -17,6 +17,8 @@ const isIterateable = (o) => o.toString().match(/[0-9]+/) !== null;
 
 const isLastElement = (i, e) => i === e.length - 1;
 
+const textToArray = (text) => (text.replace(/\r/g, "")).split("\n"); // Also delete all the Carriage Return Characters in the File to be able to see the Linebreaks
+
 const openAndDisplayFile = (eventNode, fileTarget) => {
   const input = eventNode.target; // Takes Information from the HTML element that executed this Script
   const fileReader = new FileReader(); // Create a new File Reader
@@ -44,19 +46,20 @@ const hideElement = (elementID) => document.getElementById(elementID).classList.
 
 const getIndexInArrayStartingFrom = (needle, haystack, n) => haystack.indexOf(needle, n);
 
-const getIndexInArray = (needle, haystack) => haystack.indexOf(needle);
+const isInArray = (needle, haystack) => haystack.some((e) => e === needle); // Can also be done as haystack.some(e => e === needle)
 
-const isInArray = (needle, haystack) => (getIndexInArray(needle, haystack) > -1);
+const splitLineIntoArray = (line) => line.split(" ").filter((e) => e);
 
 export {
   deepCopy,
   isIterateable,
   isLastElement,
+  textToArray,
   openAndDisplayFile,
   createFileDownloadLink,
   showElement,
   hideElement,
   getIndexInArrayStartingFrom,
-  getIndexInArray,
   isInArray,
+  splitLineIntoArray,
 };

@@ -1,5 +1,6 @@
 import * as Utils from "../Utilities/Utils.js";
 import * as Base from "./BasicInfoFunctions.js";
+import Chord from "../DataClasses/Chord.js";
 
 const startOfNewPart = (line) => line.charAt(0) === "["; // New Parts always beginn with a "["
 
@@ -63,8 +64,47 @@ const extractParts = (completeSongLineByLineArray, startingPositionsOfParts) => 
   return parts;
 };
 
+const checkIfPartHasChordsOrLyrics = (part) => {
+  let c = false;
+  let l = false;
+  const chordLine = [];
+
+  for (let i = 0; i < part.length; i++) {
+    const subdivisionsOfLine = Utils.splitLineIntoArray(part[i]);
+
+    try {
+      for (let j = 0; j < subdivisionsOfLine.length; j++) {
+        const newChord = new Chord(0, subdivisionsOfLine[j]);
+      }
+
+      chordLine.push(i);
+    } catch (error) {
+      // Just finish this iteration
+    }
+  }
+
+  if (chordLine.length === part.length) c = true;
+  if (chordLine.length === 0) l = true;
+  if (chordLine.length === (part.length / 2)) {
+    c = true;
+    l = true;
+  }
+
+  return { c, l };
+};
+
+const getTypeOfPart = (part) => {
+  const v = checkIfPartHasChordsOrLyrics(part);
+  let type = "Part has no type!? How!!??";
+
+  if (v.c && v.l) type = "combined";
+  if (v.c && !v.l) type = "chords";
+  if (!v.c && v.l) type = "lyrics";
+
+  return type;
+};
+
 const separateLyricsFromChords = (_parts) => {
-  const namesOfPartsWithNoLyrics = ["Intro", "Solo", "Instrumental", "Outro"];
   const parts = Utils.deepCopy(_parts);
 
   for (let i = 0; i < parts.length; i++) {
@@ -72,10 +112,17 @@ const separateLyricsFromChords = (_parts) => {
     const part = parts[i];
     newpart.name = Utils.deepCopy(part.name);
 
-    if (Utils.isInArray(part.name, namesOfPartsWithNoLyrics)) { // Check if parts are of name X can also be done by   parts.some(e => e.name === "[Intro]");
+    const typeOfPart = getTypeOfPart(part);
+
+    if (typeOfPart === "chords") { // Check if parts are of name X
       newpart.chords = part.filter((e) => Utils.deepCopy(e));
       newpart.lyrics = undefined;
-    } else {
+    }
+    if (typeOfPart === "lyrics") { // Check if parts are of name X
+      newpart.chords = undefined;
+      newpart.lyrics = part.filter((e) => Utils.deepCopy(e));
+    }
+    if (typeOfPart === "combined") {
       newpart.chords = [];
       newpart.lyrics = [];
       for (let j = 0; j < part.length; j++) {
@@ -93,7 +140,7 @@ const separateLyricsFromChords = (_parts) => {
   return parts;
 };
 
-const searchAndGetLyricsParts = (songLinesArray) => {
+const searchAndGetLyricsPartsAndChordLines = (songLinesArray) => {
   const startingPositionsOfParts = getStartingPositionsOfParts(songLinesArray);
   const parts = extractParts(songLinesArray, startingPositionsOfParts);
   const extendedParts = separateLyricsFromChords(parts);
@@ -101,5 +148,5 @@ const searchAndGetLyricsParts = (songLinesArray) => {
   return extendedParts;
 };
 
-export { searchAndGetLyricsParts };
+export { searchAndGetLyricsPartsAndChordLines };
 export const SongPartSeparation = { getStartingPositionsOfParts };

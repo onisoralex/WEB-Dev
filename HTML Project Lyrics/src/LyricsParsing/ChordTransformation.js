@@ -5,7 +5,7 @@ const getSingleChords = (chordsToTransformArray) => {
   const chords = [];
 
   for (let i = 0; i < chordsToTransformArray.length; i++) {
-    chords.push(chordsToTransformArray[i].split(" ").filter((e) => e));
+    chords.push(Utils.splitLineIntoArray(chordsToTransformArray[i]));
   }
 
   return chords;
@@ -19,12 +19,12 @@ const searchChordPositionsOfPartArray = (chordsArray, singleChordsArray) => {
   const chordPositionsOfPart = [];
 
   for (let i = 0; i < singleChordsArray.length; i++) { // Line by line
-    let start = 0;
+    let currentStartPosition = 0;
     const chordPositionArray = [];
 
     for (let j = 0; j < singleChordsArray[i].length; j++) { // Chord by chord
-      start = Utils.getIndexInArrayStartingFrom(singleChordsArray[i][j], chordsArray[i], start);
-      chordPositionArray.push(start);
+      currentStartPosition = Utils.getIndexInArrayStartingFrom(singleChordsArray[i][j], chordsArray[i], currentStartPosition);
+      chordPositionArray.push(currentStartPosition);
     }
 
     chordPositionsOfPart.push(chordPositionArray);
