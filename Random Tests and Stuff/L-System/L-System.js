@@ -9,39 +9,39 @@ const ctx = canvasObj.getContext("2d");
 
 // first make int, for odd screen sizes; then add half of linewidth to positions to go on the pixel (canvas 0;0 seems to be between pixels)
 
-let pen = {
+const pen = {
   dir: 0,
   angle: 0,
   lineLength: 0,
   x: 0,
   y: 0,
   states: [],
-  init: function() { // Initialises the starting values for the pen
-    this.dir = Number(eval(getValue("direction")));; // Set drawing direction; Default right
+  init() { // Initialises the starting values for the pen
+    this.dir = Number(eval(getValue("direction"))); // Set drawing direction; Default right
     this.angle = Number(eval(getValue("angle")));
     this.lineLength = Number(getValue("lineLength")); // Line Length
     this.x = Math.floor(canvasObj.width / 2); // Reset X position
     this.y = Math.floor(canvasObj.height / 2 + 145); // Reset X position
   },
-  turnLeft: function() { // Turn left a degrees
+  turnLeft() { // Turn left a degrees
     this.dir = (this.dir + this.angle) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
   },
-  turnRight: function() { // Turn right b degrees
+  turnRight() { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
-  turnOneEighty: function() {
+  turnOneEighty() {
     this.dir = (this.dir + 180) % 360;
   },
-  pushState: function() {
-    let obj = {
+  pushState() {
+    const obj = {
       dir: this.dir,
       x: this.x,
-      y: this.y
+      y: this.y,
     };
     this.states.push(obj);
   },
-  popState: function() {
-    let lastState = this.states[this.states.length - 1];
+  popState() {
+    const lastState = this.states[this.states.length - 1];
 
     this.dir = lastState.dir;
     this.x = lastState.x;
@@ -50,39 +50,39 @@ let pen = {
     this.move();
     this.states.pop();
   },
-  getNextPos: function() {
-    this.x = this.x + this.getNextPositionX();
-    this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
+  getNextPos() {
+    this.x += this.getNextPositionX();
+    this.y -= this.getNextPositionY(); // Minus, because screen positions are positive downwards
   },
-  degToRad: function() { // DEG to RAD
+  degToRad() { // DEG to RAD
     return this.dir / 180 * Math.PI;
   },
-  getNextPositionX: function() { // Calculate next X Point
+  getNextPositionX() { // Calculate next X Point
     return Math.round(this.lineLength * Math.cos(this.degToRad()));
   },
-  getNextPositionY: function() { // Calculate next Y Point
+  getNextPositionY() { // Calculate next Y Point
     return Math.round(this.lineLength * Math.sin(this.degToRad()));
   },
-  line: function() { // Draw forward
+  line() { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
   },
-  move: function() { // Move forward (without drawing)
+  move() { // Move forward (without drawing)
     ctx.moveTo(this.x + hp(), this.y + hp());
-  }
+  },
 };
 
 function start() {
   pen.init();
   console.clear();
   console.log(pen.lineLength);
-  let axiom = getValue("axiom");
+  const axiom = getValue("axiom");
   const rulesField = getValue("rules");
   const it = Number(getValue("iterations")); // How many iterations will be transformed
-  let rules = extraxtRules(rulesField);
+  const rules = extraxtRules(rulesField);
   ctx.lineWidth = getValue("lineThickness");
   const resultField = document.getElementById("result");
 
-  let resultAxiom = transform2(axiom, rules, it);
+  const resultAxiom = transform2(axiom, rules, it);
 
   resultField.innerText = `${resultAxiom}`;
 
@@ -149,12 +149,12 @@ function getValue(id) {
 
 // Creates an object with all rules specified by the user
 function extraxtRules(rulesField) {
-  let rule = rulesField.split(",");
-  let rules = [];
+  const rule = rulesField.split(",");
+  const rules = [];
   for (let i = 0; i < rule.length; i++) {
-    let ruleObject = {
+    const ruleObject = {
       input: rule[i].split(/->|→/)[0],
-      output: rule[i].split(/->|→/)[1]
+      output: rule[i].split(/->|→/)[1],
     };
     rules.push(ruleObject);
   }
@@ -165,9 +165,8 @@ function extraxtRules(rulesField) {
 function transform(axiom, rules) {
   if (axiom.length >= 1) {
     return exchange(axiom.slice(0, 1), rules) + transform(axiom.substring(1, axiom.length), rules);
-  } else {
-    return "";
   }
+  return "";
 }
 
 // Loop function to transform the Axiom character by character

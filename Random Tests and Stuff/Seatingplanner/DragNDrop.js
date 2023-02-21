@@ -1,16 +1,16 @@
-let allowDrop = (ev) => {
+const allowDrop = (ev) => {
   ev.preventDefault();
-}
+};
 
-let drag = (ev) => {
+const drag = (ev) => {
   ev.dataTransfer.setData("text", ev.target.id);
-}
+};
 
-let drop = (ev) => {
+const drop = (ev) => {
   ev.preventDefault();
   // Get the data to be transferred
-  var data = ev.dataTransfer.getData("text");
-  var target = ev.target; // Set the variable for finding the first actually valid target
+  const data = ev.dataTransfer.getData("text");
+  let { target } = ev; // Set the variable for finding the first actually valid target
 
   // If the actual target is not a valid drop location, search for one on the parent node.
   // Repeat until a valid drop location is found
@@ -21,6 +21,6 @@ let drop = (ev) => {
 
   // Get the element that has to be transferred and append it to the bottom of the list of child elements of the actually valid target
   target.appendChild(document.getElementById(data));
-}
+};
 
 export { allowDrop, drag, drop };

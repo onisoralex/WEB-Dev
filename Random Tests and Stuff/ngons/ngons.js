@@ -12,7 +12,7 @@ ctx.strokeStyle = "#000000";
 
 // first make int, for odd screen sizes; then add half of linewidth to positions to go on the pixel (canvas 0;0 seems to be between pixels)
 
-let pen = {
+const pen = {
   outerRadius: 0,
   drawOuterCircle: false,
   innerRadiusSameAsOuterRadius: false,
@@ -30,7 +30,7 @@ let pen = {
   x: 0,
   y: 0,
   states: [],
-  init: function () { // Initialises the starting values for the pen
+  init() { // Initialises the starting values for the pen
     this.outerRadius = getValue("outerRadius");
     this.drawOuterCircle = isChecked("ifOuterCircle");
     this.innerRadiusSameAsOuterRadius = isChecked("toggleInnerRadius");
@@ -48,22 +48,22 @@ let pen = {
     this.x = this.xCenter;
     this.y = this.yCenter;
   },
-  turnLeft: function (steps) { // Turn left a degrees
+  turnLeft(steps) { // Turn left a degrees
     this.dir = (this.dir + (this.angle * steps)) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
   },
-  turnRight: function (steps) { // Turn right b degrees
+  turnRight(steps) { // Turn right b degrees
     this.dir = (this.dir + (360 - (this.angle * steps))) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
-  pushState: function () {
-    let state = {
+  pushState() {
+    const state = {
       dir: this.dir,
       x: this.x,
-      y: this.y
+      y: this.y,
     };
     this.states.push(state);
   },
-  popState: function () {
-    let state = this.states[this.states.length - 1];
+  popState() {
+    const state = this.states[this.states.length - 1];
 
     this.dir = state.dir;
     this.x = state.x;
@@ -72,33 +72,33 @@ let pen = {
     this.move();
     this.states.pop();
   },
-  getNextPos: function () {
+  getNextPos() {
     this.x = this.xCenter + this.getNextPositionX();
     this.y = this.yCenter - this.getNextPositionY(); // Minus, because screen positions are positive downwards
   },
-  degToRad: function () { // DEG to RAD
+  degToRad() { // DEG to RAD
     return this.dir / 180 * Math.PI;
   },
-  getNextPositionX: function () { // Calculate next X Point
+  getNextPositionX() { // Calculate next X Point
     if (this.drawByLineLength) {
       // TODO
     } else {
       return Math.round(this.outerRadius * Math.cos(this.degToRad()));
     }
   },
-  getNextPositionY: function () { // Calculate next Y Point
+  getNextPositionY() { // Calculate next Y Point
     if (this.drawByLineLength) {
       // TODO
     } else {
       return Math.round(this.outerRadius * Math.sin(this.degToRad()));
     }
   },
-  line: function () { // Draw forward
+  line() { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
   },
-  move: function () { // Move forward (without drawing)
+  move() { // Move forward (without drawing)
     ctx.moveTo(this.x + hp(), this.y + hp());
-  }
+  },
 };
 
 function start() {
@@ -114,7 +114,7 @@ function draw() {
   ctx.clearRect(0, 0, canvasObj.width, canvasObj.height); // Resets the canvas
   ctx.beginPath(); // Resets drawing instructions
 
-  let commonPrimFactor = getCommonPrimFactors(pen.gons, pen.exp);
+  const commonPrimFactor = getCommonPrimFactors(pen.gons, pen.exp);
 
   if (commonPrimFactor === 1) {
     // Set the pen to the starting position
@@ -134,7 +134,7 @@ function draw() {
 
       pen.pushState();
 
-      let factor = pen.gons / pen.exp;
+      const factor = pen.gons / pen.exp;
       console.log(factor);
       for (let j = 0; j < factor; j++) {
         pen.turnRight(pen.exp);
@@ -179,8 +179,8 @@ function hp() {
 }
 
 function toggleHiddenElements(elementClass) {
-  let objArr = document.getElementsByClassName(elementClass);
-  let isDisabled = objArr.item(0).hasAttribute("hidden");
+  const objArr = document.getElementsByClassName(elementClass);
+  const isDisabled = objArr.item(0).hasAttribute("hidden");
   if (isDisabled) {
     for (let i = 0; i < objArr.length; i++) {
       objArr.item(i).removeAttribute("hidden");

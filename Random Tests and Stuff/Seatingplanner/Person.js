@@ -1,5 +1,5 @@
-//Person Object Constructor
-export class Person {
+// Person Object Constructor
+class Person {
   constructor(firstname, lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
@@ -9,3 +9,5 @@ export class Person {
     // Geter functions go here in the constructor
   }
 }
+
+export { Person };

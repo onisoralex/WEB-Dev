@@ -4,31 +4,31 @@
  * a2 + b2 / ab + 1 is the square of an integer.
  */
 
-let pow2 = (x) => x * x;
-let round_precision = (n, p) => Math.round(n * 100).toFixedp(p);
+const pow2 = (x) => x * x;
+const roundPrecision = (n, p) => Math.round(n * 100).toFixed(p);
 
 let res;
-let iMax = 10000;
-let jMax = 10000; // MAX: 46340, because int can only have that number safely squared (a^2 or b^2)
-let a_pow_2;
-let part_1; // This one can potentially go over int (a^2 + b^2)
-let part_2;
-let precision = 12;
+const iMax = 10000;
+const jMax = 10000; // MAX: 46340, because int can only have that number safely squared (a^2 or b^2)
+let aPow2;
+let part1; // This one can potentially go over int (a^2 + b^2)
+let part2;
+const precision = 12;
 let num = 0;
 
 for (let a = 1; a < iMax; a++) {
-    a_pow_2 = pow2(a);
+  aPow2 = pow2(a);
 
-    for (let b = a; b < jMax; b++) {
-        part_1 = a_pow_2 + pow2(b);
-        part_2 = (a * b) + 1;
+  for (let b = a; b < jMax; b++) {
+    part1 = aPow2 + pow2(b);
+    part2 = (a * b) + 1;
 
-        res = round_precision(part_1  /part_2, precision);
+    res = roundPrecision(part1 / part2, precision);
 
-        if (res % 1 <= 0) { // Questionable if modulo is the right one here original was "res.scale <= 00"
-            num++;
-            console.log("a = " + a + ", b = " + b + ", Result = " + res);
-        }
+    if (res % 1 <= 0) { // Questionable if modulo is the right one here original was "res.scale <= 00"
+      num++;
+      console.log(`a = ${a}, b = ${b}, Result = ${res}`);
     }
+  }
 }
- console.log("Numbers calculated: " + num); 
+console.log(`Numbers calculated: ${num}`);
