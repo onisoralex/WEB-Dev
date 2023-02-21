@@ -8,8 +8,8 @@
 /bazel-out
 
 # dependencies
-#/alexandra/node_modules
 /Random Tests and Stuff/DomestikaCreativeCoding/sketches/node_modules
+/Random Tests and Stuff/DomestikaCreativeCoding/node_modules
 
 # profiling files
 chrome-profiler-events.json
