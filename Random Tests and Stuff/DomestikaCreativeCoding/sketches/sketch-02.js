@@ -1,22 +1,8 @@
 // im port * as math from "https://onisor_alex.github.io/math.js"  or something klike this it should be
-import { mapRange } from "../../MyLibraries/math.js";
+import { mapRange, degToRad } from "../../MyLibraries/math.js";
 
 const canvasSketch = require("canvas-sketch");
 const Tweakpane = require("tweakpane");
-
-const hexToRgb = (hex) => {
-  const rr = parseInt(hex.slice(1, 3), 10);
-  const gg = parseInt(hex.slice(3, 5), 10);
-  const bb = parseInt(hex.slice(5, 7), 10);
-  return { r: rr, g: gg, b: bb };
-};
-
-const numToHex = (n) => (n <= 15 ? "0" : "") + n.toString(16);
-
-const rgbToHex = (rgb) => `#${numToHex(rgb.r)}${numToHex(rgb.g)}${numToHex(rgb.b)}`;
-// const rgbToHex = (rgb) => `#${((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1)}`;
-
-const degToRad = (degrees) => (degrees / 180) * Math.PI;
 
 const randomRange = (min, max) => Math.random() * (max - min) + min;
 
