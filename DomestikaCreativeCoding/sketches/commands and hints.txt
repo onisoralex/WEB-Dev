@@ -1,8 +1,8 @@
 https://github.com/mattdesl/canvas-sketch
 npm i canvas-sketch-cli -g
 npm i tweakpane -g
-mkdir my-sketches
-canvas-sketch sketch.js --new --open
+mkdir sketches
+canvas-sketch sketches/ sketch.js --new --open
 
 While in the browser, hit Cmd + S or Ctrl + S to export a high-resolution PNG of your artwork to your ~/Downloads folder.
 Change the output folder with following command:
