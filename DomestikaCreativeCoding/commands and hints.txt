@@ -1,8 +1,16 @@
 https://github.com/mattdesl/canvas-sketch
+DON'T INSTALL GLOBALLY! EXPLANATION BELOW AND FIX DOESN'T WORK!
 npm i canvas-sketch-cli -g
 npm i tweakpane -g
 mkdir sketches
 canvas-sketch sketches/ sketch.js --new --open
+
+
+In Node.js, require doesn't look in the folder where global modules are installed.
+You can fix this by setting the NODE_PATH environment variable. In Linux this will be:
+- set "NODE_PATH" environment variable to "%AppData%\npm\node_modules"
+Note: This depend on where your global modules are actually installed.
+
 
 While in the browser, hit Cmd + S or Ctrl + S to export a high-resolution PNG of your artwork to your ~/Downloads folder.
 Change the output folder with following command:

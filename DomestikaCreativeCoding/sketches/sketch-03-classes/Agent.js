@@ -1,4 +1,4 @@
-import * as random from "../../../../MyLibraries/random.js";
+import * as random from "../../../MyLibraries/random.js";
 import Vector from "./Vector.js";
 
 export default class Agent {
