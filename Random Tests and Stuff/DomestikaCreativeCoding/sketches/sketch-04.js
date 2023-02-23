@@ -1,5 +1,5 @@
 import * as random from "canvas-sketch-util/random.js";
-import * as math from "canvas-sketch-util/math.js";
+import { mapRange } from "../../MyLibraries/math.js";
 
 const canvasSketch = require("canvas-sketch");
 const Tweakpane = require("tweakpane");
@@ -57,7 +57,7 @@ const sketch = () => ({
 
     // const scale = ((n + 1) / 2) * 30;
     // const scale = (n * 0.5 + 0.5) * 30;
-    const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
+    const scale = mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
 
     context.save();
 
