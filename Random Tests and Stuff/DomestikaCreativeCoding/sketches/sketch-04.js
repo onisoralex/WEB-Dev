@@ -1,6 +1,7 @@
+import * as random from "canvas-sketch-util/random.js";
+import * as math from "canvas-sketch-util/math.js";
+
 const canvasSketch = require("canvas-sketch");
-const random = require("canvas-sketch-util/random");
-const math = require("canvas-sketch-util/math");
 const Tweakpane = require("tweakpane");
 
 const params = {

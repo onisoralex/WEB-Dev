@@ -1,6 +1,7 @@
+import * as random from "canvas-sketch-util/random";
+import * as math from "canvas-sketch-util/math";
+
 const canvasSketch = require("canvas-sketch");
-const math = require("canvas-sketch-util/math");
-const random = require("canvas-sketch-util/random");
 const Tweakpane = require("tweakpane");
 
 const randomRange = (min, max) => Math.random() * (max - min) + min;

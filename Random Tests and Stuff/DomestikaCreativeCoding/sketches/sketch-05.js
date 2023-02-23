@@ -1,5 +1,6 @@
+import * as random from "canvas-sketch-util/random.js";
+
 const canvasSketch = require("canvas-sketch");
-const random = require("canvas-sketch-util/random");
 
 const settings = {
   dimensions: [1080, 1080],
