@@ -1,18 +1,9 @@
 // im port * as math from "https://onisor_alex.github.io/math.js"  or something klike this it should be
 import { mapRange, degToRad } from "../../MyLibraries/math.js";
+import { getRandomRangeArray } from "../../MyLibraries/random.js";
 
 const canvasSketch = require("canvas-sketch");
 const Tweakpane = require("tweakpane");
-
-const randomRange = (min, max) => Math.random() * (max - min) + min;
-
-const getRandomRangeArray = (n, min, max) => {
-  const arr = [];
-  for (let i = 0; i < n; i++) {
-    arr.push(randomRange(min, max));
-  }
-  return arr;
-};
 
 const animate = () => {
   console.log("domestika");
