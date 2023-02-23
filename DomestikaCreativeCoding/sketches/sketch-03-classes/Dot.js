@@ -1,7 +1,7 @@
 import * as random from "../../../MyLibraries/random.js";
 import Vector from "./Vector.js";
 
-export default class Agent {
+export default class Dot {
   constructor(x, y) {
     this.pos = new Vector(x, y);
     this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
@@ -29,7 +29,7 @@ export default class Agent {
     context.save();
     context.translate(this.pos.x, this.pos.y);
 
-    context.lineWidth = 4;
+    context.lineWidth = this.radius / 3.14;
 
     context.beginPath();
     context.arc(0, 0, this.radius, 0, Math.PI * 2);

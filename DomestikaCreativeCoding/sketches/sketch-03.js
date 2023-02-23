@@ -1,6 +1,6 @@
 import * as math from "../../MyLibraries/math.js";
 import * as random from "../../MyLibraries/random.js";
-import Agent from "./sketch-03-classes/Agent.js";
+import Dot from "./sketch-03-classes/Dot.js";
 
 const canvasSketch = require("canvas-sketch");
 
@@ -11,20 +11,21 @@ const settings = {
 
 const animate = () => {
   console.log("domestika");
-  requestAnimationFrame(animate); // Every time the browser is ready to animate a frame it willl call this function.
+  requestAnimationFrame(animate); // Every time the browser is ready to animate a frame it will call this function.
 };
 // animate();
 
 const sketch = ({ context, width, height }) => {
   // One executed part
-  const agents = [];
+  const dots = [];
   const boundary = "wrap";
+  const maxDistance = 200;
 
+  // Create an array of dots
   for (let i = 0; i < 40; i++) {
     const x = random.range(0, width);
     const y = random.range(0, height);
-
-    agents.push(new Agent(x, y));
+    dots.push(new Dot(x, y));
   }
 
   return ({ context, width, height }) => {
@@ -32,30 +33,27 @@ const sketch = ({ context, width, height }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
-    for (let i = 0; i < agents.length; i++) {
-      const agent = agents[i];
+    dots.forEach((dot, i) => {
+      for (let j = i + 1; j < dots.length; j++) {
+        const other = dots[j];
+        const dist = dot.pos.getDistance(other.pos);
 
-      for (let j = i + 1; j < agents.length; j++) {
-        const other = agents[j];
+        if (dist < maxDistance) {
+          context.lineWidth = math.mapRange(dist, 0, maxDistance, 8, 0.01);
 
-        const dist = agent.pos.getDistance(other.pos);
-
-        if (dist > 200) continue; // Skip to the next iteration if true
-
-        context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
-
-        context.beginPath();
-        context.moveTo(agent.pos.x, agent.pos.y);
-        context.lineTo(other.pos.x, other.pos.y);
-        context.stroke();
+          context.beginPath();
+          context.moveTo(dot.pos.x, dot.pos.y);
+          context.lineTo(other.pos.x, other.pos.y);
+          context.stroke();
+        }
       }
-    }
+    });
 
-    agents.forEach((agent) => {
-      agent.update();
-      agent.draw(context);
-      if (boundary === "wrap") agent.wrap(width, height);
-      if (boundary === "bounce") agent.bounce(width, height);
+    dots.forEach((dot) => {
+      dot.update();
+      dot.draw(context);
+      if (boundary === "wrap") dot.wrap(width, height);
+      if (boundary === "bounce") dot.bounce(width, height);
     });
   };
 };
