@@ -1,12 +1,8 @@
+// im port * as math from "https://onisor_alex.github.io/math.js"  or something klike this it should be
+import { mapRange } from "../../MyLibraries/math.js";
+
 const canvasSketch = require("canvas-sketch");
 const Tweakpane = require("tweakpane");
-
-const lerp = (a, b, t) => (b - a) * t + a;
-const invLerp = (a, b, v) => (v - a) / (b - a);
-const mapRange = (v, iMin, iMax, oMin, oMax) => {
-  const t = invLerp(iMin, iMax, v);
-  return lerp(oMin, oMax, t);
-};
 
 const hexToRgb = (hex) => {
   const rr = parseInt(hex.slice(1, 3), 10);
