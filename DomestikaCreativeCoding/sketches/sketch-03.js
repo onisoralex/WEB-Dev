@@ -18,6 +18,7 @@ const animate = () => {
 const sketch = ({ context, width, height }) => {
   // One executed part
   const agents = [];
+  const boundary = "wrap";
 
   for (let i = 0; i < 40; i++) {
     const x = random.range(0, width);
@@ -53,7 +54,8 @@ const sketch = ({ context, width, height }) => {
     agents.forEach((agent) => {
       agent.update();
       agent.draw(context);
-      agent.wrap(width, height);
+      if (boundary === "wrap") agent.wrap(width, height);
+      if (boundary === "bounce") agent.bounce(width, height);
     });
   };
 };

@@ -15,6 +15,11 @@ export default class Agent {
     if (this.pos.y > height) this.pos.y = 0;
   }
 
+  bounce(width, height) {
+    if (this.pos.x <= this.radius || this.pos.x >= (width - this.radius)) this.vel.x *= -1;
+    if (this.pos.y <= this.radius || this.pos.y >= (height - this.radius)) this.vel.y *= -1;
+  }
+
   update() {
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;
