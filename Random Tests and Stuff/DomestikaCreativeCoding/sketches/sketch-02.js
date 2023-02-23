@@ -1,8 +1,12 @@
-import * as random from "canvas-sketch-util/random.js";
-import * as math from "canvas-sketch-util/math.js";
-
 const canvasSketch = require("canvas-sketch");
 const Tweakpane = require("tweakpane");
+
+const lerp = (a, b, t) => (b - a) * t + a;
+const invLerp = (a, b, v) => (v - a) / (b - a);
+const mapRange = (v, iMin, iMax, oMin, oMax) => {
+  const t = invLerp(iMin, iMax, v);
+  return lerp(oMin, oMax, t);
+};
 
 const hexToRgb = (hex) => {
   const rr = parseInt(hex.slice(1, 3), 10);
@@ -114,10 +118,10 @@ const sketch = ({
     const num = params.dials;
     const dialWidth = w * params.dialWidthFactor;
     const radius = width * (params.exercise2 ? 0.7 : params.radius);
-    const newradiusrange = radiusArr.map((e) => math.mapRange(e, radiusArrMin, radiusArrMax, radiusArrMin * params.radiusFactorMin, radiusArrMax * params.radiusFactorMax));
+    const newradiusrange = radiusArr.map((e) => mapRange(e, radiusArrMin, radiusArrMax, radiusArrMin * params.radiusFactorMin, radiusArrMax * params.radiusFactorMax));
 
     for (let i = 0; i < num; i++) {
-      const slice = math.degToRad(360 / num);
+      const slice = degToRad(360 / num);
       const angle = slice * i;
 
       const x = cx + radius * Math.sin(angle);
