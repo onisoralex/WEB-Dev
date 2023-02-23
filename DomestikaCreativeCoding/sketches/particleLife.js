@@ -1,12 +1,16 @@
-const canvasSketch = require('canvas-sketch');
+const canvasSketch = require("canvas-sketch");
 
 const settings = {
-  dimensions: [ 2048, 2048 ]
+  dimensions: [2048, 2048],
 };
 
-const sketch = () => {
+const sketch = ({ context, width, height }) => {
+  // Once executed script
+  const a = width;
+
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    // Repeatedly executed script
+    context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
   };
 };

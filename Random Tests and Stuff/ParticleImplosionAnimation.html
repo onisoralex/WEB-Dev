@@ -1,0 +1,82 @@
+<html>
+
+<head>
+  <title>Particle Life</title>
+ 
+</head>
+
+<!--body onload="init()"-->
+<body>
+  <canvas id="life" width="500" height="500"></canvas>
+  <script >
+    const m = document.getElementById("life").getContext("2d");
+
+// let init=()=>{
+//   m = document.getElementById("life").getContext("2d");
+// }
+
+const draw = (x, y, c, s) => {
+  m.fillStyle = c;
+  m.fillRect(x, y, s, s);
+};
+
+const particles = [];
+const particle = (x, y, c) => ({
+  x, y, vx: 0, vy: 0, color: c,
+});
+
+const random = () => Math.random() * 400 + 50;
+
+const create = (number, color) => {
+  const group = [];
+  for (let i = 0; i < number; i++) {
+    group.push(particle(random(), random(), color));
+    particles.push(group[i]);
+  }
+  return group;
+};
+
+const rule = (particles1, particles2, g) => {
+  for (let i = 0; i < particles1.length; i++) {
+    let fx = 0;
+    let fy = 0;
+    let a;
+    let b;
+    for (let j = 0; j < particles2.length; j++) {
+      a = particles1[i];
+      b = particles2[j];
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d > 0) {
+        const F = g * (1 / d);
+        fx += F * dx;
+        fy += F * dy;
+      }
+    }
+    a.vx += fx;
+    a.vy += fy;
+
+    a.x += a.vx;
+    a.y += a.vy;
+  }
+};
+
+const yellow = create(2000, "yellow");
+
+const update = () => {
+  rule(yellow, yellow, -0.001);
+  m.clearRect(0, 0, 500, 500);
+  draw(0, 0, "black", 500);
+  for (let i = 0; i < particles.length; i++) {
+    draw(particles[i].x, particles[i].y, particles[i].color, 5);
+  }
+  requestAnimationFrame(update);
+};
+
+update();
+
+  </script>
+</body>
+
+</html>
