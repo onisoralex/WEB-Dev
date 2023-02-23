@@ -4,9 +4,8 @@
     "es2021": true
   },
   "extends": "airbnb-base",
-    "overrides": [
-    ],
-    "parserOptions": {
+  "overrides": [],
+  "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
@@ -56,6 +55,9 @@
     ],
     "import/prefer-default-export": [
       "warn"
+    ],
+    "import/no-relative-packages": [
+      "off"
     ]
   }
 }
