@@ -15,7 +15,7 @@ Note: This depend on where your global modules are actually installed.
 Worked on MSI. Following was Path configurations:
 - System Environment Variable "Path":
 -- C:\Program Files\Git\cmd
--- C:\Program Files\nodejs\s
+-- C:\Program Files\nodejs\sssss
 - User Environment Variable: "Path":
 -- C:\Users\Alex\AppData\Local\Programs\Microsoft VS Code\bin
 -- C:\Users\Alex\AppData\Roaming\npm
