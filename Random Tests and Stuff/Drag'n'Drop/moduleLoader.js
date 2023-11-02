@@ -1,5 +1,5 @@
-window._script = import("script.js");
+import { drag, drop, allowDrop } from "./script.js";
 
-window.allowDrop = window._script.allowDrop;
-window.drag = window._script.drag;
-window.drop = window._script.drop;
+window.drag = drag;
+window.drop = drop;
+window.allowDrop = allowDrop;
