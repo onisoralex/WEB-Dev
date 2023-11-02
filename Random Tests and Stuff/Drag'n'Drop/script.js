@@ -1,12 +1,12 @@
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function drag(ev) {
+const drag = (ev) => {
   ev.dataTransfer.setData("text", ev.target.id);
-}
+};
 
-function drop(ev) {
+const allowDrop = (ev) => {
+  ev.preventDefault();
+};
+
+const drop = (ev) => {
   ev.preventDefault();
   // Get the data to be transferred
   const data = ev.dataTransfer.getData("text");
@@ -21,6 +21,6 @@ function drop(ev) {
 
   // Get the element that has to be transferred and append it to the bottom of the list of child elements of the actually valid target
   target.appendChild(document.getElementById(data));
-}
+};
 
 export { drag, drop, allowDrop };
