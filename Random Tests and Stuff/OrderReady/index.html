@@ -12,39 +12,16 @@
 </head>
 
 <body>
-  <div class="orderdisplay flexcontainer">
-    <div id="number456" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">456</label>
-    </div>
-    <div id="number7" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">7</label>
-    </div>
-    <div id="number89" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">89</label>
-    </div>
-    <div id="number1233" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">1233</label>
-    </div>
-    <div id="number123" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">123</label>
-    </div>
-    <div id="number4536" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">4536</label>
-    </div>
-    <div id="number73" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">73</label>
-    </div>
-    <div id="number893" class="drag" draggable="true" ondragstart="drag(event)">
-      <label class="ordernumberblock">893</label>
-    </div>
+  <div id="orderdisplay" class="flexcontainer">
+
   </div>
   <hr>
 
   <div class="controlview flexcontainer">
-    <label class="placeholder"></label>
-    <div class="flexcontainer newnumber">
-      <input type="number" class="numberinput" />
-      <button class="addbutton">Add</button>
+    <label id="placeholder"></label>
+    <div id="newnumber" class="flexcontainer">
+      <input id="numberinput" type="number" min="100" max="999" value="100" oninput="validateNumber(event)" />
+      <button class="addbutton" onclick="add()">Add</button>
     </div>
     <div class="trashbin dndfields" ondrop="drop(event)" ondragover="allowDrop(event)">
       T

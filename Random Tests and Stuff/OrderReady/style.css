@@ -15,7 +15,7 @@
   padding: 0.1em 0.3em;
 }
 
-.orderdisplay {
+#orderdisplay {
   padding: 1em;
   border: 1px solid lightgrey;
   border-radius: 1em;
@@ -33,11 +33,11 @@
   gap: 1.5em 1.5em;
 }
 
-.placeholder {
+#placeholder {
   visibility: hidden;
 }
 
-.newnumber {
+#newnumber {
   align-items: center;
 }
 
