@@ -6,7 +6,7 @@
   "extends": "airbnb-base",
   "overrides": [],
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "rules": {
