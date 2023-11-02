@@ -1,0 +1,62 @@
+.flexcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5em 1.5em;
+}
+
+.ordernumberblock {
+  color: white;
+  font-family: Roboto;
+  font-size: 3em;
+  background-color: dodgerblue;
+  border: 0px;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+}
+
+.orderdisplay {
+  padding: 1em;
+  border: 1px solid lightgrey;
+  border-radius: 1em;
+  max-width: 600px;
+  align-items: flex-start;
+}
+
+.controlview {
+  padding: 1em;
+  border: 1px solid lightgrey;
+  border-radius: 1em;
+  max-width: 600px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em 1.5em;
+}
+
+.placeholder {
+  visibility: hidden;
+}
+
+.newnumber {
+  align-items: center;
+}
+
+.addbutton {
+  color: white;
+  font-family: Roboto;
+  font-size: 1.5em;
+  background-color: limegreen;
+  border: 0px;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+}
+
+.trashbin {
+  padding: 3em;
+  border: 1px solid red;
+  border-radius: 1em;
+}
+
+.trashicon {
+  color: red
+}

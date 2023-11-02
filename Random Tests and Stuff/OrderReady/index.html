@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>
+    Async/Await Tests
+  </title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <script type="module" src="./main.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="orderdisplay flexcontainer">
+    <div id="number456" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">456</label>
+    </div>
+    <div id="number7" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">7</label>
+    </div>
+    <div id="number89" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">89</label>
+    </div>
+    <div id="number1233" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">1233</label>
+    </div>
+    <div id="number123" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">123</label>
+    </div>
+    <div id="number4536" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">4536</label>
+    </div>
+    <div id="number73" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">73</label>
+    </div>
+    <div id="number893" class="drag" draggable="true" ondragstart="drag(event)">
+      <label class="ordernumberblock">893</label>
+    </div>
+  </div>
+  <hr>
+
+  <div class="controlview flexcontainer">
+    <label class="placeholder"></label>
+    <div class="flexcontainer newnumber">
+      <input type="number" class="numberinput" />
+      <button class="addbutton">Add</button>
+    </div>
+    <div class="trashbin dndfields" ondrop="drop(event)" ondragover="allowDrop(event)">
+      T
+      <i class="fa fa-trash trashicon" aria-hidden="true"></i>
+    </div>
+  </div>
+</body>
+
+</html>
