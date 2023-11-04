@@ -1,28 +1,32 @@
-// Save the data of that element
 const drag = (ev) => {
   ev.dataTransfer.setData("text", ev.target.id);
 };
 
-// Make an element ready for drop
 const allowDrop = (ev) => {
+  document.getElementById("trashbinicon").classList.add("fa-beat");
   ev.preventDefault();
 };
 
-// Execute the drop
-const drop = (ev) => {
-  ev.preventDefault();
-  // Get the data to be transferred
-  const data = ev.dataTransfer.getData("text");
-  let { target } = ev; // Set the variable for finding the first actually valid target
+const stopBounce = () => {
+  document.getElementById("trashbinicon").classList.remove("fa-beat");
+};
 
-  // If the actual target is not a valid drop location, search for one on the parent node.
-  // Repeat until a valid drop location is found
+const drop = (ev) => {
+  document.getElementById("trashbinicon").classList.remove("fa-beat");
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  let { target } = ev;
+
   while (target.getAttribute("ondrop") !== "drop(event)") {
-    // Set the parent node as the new target
     target = target.parentNode;
   }
 
   document.getElementById(data).remove();
 };
 
-export { drag, drop, allowDrop };
+export {
+  drag,
+  drop,
+  allowDrop,
+  stopBounce,
+};

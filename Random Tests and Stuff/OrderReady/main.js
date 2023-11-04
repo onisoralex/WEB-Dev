@@ -1,43 +1,25 @@
-import { drag, drop, allowDrop } from "./draganddrop.js";
+import * as dnd from "./draganddrop.js";
 
 const addNumberToDisplay = (n) => {
-  const divElement = document.createElement("div");
-  divElement.id = `number${n}`;
-  divElement.setAttribute("class", "drag");
-  divElement.setAttribute("draggable", "true");
-  divElement.setAttribute("ondragstart", "drag(event)");
-
-  const labelElement = document.createElement("label");
-  labelElement.setAttribute("class", "ordernumberblock");
-  labelElement.innerHTML = n;
-
-  document.getElementById("orderdisplay").appendChild(divElement);
-  divElement.appendChild(labelElement);
+  document.getElementById("orderdisplay").innerHTML += `<div id="number${n}" class="drag" draggable="true" ondragstart="drag(event)" ondblclick="deleteThisElement(event)"><label class="ordernumber">${n}</label></div>`;
 };
 
 const add = () => {
   const el = document.getElementById("numberinput");
-
+  if ((+el.value < +el.min) || (+el.value > +el.max)) el.value = +el.min;
   addNumberToDisplay(el.value);
 
-  el.value = +el.value + 1;
+  el.value = ((+el.value + 1) > +el.max) ? +el.min : +el.value + 1;
 };
 
-const validateNumber = (event) => {
-  const ev = event;
-  const n = +ev.target.value;
-  const lo = +ev.target.min;
-  const hi = +ev.target.max;
+const deleteFirstNumber = () => document.getElementById("orderdisplay").firstChild.remove();
 
-  if (n <= lo) {
-    ev.target.value = lo;
-  } else if (n >= hi) {
-    ev.target.value = hi;
-  }
-};
+const deleteThisElement = (event) => event.target.parentElement.remove();
 
-window.drag = drag;
-window.drop = drop;
-window.allowDrop = allowDrop;
+window.drag = dnd.drag;
+window.drop = dnd.drop;
+window.allowDrop = dnd.allowDrop;
+window.stopBounce = dnd.stopBounce;
 window.add = add;
-window.validateNumber = validateNumber;
+window.deleteFirstNumber = deleteFirstNumber;
+window.deleteThisElement = deleteThisElement;

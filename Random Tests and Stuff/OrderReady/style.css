@@ -5,7 +5,7 @@
   gap: 1.5em 1.5em;
 }
 
-.ordernumberblock {
+.ordernumber {
   color: white;
   font-family: Roboto;
   font-size: 3em;
@@ -15,19 +15,18 @@
   padding: 0.1em 0.3em;
 }
 
-#orderdisplay {
+.block {
   padding: 1em;
   border: 1px solid lightgrey;
   border-radius: 1em;
   max-width: 600px;
+}
+
+#orderdisplay {
   align-items: flex-start;
 }
 
-.controlview {
-  padding: 1em;
-  border: 1px solid lightgrey;
-  border-radius: 1em;
-  max-width: 600px;
+#controlview {
   align-items: center;
   justify-content: space-between;
   gap: 1.5em 1.5em;
@@ -37,26 +36,34 @@
   visibility: hidden;
 }
 
-#newnumber {
+#newnumbercontainer {
   align-items: center;
 }
 
-.addbutton {
-  color: white;
+#numberinput {
+  color: black;
   font-family: Roboto;
-  font-size: 1.5em;
-  background-color: limegreen;
-  border: 0px;
+  font-size: 3em;
+  border: 0.1em solid dodgerblue;
   border-radius: 0.3em;
   padding: 0.1em 0.3em;
 }
 
-.trashbin {
-  padding: 3em;
-  border: 1px solid red;
-  border-radius: 1em;
+.button {
+  color: white;
+  border-radius: 20px;
+  padding: 40px;
 }
 
-.trashicon {
-  color: red
+.icon {
+  color: white;
+  font-size: 80px;
+}
+
+#addbutton {
+  background-color: limegreen;
+}
+
+#trashbinbutton {
+  background-color: red;
 }
