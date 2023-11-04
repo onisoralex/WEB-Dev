@@ -17,7 +17,7 @@ const drop = (ev) => {
   const data = ev.dataTransfer.getData("text");
   let { target } = ev;
 
-  while (target.getAttribute("ondrop") !== "drop(event)") {
+  while (target.getAttribute("ondrop") !== "dnd.drop(event)") {
     target = target.parentNode;
   }
 
