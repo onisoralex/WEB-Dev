@@ -1,0 +1,270 @@
+{
+  "name": "palworld",
+  "display": "Palworld Dedicated Server",
+  "type": "palworld",
+  "data": {
+    "publicip": {
+      "type": "string",
+      "desc": "What address to bind the server to (leave blank for auto)",
+      "display": "Public IP",
+      "required": true,
+      "value": ""
+    },
+    "publicport": {
+      "type": "integer",
+      "desc": "What port to bind the server to - default: 8211",
+      "display": "Public Port",
+      "required": true,
+      "value": 8211,
+      "userEdit": true
+    },
+    "servername": {
+      "type": "string",
+      "desc": "You server name that will show on server list",
+      "display": "Server Name",
+      "required": true,
+      "value": "Default Palworld Server",
+      "userEdit": true
+    },
+    "serverdescription": {
+      "type": "string",
+      "desc": "What is shown when selecting the server in the list.",
+      "display": "Server Description",
+      "required": true,
+      "value": "Default Palworld Server",
+      "userEdit": true
+    },
+    "serverpassword": {
+      "type": "string",
+      "desc": "Sets a Server Password to make it private.",
+      "display": "Server Password",
+      "required": true,
+      "value": "",
+      "userEdit": true
+    },
+    "serverplayermaxnum": {
+      "type": "integer",
+      "desc": "Maximum number of players - default: 32",
+      "display": "Server Player Max Num",
+      "required": true,
+      "value": 32,
+      "userEdit": true
+    },
+    "adminpassword": {
+      "type": "string",
+      "desc": "Sets a Admin Password to be able to use commands in game (use command /AdminPassword <password>)",
+      "display": "Admin Password",
+      "required": true,
+      "value": "SuperSavePalworldAdminPassword",
+      "userEdit": true
+    },
+    "autoresetguildtimenoonlineplayers": {
+      "type": "string",
+      "desc": "If the option above is enabled, guilds will be automatically disbanded after this amount of configured time in hours; default = 72.000000",
+      "display": "Auto Disband Guild if no Players are Online Time",
+      "required": true,
+      "value": "72.000000",
+      "userEdit": true
+    },
+    "basecampworkermaxnum": {
+      "type": "string",
+      "desc": "Sets the maximum amount of workers that can work in a single base camp; default = 15",
+      "display": "Max Base Camp Workers",
+      "required": true,
+      "value": "15",
+      "userEdit": true
+    },
+    "bautoresetguildnoonlineplayers": {
+      "type": "string",
+      "desc": "Whether guilds should be automatically disbanded if they are inactive for a configured amount of time; default = False",
+      "display": "Auto Disband Guild if no Players are Online",
+      "required": true,
+      "value": "False",
+      "userEdit": true
+    },
+    "bcanpickupotherguilddeathpenaltydrop": {
+      "type": "string",
+      "desc": "Whether players can pick up death penalty drops from other players that are not in their guild; default = False",
+      "display": "Guild Death Penalty Drop Pickup",
+      "required": true,
+      "value": "False",
+      "userEdit": true
+    },
+    "benablefriendlyfire": {
+      "type": "string",
+      "desc": "Enablse Friendly Fire; default = False",
+      "display": "Enable Friendly Fire",
+      "required": true,
+      "value": "False",
+      "userEdit": true
+    },
+    "benableinvaderenemy": {
+      "type": "string",
+      "desc": "Enable or disable invader enemies; default = True",
+      "display": "Invader Enemy",
+      "required": true,
+      "value": "True",
+      "userEdit": true
+    },
+    "benableplayertoplayerdamage": {
+      "type": "string",
+      "desc": "Enables player damage; default = False",
+      "display": "Enable Player To Player Damage",
+      "required": true,
+      "value": "False",
+      "userEdit": true
+    },
+    "bispvp": {
+      "type": "string",
+      "desc": "Activates PVP; default = False",
+      "display": "Is PVP",
+      "required": true,
+      "value": "False",
+      "userEdit": true
+    },
+    "collectiondroprate": {
+      "type": "string",
+      "desc": "The rate at which dropped items are collected; default = 1.000000",
+      "display": "Collection Drop Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "collectionobjectrespawnspeedrate": {
+      "type": "string",
+      "desc": "How quickly items in the world like trees, rock, sticks, etc. respawn; default = 1.000000",
+      "display": "Collection Object Respawn Speed Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "daytimespeedrate": {
+      "type": "string",
+      "desc": "The rate at which day time passes; default = 1.000000",
+      "display": "Day Time Speed Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "deathpenalty": {
+      "type": "string",
+      "desc": "Sets how much a player loses when they die, valid options include. Options: None - No items are lost on death; Item - All inventory items are dropped, but not equipment; ItemAndEquipment - All inventory items and equipment is dropped; All (Default) - When players die, they drop their items, equipment, and Pals",
+      "display": "Death Penalty",
+      "required": true,
+      "value": "All",
+      "userEdit": true
+    },
+    "enemydropitemrate": {
+      "type": "string",
+      "desc": "Sets how often enemies will drop items; default = 1.000000",
+      "display": "Enemy Drop Item Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "exprate": {
+      "type": "string",
+      "desc": "The rate at which players gain experience; default = 1.000000",
+      "display": "Exp Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "nighttimespeedrate": {
+      "type": "string",
+      "desc": "The rate at which nighttime passes; default = 1.000000",
+      "display": "Night Time Speed Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "palcapturerate": {
+      "type": "string",
+      "desc": "How likely players are to successfully capture pals; default = 1.000000",
+      "display": "Pal Capture Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "paleggdefaulthatchingtime": {
+      "type": "string",
+      "desc": "How long it takes for Pal eggs to hatch in hours; default = 72.000000",
+      "display": "Pal Egg Hatching Time",
+      "required": true,
+      "value": "72.000000",
+      "userEdit": true
+    },
+    "palspawnnumrate": {
+      "type": "string",
+      "desc": "How frequently new Pals spawn in the world. Also affects number of spawned bosses and Alpha Pals; default = 1.000000",
+      "display": "Pal Spawn Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    },
+    "workspeedrate": {
+      "type": "string",
+      "desc": "How fast Pals should work; default = 1.000000",
+      "display": "Work Speed Rate",
+      "required": true,
+      "value": "1.000000",
+      "userEdit": true
+    }
+  },
+  "install": [
+    {
+      "appId": "1007",
+      "type": "steamgamedl"
+    },
+    {
+      "appId": "2394010",
+      "type": "steamgamedl"
+    },
+    {
+      "commands": [
+        "chmod +x PalServer.sh"
+      ],
+      "type": "command"
+    },
+    {
+      "target": "Pal/Saved/Config/LinuxServer/PalWorldSettings.ini",
+      "text": "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(Difficulty=None,DayTimeSpeedRate=${daytimespeedrate},NightTimeSpeedRate=${nighttimespeedrate},ExpRate=${exprate},PalCaptureRate=${palcapturerate},PalSpawnNumRate=${palspawnnumrate},PalDamageRateAttack=1.000000,PalDamageRateDefense=1.000000,PlayerDamageRateAttack=1.000000,PlayerDamageRateDefense=1.000000,PlayerStomachDecreaceRate=1.000000,PlayerStaminaDecreaceRate=1.000000,PlayerAutoHPRegeneRate=1.000000,PlayerAutoHpRegeneRateInSleep=1.000000,PalStomachDecreaceRate=1.000000,PalStaminaDecreaceRate=1.000000,PalAutoHPRegeneRate=1.000000,PalAutoHpRegeneRateInSleep=1.000000,BuildObjectDamageRate=1.000000,BuildObjectDeteriorationDamageRate=1.000000,CollectionDropRate=${collectiondroprate},CollectionObjectHpRate=1.000000,CollectionObjectRespawnSpeedRate=${collectionobjectrespawnspeedrate},EnemyDropItemRate=${enemydropitemrate},DeathPenalty=${deathpenalty},bEnablePlayerToPlayerDamage=${benableplayertoplayerdamage},bEnableFriendlyFire=${benablefriendlyfire},bEnableInvaderEnemy=${benableinvaderenemy},bActiveUNKO=False,bEnableAimAssistPad=True,bEnableAimAssistKeyboard=False,DropItemMaxNum=3000,DropItemMaxNum_UNKO=100,BaseCampMaxNum=128,BaseCampWorkerMaxNum=${basecampworkermaxnum},DropItemAliveMaxHours=1.000000,bAutoResetGuildNoOnlinePlayers=${bautoresetguildnoonlineplayers},AutoResetGuildTimeNoOnlinePlayers=${autoresetguildtimenoonlineplayers},GuildPlayerMaxNum=20,PalEggDefaultHatchingTime=${paleggdefaulthatchingtime},WorkSpeedRate=${workspeedrate},bIsMultiplay=False,bIsPvP=${bispvp},bCanPickupOtherGuildDeathPenaltyDrop=${bcanpickupotherguilddeathpenaltydrop},bEnableNonLoginPenalty=True,bEnableFastTravel=True,bIsStartLocationSelectByMap=True,bExistPlayerAfterLogout=False,bEnableDefenseOtherGuildPlayer=False,CoopPlayerMaxNum=4,ServerPlayerMaxNum=${serverplayermaxnum},ServerName=\"${servername}\",ServerDescription=\"${serverdescription}\",AdminPassword=\"${adminpassword}\",ServerPassword=\"${serverpassword}\",PublicPort=${publicport},PublicIP=\"${publicip}\",RCONEnabled=False,RCONPort=25575,Region=\"\",bUseAuth=True,BanListURL=\"https://api.palworldgame.com/api/banlist.txt\")\n",
+      "type": "writefile"
+    }
+  ],
+  "run": {
+    "stopCode": 15,
+    "command": "./PalServer.sh -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS EpicApp=PalServer",
+    "workingDirectory": "",
+    "pre": [
+      {
+        "appId": "1007",
+        "type": "steamgamedl"
+      },
+      {
+        "appId": "2394010",
+        "type": "steamgamedl"
+      },
+      {
+        "commands": [
+          "chmod +x PalServer.sh"
+        ],
+        "type": "command"
+      }
+    ],
+    "post": [],
+    "environmentVars": {}
+  },
+  "environment": {
+    "type": "tty"
+  },
+  "supportedEnvironments": [
+    {
+      "type": "tty"
+    }
+  ],
+  "requirements": {
+    "os": "linux",
+    "arch": "amd64"
+  }
+}
